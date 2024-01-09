@@ -38,8 +38,8 @@ model Question {
   option3 String?
   option4 String?
   answers Answer[]
-  Room    Room?    @relation(fields: [roomId], references: [id])
-  roomId  String?
+  Room    Room     @relation(fields: [roomId], references: [id])
+  roomId  String
 }
 
 model Answer {
@@ -58,6 +58,6 @@ model Answer {
 model Note {
   id     String  @id @default(uuid())
   text   String?
-  User   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  User   User    @relation(fields: [userId], references: [id])
+  userId String
 }
