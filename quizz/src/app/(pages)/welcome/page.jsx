@@ -1,28 +1,20 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image.js";
+import Logo from "../../../assets/codeHero/logo1.png";
+import Link from "next/link.js";
 
 export default function Login() {
   //const router = useRouter();
 
   return (
     <div className="welcome-container ">
-      <p className="login-register-logo">Image go here</p>
+      <Image className="welcome-logo" src={Logo} alt="CodeHero Logo" />
 
-      <h1>
-        Welcome to <span>Code Hero</span>
-      </h1>
-      <button className="login-register-button">Login</button>
-
-      <button className="google-button">Sign in with Google</button>
-      <p className="pTag-auth">
-        Not yet a member?
-        <a href="" className="pTag-auth">
-          {" "}
-          Sign Up
-        </a>
-      </p>
+      <h3>
+        Welcome to <span id="welcomeSpan">CodeHero</span>
+      </h3>
+      <Link href={"/login"} id="welcomeBtn">
+        Login
+      </Link>
     </div>
   );
 }

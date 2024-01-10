@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image.js";
+import Logo from "../../../assets/codeHero/logo1.png";
+import { useState } from "react";
 import { useRouter } from "next/navigation.js";
 
 export default function Login() {
@@ -28,7 +29,7 @@ export default function Login() {
   }*/
   return (
     <div className="login-register-container">
-      <p className="login-register-logo">Image go here</p>
+      <Image className="login-register-logo" src={Logo} alt="CodeHero Logo" />
       <form onSubmit={""}>
         <input
           value={username}
@@ -44,21 +45,22 @@ export default function Login() {
           className="auth-input-field"
         />
         <p className="pTag-auth">
-          <a href="#" className="signIn-link">
+          <a href="/register" className="signIn-link">
             Forgot your Password?
           </a>
         </p>
         <button className="login-register-button">Login</button>
         <p>{error}</p>
       </form>
-      <p className="pTag-auth">
+      <p className="signIn-link">or</p>
+      <button className="google-button">Sign in with Google</button>
+      <p className="signIn-link">
         Not yet a member?
-        <a href="" className="pTag-auth">
+        <a href="/register" className="signIn-link">
           {" "}
-          Sign Up
+          Register
         </a>
       </p>
-      <button className="google-button">Sign in with Google</button>
     </div>
   );
 }
