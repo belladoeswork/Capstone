@@ -1,0 +1,71 @@
+/*START - WELCOME/LOGIN/REGISTER*/
+.welcome-container {
+  width: 80%;
+  max-width: 200px;
+  margin: auto;
+  padding: 20px;
+  border: none;
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-register-container {
+  width: 80%;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-register-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.auth-input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-register-button,
+.google-button {
+  width: 100%;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sign-in-link {
+  margin-top: 10px;
+  text-align: center;
+}
+.pTag-auth {
+  font-size: 13px;
+}
+
+.signIn-link {
+  color: #4caf50;
+}
+
+/*END - WELCOME/LOGIN/REGISTER*/
