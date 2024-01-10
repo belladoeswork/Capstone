@@ -1,35 +1,60 @@
+/*COLORS:
+#623B5A - Purple
+#F2F5FF - off white
+#2274a5 - Blue
+*/
+
 /*START - WELCOME/LOGIN/REGISTER*/
 .welcome-container {
-  width: 80%;
-  max-width: 200px;
-  margin: auto;
-  padding: 20px;
-  border: none;
-  background-color: #fff;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto;
+  padding: 20px;
+}
+
+.welcome-logo {
+  width: 80%;
+  height: 80%;
+}
+
+#welcomeBtn {
+  width: 200px;
+  background-color: #2274a5;
+  color: #f2f5ff;
+  font-size: 20px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#welcomeSpan {
+  color: #2274a5;
 }
 
 .login-register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 80%;
   max-width: 400px;
   margin: auto;
   padding: 20px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #f2f5ff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .login-register-logo {
-  width: 80px;
-  height: 80px;
+  width: 140px;
+  height: 140px;
   margin-bottom: 20px;
 }
 
@@ -38,34 +63,72 @@
   padding: 10px;
   margin: 12px 0;
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  border: 1px solid #f2f5ff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
-.login-register-button,
-.google-button {
+.login-register-button {
   width: 100%;
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #2274a5;
+  color: #f2f5ff;
   font-size: 15px;
   padding: 10px;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.sign-in-link {
-  margin-top: 10px;
-  text-align: center;
+.google-button {
+  background-color: #2274a5;
+  color: #f2f5ff;
+  font-size: 15px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+
+  border-radius: 5px;
+  cursor: pointer;
 }
+
 .pTag-auth {
   font-size: 13px;
 }
 
 .signIn-link {
-  color: #4caf50;
+  font-size: 13px;
+  color: #2274a5;
+  font-weight: 800;
+}
+/*END - WELCOME/LOGIN/REGISTER*/
+
+/*START - NAVBAR*/
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #623b5a;
+
+  padding: 10px;
+  border-radius: 5px;
 }
 
-/*END - WELCOME/LOGIN/REGISTER*/
+.logo {
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+}
+
+.navbarRight {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  font-size: 20px;
+}
+
+.navTab {
+  color: #f2f5ff;
+  text-decoration: none;
+}
+/*END - NAVBAR*/
