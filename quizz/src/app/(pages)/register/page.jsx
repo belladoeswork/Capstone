@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
+//import { useRouter } from "next/navigation.js";
 
 import Image from "next/image.js";
-//import { useRouter } from "next/navigation.js";
+import Logo from "../../../assets/codeHero/logo1.png";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -32,7 +33,7 @@ export default function Register() {
 
   return (
     <div className="login-register-container">
-      <p className="login-register-logo"></p>
+      <Image className="login-register-logo" src={Logo} alt="CodeHero Logo" />
       <form onSubmit={""}>
         <input
           value={username}
@@ -50,12 +51,13 @@ export default function Register() {
         />
         <button className="login-register-button">Register</button>
       </form>
-      <p className="pTag-auth">
+      <p className="signIn-link">
         Already a member?
-        <a href="" className="signIn-link">
-          Sign In
+        <a href="/login" className="signIn-link">
+          Login
         </a>
       </p>
+      <p className="signIn-link">or</p>
       <button className="google-button">Sign up with Google</button>
     </div>
   );
