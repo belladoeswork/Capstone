@@ -1,19 +1,10 @@
-import Welcome from "./(pages)/welcome/page.jsx";
-import App from "./app.js";
-import Login from "./(pages)/login/page.jsx";
-import Register from "./(pages)/register/page.jsx";
-import Link from "next/link.js";
+import Navbar from "@/components/Navbar.jsx";
 
 export default function Home() {
   return (
     <main>
-      <div>
-        <Welcome />
-        <Login />
-        <Register />
-      </div>
-      <App />
-      
+      <Navbar />
+      <h1>CodeHero</h1>
     </main>
   );
 }
