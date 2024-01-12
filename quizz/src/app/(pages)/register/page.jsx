@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-//import { useRouter } from "next/navigation.js";
+import { useRouter } from "next/navigation.js";
 
 import Image from "next/image.js";
 import Logo from "../../../assets/codeHero/logo1.png";
@@ -10,11 +10,11 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  //const router = useRouter();
+  const router = useRouter();
 
-  /*async function handleRegister(e) {
+  async function handleRegister(e) {
     e.preventDefault();
-    //console.log(username, password);
+    console.log(username, password);
     //send a rewuest to the server
     //api/users/register
     const response = await fetch("/api/users/register", {
@@ -29,12 +29,12 @@ export default function Register() {
     //console.log(info);
     router.push("/");
     router.refresh();
-  }*/
+  }
 
   return (
     <div className="login-register-container">
       <Image className="login-register-logo" src={Logo} alt="CodeHero Logo" />
-      <form onSubmit={""}>
+      <form onSubmit={handleRegister}>
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}

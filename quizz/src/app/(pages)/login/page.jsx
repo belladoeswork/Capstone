@@ -10,9 +10,9 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  //const router = useRouter();
+  const router = useRouter();
 
-  /*async function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
     //console.log(username, password);
     const res = await fetch("/api/users/login", {
@@ -26,11 +26,12 @@ export default function Login() {
     //console.log(info);
     router.push("/");
     router.refresh();
-  }*/
+  }
+
   return (
     <div className="login-register-container">
       <Image className="login-register-logo" src={Logo} alt="CodeHero Logo" />
-      <form onSubmit={""}>
+      <form onSubmit={handleLogin}>
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
