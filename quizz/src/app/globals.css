@@ -101,6 +101,7 @@
   color: #2274a5;
   font-weight: 800;
 }
+
 /*END - WELCOME/LOGIN/REGISTER*/
 
 /*START - NAVBAR*/
@@ -108,10 +109,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #623b5a;
-
-  padding: 10px;
+  background-color: #241420;
+  /* background-color: #623b5a; */
+  padding: 10px 50px;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -131,4 +133,43 @@
   color: #f2f5ff;
   text-decoration: none;
 }
+
 /*END - NAVBAR*/
+
+
+/* START - HOME PAGE  */
+#homeHeader {
+  display: flex;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+#how-to-play-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  height: auto;
+  background-color: lightcyan;
+}
+
+#play-now-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightcoral;
+}
+
+#play-now-btn {
+  display: flex;
+  border: 1px solid;
+}
+
+.level-link-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* END - HOME PAGE  */
