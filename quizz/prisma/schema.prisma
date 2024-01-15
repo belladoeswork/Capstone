@@ -20,8 +20,11 @@ model User {
   badge     String?
   createdAt DateTime   @default(now())
   answers   Answer[]
-  notes     Note[]
+  note      Note?
+  noteId    String?
   questions Question[]
+  room      Room?      @relation(fields: [roomId], references: [id])
+  roomId    String?
 }
 
 model Room {
@@ -30,6 +33,7 @@ model Room {
   isUnlocked Boolean?
   questions  Question[]
   answers    Answer[]
+  users      User[]
 }
 
 model Question {
@@ -55,13 +59,13 @@ model Answer {
   users      User[]
   question   Question @relation(fields: [questionId], references: [id])
   questionId String
-  Room       Room     @relation(fields: [roomId], references: [id])
+  room       Room     @relation(fields: [roomId], references: [id])
   roomId     String
 }
 
 model Note {
   id     String  @id @default(uuid())
   text   String?
-  User   User    @relation(fields: [userId], references: [id])
-  userId String
+  user   User    @relation(fields: [userId], references: [id])
+  userId String  @unique
 }

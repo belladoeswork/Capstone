@@ -8,6 +8,7 @@ export async function POST(request) {
   try {
     const cookieStore = cookies();
     const { username, password } = await request.json();
+
     if (!username || !password) {
       return NextResponse.json({
         success: false,
@@ -28,13 +29,15 @@ export async function POST(request) {
       data: { username, password: hashedPassword },
     });
 
+    delete user.password;
+
     const token = jwt.sign(
       { userId: user.id, username },
       process.env.JWT_SECRET
     );
     cookieStore.set("token", token);
 
-    return NextResponse.json({ success: true, user });
+    return NextResponse.json({ success: true, user, token });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });
   }

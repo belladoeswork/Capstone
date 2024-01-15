@@ -32,7 +32,7 @@ export async function POST(request, response) {
     // create the token that we can send in the cookie
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
     cookieStore.set("token", token);
-    return NextResponse.json({ success: true, user });
+    return NextResponse.json({ success: true, user, token });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });
   }
