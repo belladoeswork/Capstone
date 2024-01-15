@@ -1,0 +1,20 @@
+"Code Hero" is an immersive, coding adventure game designed for aspiring coders and programming enthusiasts. The game takes players on an exciting journey through four distinct beautifully cities through the seasons, each representing a crucial phase in a software developer's education. Your mission is to land a prestigious coding job, but to do so, you must prove your skills by conquering challenges in each city.
+
+Key Features:
+
+    Four Unique Cities as Levels: Traverse through Syntax Summer, Scripting Spring, Web Dev Winter, and Asynchronous Autumn, each offering a different set of programming challenges.
+    
+    Answer five coding-related questions correctly in each city to progress. 
+    The questions range from basic syntax to complex programming concepts.
+    
+    High Stakes: One wrong answer, and you start over. This feature adds an exciting level of challenge and encourages mastery of the material. 
+    Rewards and Badges: Earn a badge for each city you conquer.
+
+
+Game Introduction:
+
+Welcome to "Code Hero: The Developer's Quest," where your journey to becoming a Javascript master coder begins. You are about to embark on an adventure through four fantastical cities, each representing a critical stage in your coding education. Your ultimate goal? To land a dream job in the competitive world of software development.
+
+In each city, you must answer five coding questions correctly to progress. Be warned: a single incorrect answer, and you'll have to start your journey afresh. But fear not, for with each attempt, you grow stronger in your knowledge and closer to your dream job.
+
+Ready to start your odyssey? Sharpen your mind, prepare your keyboard, and step into the world of "Code  Hero" Your future as a coding expert awaits!

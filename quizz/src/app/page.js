@@ -1,16 +1,94 @@
+"use client";
 import Navbar from "@/components/Navbar.jsx";
 import Game from "@/components/Game.jsx";
 // import App from "./app.js";
-
-
+import Link from "next/link";
+import { useState } from "react";
+import Image from "next/image.js";
+import CodeHero from "/public/assets/Level1.png";
+import { IoIosArrowDropdown } from "react-icons/io";
+import { IoIosArrowDropup } from "react-icons/io";
 
 export default function Home() {
+  const [hidePlayButton, setHidePlayButton] = useState(true);
+  const [hideHowToButton, setHideHowToButton] = useState(true);
+
+  function handlePlayClick() {
+    setHidePlayButton(false);
+  }
+
+  function handleHowtoClick() {
+    setHideHowToButton(!hideHowToButton);
+  }
   return (
     <main>
-      <Navbar />
-      <h1>CodeHero</h1>
       <Game />
       {/* <App /> */}
+
+      <div id="homepage-container">
+        <div id="homepage-left-container">
+          <div className="container">
+            <h1 className="typed">A JavaScript Escape Room</h1>
+          </div>
+          <p>
+            Welcome to Code Hero! A game where your journey to becoming a
+            Javascript master coder begins.
+            <br />
+            <br />
+            Ready to start your odyssey? Sharpen your mind, prepare your
+            keyboard, and step into the world of "Code Hero" Your future as a
+            coding expert awaits!
+          </p>
+          <div id="how-to-play-container">
+            <button id="howto-btn" onClick={handleHowtoClick}>
+              {hideHowToButton ? `Learn How to Play ` : `Hide `}
+              {hideHowToButton ? <IoIosArrowDropdown /> : <IoIosArrowDropup />}
+            </button>
+
+            {/* Show if the button is click  */}
+            <div style={{ display: !hideHowToButton ? "flex" : "none" }}>
+              <p>
+                Embark on an adventure through four stages, each representing a
+                critical stage in your coding education. Your ultimate goal? To
+                land a dream job in the competitive world of software
+                development. You must find and answer five coding questions
+                correctly to progress.{" "}
+                <span id="warning-text">
+                  Be warned: a single incorrect answer, and you'll have to start
+                  your journey afresh.{" "}
+                </span>
+                But fear not, for with each attempt, you grow stronger in your
+                knowledge and closer to your dream job.
+              </p>
+            </div>
+          </div>
+
+          <div id="play-now-container">
+            {/* hide play now button if clicked */}
+            <div style={{ display: !hidePlayButton ? "none" : "flex" }}>
+              <button id="play-now-btn" type="button" onClick={handlePlayClick}>
+                Get Started
+              </button>
+            </div>
+            {/* Show room options if the play now button is click  */}
+            <div style={{ display: !hidePlayButton ? "flex" : "none" }}>
+              <div className="level-link-container">
+                <h2>Select Room</h2>
+
+                <Link href={`/game`}>Level 1</Link>
+                <Link href={`/game`}>Level 3</Link>
+                <Link href={`/game`}>Level 3</Link>
+                <Link href={`/speedTest`}>Level 4</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="homepage-right-container">
+          <Image src={CodeHero} alt="Level One Map" />
+          Find the questions and answer them correctly to beat the level.
+        </div>
+      </div>
     </main>
   );
 }

@@ -1,4 +1,5 @@
-Basic Syntax and Concepts
+
+Syntax Summer
 
     What is the correct syntax for declaring a variable in JavaScript?
     a) var name = 'value';
@@ -25,17 +26,73 @@ Basic Syntax and Concepts
     b) /* This is a comment */
     c) // This is a comment
 
-DOM Manipulation and Web APIs
+Scripting Spring 
+
+
+    Question: Which JavaScript function finds the largest number in an array?
+    A) array.max()
+    B) Math.max(...array)
+    C) array.sort().pop()
+    D) array.findMax()
+    Answer: B) Math.max(...array)
+
+    Question: How do you reverse a string in JavaScript?
+    A) string.reverse()
+    B) string.split('').reverse().join('')
+    C) Array.reverse(string)
+    D) string.split().reverse()
+    Answer: B) string.split('').reverse().join('')
+
+
+    Question: Which of the following functions correctly checks if a string is a palindrome?
+    A) function isPalindrome(str) { return str === str.reverse(); }
+    B) function isPalindrome(str) { return str === str.split('').reverse().join(''); }
+    C) function isPalindrome(str) { return str.split(' ').reverse().join(' ') === str; }
+    D) function isPalindrome(str) { return Array.reverse(str) === str; }
+    Answer: B) function isPalindrome(str) { return str === str.split('').reverse().join(''); }
+
+    Question: What does the following JavaScript function output for the number 15?
+
+    function fizzBuzz(n) {
+        for (let i = 1; i <= n; i++) {
+            let output = '';
+            if (i % 3 === 0) output += 'Fizz';
+            if (i % 5 === 0) output += 'Buzz';
+            console.log(output || i);
+        }
+    }
+
+    A) Fizz
+    B) Buzz
+    C) FizzBuzz
+    D) 15
+    Answer: C) FizzBuzz
+
+    Question: Which function counts the number of vowels in a string?
+    A) function countVowels(str) { return str.match(/[aeiou]/gi).length; }
+    B) function countVowels(str) { return str.split('aeiou').length - 1; }
+    C) function countVowels(str) { return str.includes('a', 'e', 'i', 'o', 'u'); }
+    D) function countVowels(str) { return str.count('aeiou'); }
+    Answer: A) function countVowels(str) { return str.match(/[aeiou]/gi).length; }
+
+Web Dev Winter
 
     Which method is used to select an element by its ID?
-    a) document.getElement('id')
-    b) document.getElementById('id')
-    c) document.selectById('id')
+    a) document.getElement('')
+    b) document.querySelector('') answer
+    c) document.selectById('')
 
-    How do you change the text of a div element with the id 'myDiv'?
-    a) document.getElementById('myDiv').innerHTML = 'New text';
-    b) document.getElement('myDiv').text = 'New text';
-    c) document.getElementById('myDiv').value = 'New text';
+    Frameworks and Libraries
+    In React, what is used to pass data to a component from outside?
+    a) setState
+    b) render
+    c) props
+
+    Debugging and Testing
+    Which tool can be used for debugging JavaScript code in the browser?
+    a) JavaScript Console
+    b) Node.js
+    c) CSS Inspector
 
     What does the addEventListener method do?
     a) Adds a new HTML element
@@ -52,8 +109,13 @@ DOM Manipulation and Web APIs
     b) element.remove();
     c) document.deleteElement(element);
 
-Asynchronous JavaScript
+Asynchronous Autumn
 
+    What does the .catch() method do for a promise?
+    a) Stops the execution of the promise
+    b) Executes a callback function if the promise is rejected
+    c) Catches any syntax errors in the promise code
+    
     What does the 'async' keyword do in front of a function?
     a) Makes the function run synchronously
     b) Allows the function to return a promise
@@ -79,22 +141,5 @@ Asynchronous JavaScript
     b) An object representing the eventual completion or failure of an asynchronous operation
     c) A callback function for an API request
 
-    What does the .catch() method do for a promise?
-    a) Stops the execution of the promise
-    b) Executes a callback function if the promise is rejected
-    c) Catches any syntax errors in the promise code
 
-Frameworks and Libraries
-
-    In React, what is used to pass data to a component from outside?
-    a) setState
-    b) render
-    c) props
-
-Debugging and Testing
-
-    Which tool can be used for debugging JavaScript code in the browser?
-    a) JavaScript Console
-    b) Node.js
-    c) CSS Inspector
 

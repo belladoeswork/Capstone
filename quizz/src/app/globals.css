@@ -1,8 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Mina:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Mina:wght@400;700&display=swap'); */
+
 /*COLORS:
 #623B5A - Purple
 #F2F5FF - off white
 #2274a5 - Blue
 */
+
+* {
+  margin: 0;
+  font-family: 'Mina';
+
+}
 
 /*START - WELCOME/LOGIN/REGISTER*/
 .welcome-container {
@@ -101,6 +110,7 @@
   color: #2274a5;
   font-weight: 800;
 }
+
 /*END - WELCOME/LOGIN/REGISTER*/
 
 /*START - NAVBAR*/
@@ -108,10 +118,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #623b5a;
-
-  padding: 10px;
+  /* background-color: #241420; */
+  background-color: #F2F5FF;
+  padding: 10px 50px;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -128,7 +139,153 @@
 }
 
 .navTab {
-  color: #f2f5ff;
+  /* color: #f2f5ff; */
   text-decoration: none;
 }
+
 /*END - NAVBAR*/
+
+
+/* START - HOME PAGE  */
+#homepage-container {
+  display: flex;
+  height: 100vh;
+  min-height: 100vh;
+  gap: 30px;
+  padding: 75px;
+  background-color: #F2F5FF;
+  justify-content: center;
+}
+
+#homepage-left-container {
+  display: flex;
+  width: 600px;
+  height: 600px;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+#homepage-right-container {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 600px;
+  /* justify-content: flex-end; */
+  align-items: end;
+  background-color: #F2F5FF;
+}
+
+.homeHeader {
+  display: flex;
+  font-family: 'Press Start 2P';
+  color: #623B5A;
+  justify-content: center;
+  text-decoration: none;
+  align-items: center;
+}
+
+:link {
+  text-decoration: none;
+}
+
+#how-to-play-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 600px;
+  height: auto;
+}
+
+#howto-btn {
+  width: 600px;
+  justify-content: center;
+  align-items: center;
+  color: #2274a5;
+  background-color: white;
+  font-size: 15px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+#play-now-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#play-now-btn {
+  display: flex;
+  width: 600px;
+  justify-content: center;
+  background-color: #2274a5;
+  color: #f2f5ff;
+  font-size: 15px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+
+.level-link-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 500px;
+  height: auto;
+  font-size: larger;
+}
+
+#warning-text {
+  font-weight: bolder;
+  color: #2274a5;
+}
+
+.container {
+  display: flex;
+  font-family: 'Press Start 2P';
+  font-size: 12px;
+  justify-content: center;
+  width: 600px;
+}
+
+.typed {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid;
+  width: 0;
+  animation: typing 3.5s steps(30, end) forwards, blinking 1s infinite;
+  font-family: 'Press Start 2P';
+  color: #623B5A;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+
+  to {
+    width: 100%
+  }
+}
+
+@keyframes blinking {
+  0% {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: black
+  }
+
+  100% {
+    border-color: transparent
+  }
+}
+
+/* END - HOME PAGE  */
