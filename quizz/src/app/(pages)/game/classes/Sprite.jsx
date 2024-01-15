@@ -1,37 +1,64 @@
-// import React from 'react';
-    
+// sprite class
+export class Sprite {
+  constructor({
+    position,
+    imageSrc,
+    frameRate = 1,
+    frameBuffer = 3,
+    scale = 1,
+    context,
+  }) {
+    this.position = position;
+    this.scale = scale;
+    this.loaded = false;
+    this.image = new Image();
+    this.context = context
+    this.image.onload = () => {
+      this.width = (this.image.width / this.frameRate) * this.scale;
+      this.height = this.image.height * this.scale;
+      this.loaded = true;
+      console.log('Image loaded successfully', this.image.src);
+    };
+    this.image.src = imageSrc;
+    this.frameRate = frameRate;
+    this.currentFrame = 0;
+    this.frameBuffer = frameBuffer;
+    this.elapsedFrames = 0;
+  }
 
-// // sprite class
-//    export class Sprite {
-//         constructor({ position, context, imageSrc }) {
-//           this.position = position;
-//           this.image = new Image();
-//           this.image.src = imageSrc;
-//           this.context = context;
-//           this.imageLoaded = false;
-//           this.image.onload = () => {
-//             this.imageLoaded = true;
-//             this.scale = Math.max(
-//               canvas.width / this.image.width,
-//               canvas.height / this.image.height
-//             );
-//             this.position.y = canvas.height - this.image.height * this.scale;
-//           };
-//         }
-  
-//         draw() {
-//           if (!this.image) return;
-//           context.drawImage(
-//             this.image,
-//             this.position.x,
-//             this.position.y,
-//             //   canvas.width,
-//             //   canvas.height
-//             this.image.width * this.scale,
-//             this.image.height * this.scale
-//           );
-//         }
-//         update() {
-//           this.draw();
-//         }
-//       }
+  draw() {
+    if (!this.image || !this.loaded) return;
+
+    const cropbox = {
+      position: {
+        x: this.currentFrame * (this.image.width / this.frameRate),
+        y: 0,
+      },
+      width: this.image.width / this.frameRate,
+      height: this.image.height,
+    };
+
+    this.context.drawImage(
+      this.image,
+      cropbox.position.x,
+      cropbox.position.y,
+      cropbox.width,
+      cropbox.height,
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
+  }
+  update() {
+    this.draw();
+    this.updateFrames();
+  }
+
+  updateFrames() {
+    this.elapsedFrames++;
+    if (this.elapsedFrames % this.frameBuffer === 0)
+      if (this.currentFrame < this.frameRate - 1) this.currentFrame++;
+      else this.currentFrame = 0;
+  }
+}
