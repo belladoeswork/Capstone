@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Mina:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Mina:wght@400;700&display=swap");
 /* @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Mina:wght@400;700&display=swap'); */
 
 /*COLORS:
@@ -9,8 +9,7 @@
 
 * {
   margin: 0;
-  font-family: 'Mina';
-
+  font-family: "Mina";
 }
 
 /*START - WELCOME/LOGIN/REGISTER*/
@@ -119,7 +118,7 @@
   justify-content: space-between;
   align-items: center;
   /* background-color: #241420; */
-  background-color: #F2F5FF;
+  background-color: #f2f5ff;
   padding: 10px 50px;
   border-radius: 5px;
   box-sizing: border-box;
@@ -145,7 +144,6 @@
 
 /*END - NAVBAR*/
 
-
 /* START - HOME PAGE  */
 #homepage-container {
   display: flex;
@@ -153,7 +151,7 @@
   min-height: 100vh;
   gap: 30px;
   padding: 75px;
-  background-color: #F2F5FF;
+  background-color: #f2f5ff;
   justify-content: center;
 }
 
@@ -173,13 +171,13 @@
   height: 600px;
   /* justify-content: flex-end; */
   align-items: end;
-  background-color: #F2F5FF;
+  background-color: #f2f5ff;
 }
 
 .homeHeader {
   display: flex;
-  font-family: 'Press Start 2P';
-  color: #623B5A;
+  font-family: "Press Start 2P";
+  color: #623b5a;
   justify-content: center;
   text-decoration: none;
   align-items: center;
@@ -228,8 +226,6 @@
   border-radius: 5px;
 }
 
-
-
 .level-link-container {
   display: flex;
   flex-direction: column;
@@ -248,7 +244,7 @@
 
 .container {
   display: flex;
-  font-family: 'Press Start 2P';
+  font-family: "Press Start 2P";
   font-size: 12px;
   justify-content: center;
   width: 600px;
@@ -260,31 +256,31 @@
   border-right: 2px solid;
   width: 0;
   animation: typing 3.5s steps(30, end) forwards, blinking 1s infinite;
-  font-family: 'Press Start 2P';
-  color: #623B5A;
+  font-family: "Press Start 2P";
+  color: #623b5a;
 }
 
 @keyframes typing {
   from {
-    width: 0
+    width: 0;
   }
 
   to {
-    width: 100%
+    width: 100%;
   }
 }
 
 @keyframes blinking {
   0% {
-    border-color: transparent
+    border-color: transparent;
   }
 
   50% {
-    border-color: black
+    border-color: black;
   }
 
   100% {
-    border-color: transparent
+    border-color: transparent;
   }
 }
 
