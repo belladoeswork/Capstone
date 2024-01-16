@@ -1,4 +1,4 @@
-import { Sprite } from './Sprite.jsx';
+import { Sprite } from "./Sprite.jsx";
 import collision from "../../../../helpers/utils.js";
 
 const gravity = 0.1;
@@ -31,6 +31,14 @@ export class Player extends Sprite {
       width: 10,
       height: 10,
     };
+
+    // Find the highest collision block
+    // let highestCollisionBlock = this.collisionBlocks.reduce((highest, block) => {
+    //   return (highest && highest.position.y < block.position.y) ? highest : block;
+    // }, null);
+
+    // // Set the player's y position to be just above the highest collision block
+    // this.position.y = highestCollisionBlock.position.y - this.hitbox.height;
     // this.animations = animations
     // this.lastDirection = 'right'
 
@@ -44,8 +52,7 @@ export class Player extends Sprite {
     // }
   }
 
-
-  // switchSprite(key) { 
+  // switchSprite(key) {
   //   if (this.image === this.animations[key] || !this.loaded) return;
   //   this.currentFrame = 0;
   //   this.image = this.animations[key].image;
@@ -54,7 +61,6 @@ export class Player extends Sprite {
 
   // }
 
-  
   update() {
     this.updateFrames();
     this.updateHitBox();
@@ -78,18 +84,16 @@ export class Player extends Sprite {
       this.hitbox.height
     );
 
-
     this.draw();
-    // this.hitbox.draw()
-    this.position.x += this.velocity.x;
-    // this.updateHitBox();
     this.checkForHorizontalCollision();
 
-    this.position.y += this.velocity.y;
-    this.applyGravity();
-    // this.updateHitBox();
-    this.checkForVerticalCollision();
+    this.position.x += this.velocity.x;
+    this.updateHitBox();
 
+    this.applyGravity();
+    this.updateHitBox();
+    this.checkForVerticalCollision();
+    this.position.y += this.velocity.y;
   }
 
   updateHitBox() {
@@ -101,9 +105,7 @@ export class Player extends Sprite {
       width: 35,
       height: 54,
     };
-
   }
-
 
   checkForHorizontalCollision() {
     for (let i = 0; i < this.collisionBlocks.length; i++) {
@@ -113,12 +115,10 @@ export class Player extends Sprite {
           object1: this.hitbox,
           object2: block,
         })
-        
       ) {
-
-        console.log('Collision detected!');
-        console.log('Player hitbox:', this.hitbox);
-        console.log('Block:', block);
+        console.log("Collision detected!");
+        console.log("Player hitbox:", this.hitbox);
+        console.log("Block:", block);
 
         if (this.velocity.x > 0) {
           this.velocity.x = 0;
@@ -128,9 +128,7 @@ export class Player extends Sprite {
 
           this.position.x = block.position.x - offset - 0.01;
           break;
-        }
-      
-        if (this.velocity.x < 0) {
+        } else if (this.velocity.x < 0) {
           this.velocity.x = 0;
 
           const offset = this.hitbox.position.x - this.position.x;
@@ -142,15 +140,61 @@ export class Player extends Sprite {
     }
   }
 
-  applyGravity() {
-    this.position.y += this.velocity.y;
-    this.velocity.y += gravity;
-// to rmv
-    // if (this.position.y + this.height > this.context.canvas.height) {
-    //   this.position.y = this.context.canvas.height - this.height;
-    //   this.velocity.y = 0;
-    // }
-  }
+    applyGravity() {
+      // this.position.y += this.velocity.y;
+      this.velocity.y += gravity;
+  // to rmv
+      if (this.position.y + this.height > this.context.canvas.height) {
+        this.position.y = this.context.canvas.height - this.height;
+        this.velocity.y = 0;
+      }
+      }
+
+  // applyGravity() {
+  //   this.velocity.y += gravity;
+  //   // Predict the next position
+  //   let nextY = this.position.y + this.velocity.y;
+  //   // Check for collision with each collision block
+  //   for (let block of this.collisionBlocks) {
+  //     if (
+  //       collision({
+  //         object1: this.hitbox,
+  //         object2: block,
+  //       })
+  //     ) {
+  //       nextY = block.position.y - this.hitbox.height;
+  //       this.velocity.y = 0;
+  //       break;
+  //     }
+  //   }
+  
+  //   if (nextY + this.height > this.context.canvas.height) {
+  //     nextY = this.context.canvas.height - this.height;
+  //     this.velocity.y = 0;
+  //   }
+  
+  //   // Only update the player's y position if a collision is not detected
+  //   if (!collision({
+  //     object1: this.hitbox,
+  //     object2: block,
+  //   })) {
+  //     this.position.y = nextY;
+  //   }
+  // }
+
+  // Check if the next position is beyond the canvas
+  // if (nextY + this.height > this.context.canvas.height) {
+  //   nextY = this.context.canvas.height - this.height;
+  //   this.velocity.y = 0;
+  // }
+
+  // // Update the position
+  // this.position.y = nextY;
+  
+
+  //   // Update the position
+  //   this.position.y = nextY;
+  // }
 
   // check for player & collision intersection
 
@@ -163,34 +207,63 @@ export class Player extends Sprite {
           object2: block,
         })
       ) {
-        console.log('Collision detected!');
-        console.log('Player hitbox:', this.hitbox);
-        console.log('Block:', block);
-        
+        console.log("Collision detected!");
+        console.log("Player hitbox:", this.hitbox);
+        console.log("Block:", block);
+
         if (this.velocity.y > 0) {
           this.velocity.y = 0;
 
-
           const offset =
-            this.hitbox.position.y - this.position.y + this.hitbox.height ;
-          
+            this.hitbox.position.y - this.position.y + this.hitbox.height;
+
           this.position.y = block.position.y - offset - 0.01;
-          // added? 
-          this.position.y -= 1; 
+          // added?
+          console.log("Player position after collision:", this.position);
           break;
-        }
-      
-      
-        else if (this.velocity.y < 0) {
+        } else if (this.velocity.y < 0) {
           this.velocity.y = 0;
 
           const offset = this.hitbox.position.y - this.position.y;
 
           this.position.y = block.position.y + block.height - offset + 0.01;
+          console.log("Player position after collision:", this.position);
           break;
         }
       }
     }
   }
-
 }
+//   checkForVerticalCollision() {
+//     for (let i = 0; i < this.collisionBlocks.length; i++) {
+//       const block = this.collisionBlocks[i];
+//       if (
+//         collision({
+//           object1: this.hitbox,
+//           object2: block,
+//         })
+//       ) {
+//         console.log("Collision detected!");
+//         console.log("Player hitbox:", this.hitbox);
+//         console.log("Block:", block);
+//         if (this.velocity.y > 0) {
+//           this.velocity.y = 0;
+//           const offset =
+//             this.hitbox.position.y - this.position.y + this.hitbox.height;
+//           this.position.y = block.position.y - offset - 0.01;
+//           console.log("Player position after collision:", this.position);
+//           break;
+//         } else if (this.velocity.y < 0) {
+//           this.velocity.y = 0;
+//           const offset = this.hitbox.position.y - this.position.y;
+//           this.position.y = block.position.y + block.height - offset + 0.01;
+//           console.log("Player position after collision:", this.position);
+//           break;
+//         }
+//       } else {
+//         // Only update the player's y position if a collision is not detected
+//         this.position.y += this.velocity.y;
+//       }
+//     }
+//   }
+// }
