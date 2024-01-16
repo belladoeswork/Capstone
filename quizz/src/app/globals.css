@@ -285,3 +285,30 @@
 }
 
 /* END - HOME PAGE  */
+
+/* START - PROFILE  */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-avatar-container {
+  display: flex;
+  height: 350px;
+  width: 500px;
+  border: 1px solid #623b5a;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
+}
+
+.profile-avatar {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  border: 1px solid #623b5a;
+  border-radius: 0%;
+}
+
+/* END - PROFILE */

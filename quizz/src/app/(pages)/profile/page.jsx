@@ -11,9 +11,12 @@ export default function Profile({ avatar }) {
   //const user = await fetchUser();
 
   return (
-    <div>
-      <h1>Your Profile</h1>
-      <ProfilePage avatar={avatar} />
+    <div className="profile-container">
+      <div className="profile-avatar-container">
+        <div className="profile-avatar">{user.avatar}</div>
+      </div>
+      {user.badge}
+      <BsFillTrophyFill />
     </div>
   );
 }
