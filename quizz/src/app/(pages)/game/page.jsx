@@ -81,11 +81,13 @@ export default function GameLevel1() {
 
     // const gravity = 0.1;
 
+ 
+
     // draw new player
     const player = new Player({
       position: {
         x: 100,
-        y: 300,
+        y:  300
       },
       context: context,
       collisionBlocks,
@@ -146,7 +148,6 @@ export default function GameLevel1() {
       //platform collision blocks
       platformCollisionBlocks.forEach((block) => block.update());
 
-     
       // player.velocity.x = 0;
       // if (keys.ArrowRight.pressed) {
       //   // player.switchSprite("Run");
@@ -162,16 +163,11 @@ export default function GameLevel1() {
       //   // else player.switchSprite("Idle");
       // }
 
-
-
-      
-            // end transformations
+      // end transformations
       context.restore();
-      
 
-       // // draw player
-       player.update();
-
+      // // draw player
+      player.update();
 
       // draw player
       // player.update();

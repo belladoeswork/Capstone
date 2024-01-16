@@ -1,7 +1,6 @@
 import React from "react";
-import { Sprite } from './Sprite.jsx';
-import { Player } from './Player.jsx';
-
+import { Sprite } from "./Sprite.jsx";
+import { Player } from "./Player.jsx";
 
 // collision class
 export class CollisionBlock {
@@ -26,4 +25,3 @@ export class CollisionBlock {
     this.draw();
   }
 }
-
