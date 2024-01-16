@@ -6,7 +6,10 @@ export default async function Profile() {
   const user = await fetchUser();
 
   return (
-    <div>
+    <div className="profile-container">
+      <div className="profile-avatar-container">
+        <div className="profile-avatar">{user.avatar}</div>
+      </div>
       {user.badge}
       <BsFillTrophyFill />
     </div>
