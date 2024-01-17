@@ -46,8 +46,8 @@ export default function GameLevel1() {
           collisionBlocks.push(
             new CollisionBlock({
               position: {
-                x: x * 16,
-                y: y * 16,
+                x: x * 16 ,
+                y: y * 16 ,
               },
               context,
             })
@@ -68,11 +68,11 @@ export default function GameLevel1() {
           platformCollisionBlocks.push(
             new CollisionBlock({
               position: {
-                x: x * 16,
-                y: y * 16,
+                x: x * 16 ,
+                y: y * 16 ,
               },
               context,
-              height: 4,
+              // height: 4,
             })
           );
         }
