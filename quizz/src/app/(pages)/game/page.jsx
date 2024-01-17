@@ -46,10 +46,10 @@ export default function GameLevel1() {
           collisionBlocks.push(
             new CollisionBlock({
               position: {
-                x: x * 16,
-                y: y * 16,
+                x: x * 16 ,
+                y: y * 16 ,
               },
-              context: context,
+              context,
             })
           );
         }
@@ -68,11 +68,11 @@ export default function GameLevel1() {
           platformCollisionBlocks.push(
             new CollisionBlock({
               position: {
-                x: x * 16,
-                y: y * 16,
+                x: x * 16 ,
+                y: y * 16 ,
               },
-              context: context,
-              height: 4,
+              context,
+              // height: 4,
             })
           );
         }
@@ -89,7 +89,7 @@ export default function GameLevel1() {
         x: 100,
         y:  300
       },
-      context: context,
+      context,
       collisionBlocks,
       platformCollisionBlocks,
       imageSrc: "/assets/hero/Idle.png",
@@ -125,7 +125,7 @@ export default function GameLevel1() {
         y: 0,
       },
       imageSrc: "assets/level1.png",
-      context: context,
+      context,
     });
 
     // animation loop
@@ -148,25 +148,12 @@ export default function GameLevel1() {
       //platform collision blocks
       platformCollisionBlocks.forEach((block) => block.update());
 
-      // player.velocity.x = 0;
-      // if (keys.ArrowRight.pressed) {
-      //   // player.switchSprite("Run");
-      //   player.velocity.x = 2;
-      //   player.lastDirection = "right";
-      // } else if (keys.ArrowLeft.pressed) {
-      //   // player.switchSprite("Run");
-      //   player.velocity.x = -2;
-      //   player.lastDirection = "left";
-      // } else if (player.velocity.y === 0) {
-      //   player.velocity.x = 0;
-      //   if (player.lastDirection === "right") player.switchSprite("Idle");
-      //   // else player.switchSprite("Idle");
-      // }
-
       // end transformations
       context.restore();
 
       // // draw player
+      
+      player.checkForVerticalCollisions();
       player.update();
 
       // draw player
