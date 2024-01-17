@@ -1,22 +1,18 @@
 import { fetchUser } from "@/lib/fetchUser";
-import { prisma } from "@/lib/prisma";
-//import ProfilePage from "@/components/ProfilePage.jsx";
 
-import AvatarOption from "../../../components/AvatarOption.jsx";
+import AvatarOption from "@/components/AvatarOption.jsx";
 
-import { BsFillTrophyFill } from "react-icons/bs";
 import ProfilePage from "@/components/ProfilePage.jsx";
 
-export default function Profile({ avatar }) {
-  //const user = await fetchUser();
+export default async function Profile() {
+  const user = await fetchUser();
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="profile-container">
-      <div className="profile-avatar-container">
-        <div className="profile-avatar">{user.avatar}</div>
-      </div>
-      {user.badge}
-      <BsFillTrophyFill />
+    <div>
+      <ProfilePage user={user} />
     </div>
   );
 }

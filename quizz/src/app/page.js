@@ -40,7 +40,11 @@ export default function Home() {
             coding expert awaits!
           </p>
           <div id="how-to-play-container">
-            <button id="howto-btn" onClick={handleHowtoClick}>
+            <button
+              id="howto-btn"
+              onClick={handleHowtoClick}
+              className="editProfile-button"
+            >
               {hideHowToButton ? `Learn How to Play ` : `Hide `}
               {hideHowToButton ? <IoIosArrowDropdown /> : <IoIosArrowDropup />}
             </button>
