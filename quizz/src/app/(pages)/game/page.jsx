@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   floorCollisions,
   platformCollisions,
 } from "../../../components/data/Collisions.js";
 import collision from "../../../helpers/utils.js";
 import { Sprite } from "./classes/Sprite.jsx";
-import { Player } from "./classes/Player.jsx";
+import { Player, Rock } from "./classes/Player.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 
 export default function GameLevel1() {
+  const [showPopup, setShowPopup] = useState(false); // State to manage popup visibility
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -134,6 +135,15 @@ export default function GameLevel1() {
       },
     };
 
+    const rock = new Rock({
+      position: {
+        x: 300, // x position of the rock
+        y: 300, // y position of the rock
+      },
+      context: context,
+      imageSrc: "/assets/Rocks.png",
+    });
+
     const background = new Sprite({
       position: {
         x: 0,
@@ -171,6 +181,7 @@ export default function GameLevel1() {
 
       player.checkForHorizontalCanvasCollision();
       player.update();
+      rock.update();
 
       player.velocity.x = 0;
       if (keys.ArrowRight.pressed) {
@@ -214,6 +225,11 @@ export default function GameLevel1() {
         case "ArrowUp":
           player.velocity.y = -4;
           break;
+        case "w":
+          if (player.isNearRock(rock)) {
+            setShowPopup(true); // Show popup if player presses "w" near the rock
+          }
+          break;
       }
     });
 
@@ -233,6 +249,20 @@ export default function GameLevel1() {
     <div>
       <canvas ref={canvasRef} />
       Hi
+      {showPopup && (
+        <div
+          style={{
+            position: "absolute",
+            top: "20px",
+            left: "20px",
+            background: "white",
+            padding: "10px",
+          }}
+        >
+          Hello, answer the question.
+          <button onClick={() => setShowPopup(false)}>Close</button>
+        </div>
+      )}
     </div>
   );
 }
