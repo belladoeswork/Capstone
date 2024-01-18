@@ -14,10 +14,14 @@ export default function QuestionAnswer({
   function handleClue() {
     setClue(hint);
   }
+  // if the answers 5 qs they unlock the next level
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (condition) {
+    }
   }
+
   return (
     <div>
       <button></button>
@@ -33,7 +37,7 @@ export default function QuestionAnswer({
           Hint
         </button>
         <div style={{ display: !hideHint ? "flex" : "none" }}>
-          <p>{hint}</p>
+          <p>{clue}</p>
         </div>
       </form>
     </div>
