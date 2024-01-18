@@ -1,11 +1,18 @@
+"use client";
 import { useState } from "react";
 
-export default function Answer({ user, room }) {
+export default function QuestionAnswer({
+  user,
+  questionTitle,
+  answerText,
+  hint,
+}) {
   const [answer, setAnswer] = useState("");
+  const [hideHint, setHideHint] = useState(true);
   const [clue, setClue] = useState("");
 
   function handleClue() {
-    setClue("Test");
+    setClue(hint);
   }
 
   async function handleSubmit(e) {
@@ -20,12 +27,14 @@ export default function Answer({ user, room }) {
           placeholder="Enter you're answer here"
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
-        >
-          <button type="submit">Submit</button>
-          <button type="button" onClick={handleClue}>
-            Clue
-          </button>
-        </input>
+        />
+        <button type="submit">Submit</button>
+        <button type="button" onClick={handleClue}>
+          Hint
+        </button>
+        <div style={{ display: !hideHint ? "flex" : "none" }}>
+          <p>{hint}</p>
+        </div>
       </form>
     </div>
   );

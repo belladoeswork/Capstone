@@ -56,11 +56,11 @@ model Answer {
   text       String
   isCorrect  Boolean
   createdAt  DateTime @default(now())
-  users      User[]
+  users      User[] //track of one user answers/response
   question   Question @relation(fields: [questionId], references: [id])
   questionId String
   room       Room     @relation(fields: [roomId], references: [id])
-  roomId     String
+  roomId     String //userid, questionid, correct
 }
 
 model Note {

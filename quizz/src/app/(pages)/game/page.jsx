@@ -46,8 +46,8 @@ export default function GameLevel1() {
           collisionBlocks.push(
             new CollisionBlock({
               position: {
-                x: x * 16 ,
-                y: y * 16 ,
+                x: x * 16,
+                y: y * 16,
               },
               context,
             })
@@ -68,8 +68,8 @@ export default function GameLevel1() {
           platformCollisionBlocks.push(
             new CollisionBlock({
               position: {
-                x: x * 16 ,
-                y: y * 16 ,
+                x: x * 16,
+                y: y * 16,
               },
               context,
               // height: 4,
@@ -81,13 +81,25 @@ export default function GameLevel1() {
 
     // const gravity = 0.1;
 
- 
+    //add sprite
+    const rock = [
+      new Sprite({
+        position: {
+          x: 100,
+          y: 200,
+        },
+        context,
+        collisionBlocks,
+        platformCollisionBlocks,
+        imageSrc: "assets/Rocks.png",
+      }),
+    ];
 
     // draw new player
     const player = new Player({
       position: {
         x: 100,
-        y:  300
+        y: 300,
       },
       context,
       collisionBlocks,
@@ -152,10 +164,12 @@ export default function GameLevel1() {
       context.restore();
 
       // // draw player
-      
+
       player.checkForVerticalCollisions();
       player.update();
 
+      // rock.checkForVerticalCollisions();
+      // rock.update();
       // draw player
       // player.update();
     }

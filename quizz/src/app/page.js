@@ -76,7 +76,7 @@ export default function Home() {
                 <h2>Select Room</h2>
 
                 <Link href={`/game`}>Level 1</Link>
-                <Link href={`/game`}>Level 3</Link>
+                <Link href={`/map`}>Level 2</Link>
                 <Link href={`/game`}>Level 3</Link>
                 <Link href={`/speedTest`}>Level 4</Link>
               </div>
