@@ -1,55 +1,52 @@
 "use client";
 import { fetchUser } from "@/lib/fetchUser";
-//import { prisma } from "@/lib/prisma";
-import { useState } from "react";
-import AvatarOption from "@/components/AvatarOption.jsx";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { FaTrophy } from "react-icons/fa6";
+import AvatarOption from "./AvatarOption.jsx";
 
-import { BsFillTrophyFill } from "react-icons/bs";
+import profileImg1 from "@/assets/avatar/9439685.jpg";
 
-const avatarOptions = [
-  {
-    id: 1,
-    src: "/public/assets/avatars/9439685.jpg",
-    alt: "Avatar 1",
-  },
-  {
-    id: 2,
-    src: "/public/assets/avatars/9439833.jpg",
-    alt: "Avatar 2",
-  },
-];
+export default function ProfilePage({ user }) {
+  const [isModalOpen, setModalOpen] = useState(false);
+  //const [avatarProfile, setAvatarProfile] = useState("avatar1");
 
-export default function ProfilePage() {
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
-
-  const handleAvatarSelect = (avatarId) => {
-    const selected = avatarOptions.find((avatar) => avatar.id === avatarId);
-    setSelectedAvatar(selected);
-  };
+  //add eventlist to all avatars
 
   //const user = await fetchUser();
-  // {user.badge}
-  return (
-    <div>
-      <h1>Your Profile</h1>
 
-      <BsFillTrophyFill />
-      <div className="avatar-options">
-        {avatarOptions.map((avatar) => (
-          <AvatarOption
-            key={avatar.id}
-            src={avatar.src}
-            alt={avatar.alt}
-            onSelect={() => handleAvatarSelect(avatar.id)}
-          />
-        ))}
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
+  const handleEditProfileClick = () => {
+    console.log("Button clicked");
+    setModalOpen(true);
+  };
+
+  return (
+    <div className="profile-container">
+      <div>
+        <Image src={profileImg1} alt={"avatar img"} className="profile-image" />
       </div>
-      {selectedAvatar && (
+      {user.id && (
         <div>
-          <h2>Selected Avatar</h2>
-          {process.browser && (
-            <Image src={selectedAvatar.src} alt={selectedAvatar.alt} />
-          )}
+          <h1 className="user-name">{user.username}</h1>
+          <div className="level-indicator">
+            <FaTrophy />
+            <p>Level:</p>
+          </div>
+          <div>
+            <button
+              onClick={handleEditProfileClick}
+              className="editProfile-button"
+            >
+              Change Avatar
+            </button>
+            <div style={{ display: !isModalOpen ? "flex" : "none" }}>
+              <AvatarOption />
+            </div>
+          </div>
         </div>
       )}
     </div>

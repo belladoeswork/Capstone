@@ -15,6 +15,7 @@ export default function GameLevel1() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+
     const context = canvas.getContext("2d");
 
     canvas.width = 1024;
@@ -26,30 +27,20 @@ export default function GameLevel1() {
     };
 
     const floorCollisions2D = [];
-    for (let i = 0; i < floorCollisions.length; i += 30) {
-      floorCollisions2D.push(floorCollisions.slice(i, i + 30));
+    for (let i = 0; i < floorCollisions.length; i += 36) {
+      floorCollisions2D.push(floorCollisions.slice(i, i + 36));
     }
 
     const collisionBlocks = [];
-
     floorCollisions2D.forEach((row, y) => {
       row.forEach((symbol, x) => {
-        if (
-          symbol === 151 ||
-          symbol === 51 ||
-          symbol === 76 ||
-          symbol === 154 ||
-          symbol === 155 ||
-          symbol === 153 ||
-          symbol === 152
-        ) {
+        if (symbol === 21557) {
           collisionBlocks.push(
             new CollisionBlock({
               position: {
                 x: x * 16,
                 y: y * 16,
               },
-              context,
             })
           );
         }
@@ -57,70 +48,83 @@ export default function GameLevel1() {
     });
 
     const platformCollisions2D = [];
-    for (let i = 0; i < platformCollisions.length; i += 30) {
-      platformCollisions2D.push(platformCollisions.slice(i, i + 30));
+    for (let i = 0; i < platformCollisions.length; i += 36) {
+      platformCollisions2D.push(platformCollisions.slice(i, i + 36));
     }
 
     const platformCollisionBlocks = [];
     platformCollisions2D.forEach((row, y) => {
       row.forEach((symbol, x) => {
-        if (symbol === 387 || symbol === 388 || symbol === 389) {
+        if (symbol === 21557) {
           platformCollisionBlocks.push(
             new CollisionBlock({
               position: {
                 x: x * 16,
                 y: y * 16,
               },
-              context,
-              // height: 4,
+              height: 4,
             })
           );
         }
       });
     });
 
-    // const gravity = 0.1;
+    const gravity = 0.1;
 
-    //add sprite
-    const rock = [
-      new Sprite({
-        position: {
-          x: 100,
-          y: 200,
-        },
-        context,
-        collisionBlocks,
-        platformCollisionBlocks,
-        imageSrc: "assets/Rocks.png",
-      }),
-    ];
-
-    // draw new player
     const player = new Player({
       position: {
         x: 100,
         y: 300,
       },
-      context,
       collisionBlocks,
       platformCollisionBlocks,
-      imageSrc: "/assets/hero/Idle.png",
-      frameRate: 4,
-      // animations: {
-      //   Idle: {
-      //     imageSrc: "/assets/hero/Idle.png",
-      //     frameRate: 4,
-      //     frameBuffer: 3,
-      //   },
-      //   Run: {
-      //     imageSrc: "/assets/hero/Run.png",
-      //     frameRate: 8,
-      //     frameBuffer: 3,
-      //   }
-      // },
+      context: context,
+      imageSrc: "/assets/huntress/Idle.png",
+      frameRate: 8,
+      animations: {
+        Idle: {
+          imageSrc: "/assets/huntress/Idle.png",
+          frameRate: 8,
+          frameBuffer: 3,
+        },
+        Run: {
+          imageSrc: "/assets/huntress/Run.png",
+          frameRate: 8,
+          frameBuffer: 5,
+        },
+        Jump: {
+          imageSrc: "/assets/huntress/Jump.png",
+          frameRate: 2,
+          frameBuffer: 3,
+        },
+        Fall: {
+          imageSrc: "/assets/huntress/Fall.png",
+          frameRate: 2,
+          frameBuffer: 3,
+        },
+        FallLeft: {
+          imageSrc: "/assets/huntress/FallLeft.png",
+          frameRate: 2,
+          frameBuffer: 3,
+        },
+        RunLeft: {
+          imageSrc: "/assets/huntress/RunLeft.png",
+          frameRate: 8,
+          frameBuffer: 5,
+        },
+        IdleLeft: {
+          imageSrc: "/assets/huntress/IdleLeft.png",
+          frameRate: 8,
+          frameBuffer: 3,
+        },
+        JumpLeft: {
+          imageSrc: "/assets/huntress/JumpLeft.png",
+          frameRate: 2,
+          frameBuffer: 3,
+        },
+      },
     });
 
-    // player keys
     const keys = {
       ArrowRight: {
         pressed: false,
@@ -130,81 +134,96 @@ export default function GameLevel1() {
       },
     };
 
-    // getting the background image
     const background = new Sprite({
       position: {
         x: 0,
         y: 0,
       },
-      imageSrc: "assets/level1.png",
-      context,
+      context: context,
+      imageSrc: "/assets/map1.png",
     });
 
-    // animation loop
+    const backgroundImageHeight = 432;
+
+    const camera = {
+      position: {
+        x: 0,
+        y: -backgroundImageHeight + scaledCanvas.height,
+      },
+    };
+
     function animate() {
+      window.requestAnimationFrame(animate);
       context.fillStyle = "white";
       context.fillRect(0, 0, canvas.width, canvas.height);
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      window.requestAnimationFrame(animate);
 
-      // start transformations
       context.save();
       context.scale(4, 4);
-      context.translate(0, -background.image.height + scaledCanvas.height);
-
-      // draw bg
+      context.translate(camera.position.x, camera.position.y);
       background.update();
-      // collision blocks
-      collisionBlocks.forEach((CollisionBlock) => CollisionBlock.update());
+      // collisionBlocks.forEach((collisionBlock) => {
+      //   collisionBlock.update()
+      // })
 
-      //platform collision blocks
-      platformCollisionBlocks.forEach((block) => block.update());
+      // platformCollisionBlocks.forEach((block) => {
+      //   block.update()
+      // })
 
-      // end transformations
-      context.restore();
-
-      // // draw player
-
-      player.checkForVerticalCollisions();
+      player.checkForHorizontalCanvasCollision();
       player.update();
 
-      // rock.checkForVerticalCollisions();
-      // rock.update();
-      // draw player
-      // player.update();
+      player.velocity.x = 0;
+      if (keys.ArrowRight.pressed) {
+        player.switchSprite("Run");
+        player.velocity.x = 2;
+        player.lastDirection = "right";
+        player.shouldPanCameraToTheLeft({ canvas, camera });
+      } else if (keys.ArrowLeft.pressed) {
+        player.switchSprite("RunLeft");
+        player.velocity.x = -2;
+        player.lastDirection = "left";
+        player.shouldPanCameraToTheRight({ canvas, camera });
+      } else if (player.velocity.y === 0) {
+        if (player.lastDirection === "right") player.switchSprite("Idle");
+        else player.switchSprite("IdleLeft");
+      }
+
+      if (player.velocity.y < 0) {
+        player.shouldPanCameraDown({ camera, canvas });
+        if (player.lastDirection === "right") player.switchSprite("Jump");
+        else player.switchSprite("JumpLeft");
+      } else if (player.velocity.y > 0) {
+        player.shouldPanCameraUp({ camera, canvas });
+        if (player.lastDirection === "right") player.switchSprite("Fall");
+        else player.switchSprite("FallLeft");
+      }
+
+      context.restore();
     }
 
     animate();
 
-    // player keys
-    window.addEventListener("keydown", (e) => {
-      switch (e.key) {
-        case "ArrowUp":
-          player.velocity.y = -4;
-          break;
-        case "ArrowDown":
-          player.velocity.y = 1;
+    window.addEventListener("keydown", (event) => {
+      switch (event.key) {
+        case "ArrowRight":
+          keys.ArrowRight.pressed = true;
           break;
         case "ArrowLeft":
           keys.ArrowLeft.pressed = true;
-          player.velocity.x = -2;
           break;
-        case "ArrowRight":
-          keys.ArrowRight.pressed = true;
-          player.velocity.x = 2;
+        case "ArrowUp":
+          player.velocity.y = -4;
           break;
       }
     });
 
-    window.addEventListener("keyup", (e) => {
-      switch (e.key) {
-        case "ArrowLeft":
-          keys.ArrowLeft.pressed = false;
-          player.velocity.x = 0;
-          break;
+    window.addEventListener("keyup", (event) => {
+      switch (event.key) {
         case "ArrowRight":
           keys.ArrowRight.pressed = false;
-          player.velocity.x = 0;
+          break;
+        case "ArrowLeft":
+          keys.ArrowLeft.pressed = false;
           break;
       }
     });
