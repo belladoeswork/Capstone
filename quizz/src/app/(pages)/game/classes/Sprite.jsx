@@ -3,31 +3,31 @@ export class Sprite {
   constructor({
     position,
     imageSrc,
+    context,
     frameRate = 1,
     frameBuffer = 3,
     scale = 1,
-    context,
   }) {
-    this.position = position;
-    this.scale = scale;
-    this.loaded = false;
-    this.image = new Image();
-    this.context = context;
+    this.position = position
+    this.scale = scale
+    this.context = context
+    this.loaded = false
+    this.image = new Image()
     this.image.onload = () => {
-      this.width = (this.image.width / this.frameRate) * this.scale;
-      this.height = this.image.height * this.scale;
-      this.loaded = true;
-      console.log("Image loaded successfully", this.image.src);
-    };
-    this.image.src = imageSrc;
-    this.frameRate = frameRate;
-    this.currentFrame = 0;
-    this.frameBuffer = frameBuffer;
-    this.elapsedFrames = 0;
+      this.width = (this.image.width / this.frameRate) * this.scale
+      this.height = this.image.height * this.scale
+      this.loaded = true
+    }
+    this.image.src = imageSrc
+    this.frameRate = frameRate
+    this.currentFrame = 0
+    this.frameBuffer = frameBuffer
+    this.elapsedFrames = 0
   }
 
   draw() {
-    if (!this.image || !this.loaded) return;
+    // if (!this.image) return
+    if (!this.loaded) return;
 
     const cropbox = {
       position: {
@@ -36,7 +36,7 @@ export class Sprite {
       },
       width: this.image.width / this.frameRate,
       height: this.image.height,
-    };
+    }
 
     this.context.drawImage(
       this.image,
@@ -48,17 +48,20 @@ export class Sprite {
       this.position.y,
       this.width,
       this.height
-    );
+    )
   }
+
   update() {
-    this.draw();
-    this.updateFrames();
+    this.draw()
+    this.updateFrames()
   }
 
   updateFrames() {
-    this.elapsedFrames++;
-    if (this.elapsedFrames % this.frameBuffer === 0)
-      if (this.currentFrame < this.frameRate - 1) this.currentFrame++;
-      else this.currentFrame = 0;
+    this.elapsedFrames++
+
+    if (this.elapsedFrames % this.frameBuffer === 0) {
+      if (this.currentFrame < this.frameRate - 1) this.currentFrame++
+      else this.currentFrame = 0
+    }
   }
 }
