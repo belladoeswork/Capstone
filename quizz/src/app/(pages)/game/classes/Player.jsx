@@ -63,20 +63,20 @@ export class Player extends Sprite {
     this.frameRate = this.animations[key].frameRate;
   }
 
-  isNearRock(rock) {
+  isNearItem(item) {
     const playerCenter = {
       x: this.hitbox.position.x + this.hitbox.width / 2,
       y: this.hitbox.position.y + this.hitbox.height / 2,
     };
-    const rockCenter = {
-      x: rock.position.x + rock.width / 2,
-      y: rock.position.y + rock.height / 2,
+    const itemCenter = {
+      x: item.position.x + item.width / 2,
+      y: item.position.y + item.height / 2,
     };
     const distance = Math.hypot(
-      rockCenter.x - playerCenter.x,
-      rockCenter.y - playerCenter.y
+      itemCenter.x - playerCenter.x,
+      itemCenter.y - playerCenter.y
     );
-    return distance < 50; // distance threshold to consider the player is near the rock
+    return distance < 50; // distance threshold to consider the player is near the item
   }
 
   updateCamerabox() {
@@ -268,6 +268,16 @@ export class Player extends Sprite {
 }
 
 export class Rock extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    super({ position, imageSrc, context, scale });
+  }
+
+  update() {
+    this.draw();
+  }
+}
+
+export class HiveOne extends Sprite {
   constructor({ position, context, imageSrc, scale = 0.5 }) {
     super({ position, imageSrc, context, scale });
   }

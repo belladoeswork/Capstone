@@ -7,8 +7,9 @@ import {
 } from "../../../components/data/Collisions.js";
 import collision from "../../../helpers/utils.js";
 import { Sprite } from "./classes/Sprite.jsx";
-import { Player, Rock } from "./classes/Player.jsx";
+import { Player, Rock, HiveOne } from "./classes/Player.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
+import QuestionSelection from "@/components/QuestionSelection.jsx";
 
 export default function GameLevel1() {
   const [showPopup, setShowPopup] = useState(false); // State to manage popup visibility
@@ -137,11 +138,20 @@ export default function GameLevel1() {
 
     const rock = new Rock({
       position: {
-        x: 300, // x position of the rock
-        y: 300, // y position of the rock
+        x: 310, // x position of the rock
+        y: 310, // y position of the rock
       },
       context: context,
       imageSrc: "/assets/Rocks.png",
+    });
+
+    const hiveOne = new HiveOne({
+      position: {
+        x: 100,
+        y: 315,
+      },
+      context: context,
+      imageSrc: "/assets/Hive-One.png",
     });
 
     const background = new Sprite({
@@ -182,6 +192,7 @@ export default function GameLevel1() {
       player.checkForHorizontalCanvasCollision();
       player.update();
       rock.update();
+      hiveOne.update();
 
       player.velocity.x = 0;
       if (keys.ArrowRight.pressed) {
@@ -225,9 +236,14 @@ export default function GameLevel1() {
         case "ArrowUp":
           player.velocity.y = -4;
           break;
-        case "w":
-          if (player.isNearRock(rock)) {
-            setShowPopup(true); // Show popup if player presses "w" near the rock
+        case "Enter":
+          if (player.isNearItem(hiveOne)) {
+            setShowPopup(true);
+          }
+          break;
+        case "Enter":
+          if (player.isNearItem(rock)) {
+            setShowPopup(true);
           }
           break;
       }
@@ -259,7 +275,7 @@ export default function GameLevel1() {
             padding: "10px",
           }}
         >
-          Hello, answer the question.
+          <QuestionSelection />
           <button onClick={() => setShowPopup(false)}>Close</button>
         </div>
       )}
