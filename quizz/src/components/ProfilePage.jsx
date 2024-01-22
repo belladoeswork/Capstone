@@ -4,14 +4,16 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaTrophy } from "react-icons/fa6";
 import AvatarOption from "./AvatarOption.jsx";
+import { useRouter } from "next/navigation.js";
 
 import profileImg1 from "@/assets/avatar/9439685.jpg";
 
 export default function ProfilePage({ user }) {
-  const [isModalOpen, setModalOpen] = useState(false);
-  //const [avatarProfile, setAvatarProfile] = useState("avatar1");
+  const router = useRouter();
 
-  //add eventlist to all avatars
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedAvatar, setSelectedAvatar] = useState(profileImg1);
+  //const [avatarProfile, setAvatarProfile] = useState("avatar1");
 
   //const user = await fetchUser();
 
@@ -27,7 +29,13 @@ export default function ProfilePage({ user }) {
   return (
     <div className="profile-container">
       <div>
-        <Image src={profileImg1} alt={"avatar img"} className="profile-image" />
+        <Image
+          src={selectedAvatar}
+          alt={"avatar img"}
+          className="profile-image"
+          width={100}
+          height={100}
+        />
       </div>
       {user.id && (
         <div>
@@ -36,15 +44,17 @@ export default function ProfilePage({ user }) {
             <FaTrophy />
             <p>Level:</p>
           </div>
-          <div>
-            <button
-              onClick={handleEditProfileClick}
-              className="editProfile-button"
-            >
-              Change Avatar
-            </button>
-            <div style={{ display: !isModalOpen ? "flex" : "none" }}>
-              <AvatarOption />
+          <div className="profileButton-div">
+            <div>
+              <button
+                onClick={handleEditProfileClick}
+                className="editProfile-button"
+              >
+                Choose an Avatar
+              </button>
+              <div style={{ display: isModalOpen ? "flex" : "none" }}>
+                <AvatarOption setSelectedAvatar={setSelectedAvatar} />
+              </div>
             </div>
           </div>
         </div>
