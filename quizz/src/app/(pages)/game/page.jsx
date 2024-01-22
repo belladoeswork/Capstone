@@ -7,13 +7,62 @@ import {
 } from "../../../components/data/Collisions.js";
 import collision from "../../../helpers/utils.js";
 import { Sprite } from "./classes/Sprite.jsx";
-import { Player, Rock, HiveOne } from "./classes/Player.jsx";
+import { Player } from "./classes/Player.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 import QuestionSelection from "@/components/QuestionSelection.jsx";
+import { useRouter } from "next/navigation.js";
+import ScoreBoard from "@/components/Score.jsx";
+import { Rock, HiveOne } from "./classes/StaticSprite.jsx";
+import QuizComponent from "@/components/Quiz.jsx";
 
 export default function GameLevel1() {
-  const [showPopup, setShowPopup] = useState(false); // State to manage popup visibility
+  const [showPopup, setShowPopup] = useState(false);
+  const [currentItem, setCurrentItem] = useState(null);
+  // const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+  const [level, setLevel] = useState(1);
+  const [interactedItems, setInteractedItems] = useState({});
+  const [getQuestion, setGetQuestion] = useState(false);
+  const router = useRouter();
   const canvasRef = useRef(null);
+
+  // const question =
+  //   currentQuestionIndex >= 0
+  //     ? questionsData[level][currentQuestionIndex]
+  //     : null;
+
+  // const handleAnswer = (isCorrect, itemKey) => {
+  //   setShowPopup(false);
+  //   if (isCorrect) {
+  //     setScore(score + 1);
+  //     setInteractedItems({ ...interactedItems, [itemKey]: false });
+
+  //     if ((score + 1) % 5 === 0) {
+  //       // Level up after every 5 correct answers
+  //       setLevel(level + 1);
+  //       setCurrentQuestionIndex(-1);
+  //     }
+  //   } else {
+  //     setGameOver(true);
+  //   }
+  // };
+
+  // const getNextQuestion = () => {
+  //   if (currentQuestionIndex + 1 < questionsData[level].length) {
+  //     setCurrentQuestionIndex(currentQuestionIndex + 1);
+  //     setShowPopup(true);
+  //   }
+  // };
+
+  // const restartGame = () => {
+  //   setScore(0);
+  //   setLevel(0);
+  //   setCurrentQuestionIndex(-1);
+  //   setShowPopup(false);
+  //   setGameOver(false);
+  //   setInteractedItems({});
+  //   router.reload();
+  // };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -125,6 +174,8 @@ export default function GameLevel1() {
           frameBuffer: 3,
         },
       },
+      interactedItems: interactedItems,
+      currentItem: currentItem,
     });
 
     const keys = {
@@ -236,15 +287,21 @@ export default function GameLevel1() {
         case "ArrowUp":
           player.velocity.y = -4;
           break;
-        case "Enter":
-          if (player.isNearItem(hiveOne)) {
-            setShowPopup(true);
-          }
-          break;
-        case "Enter":
-          if (player.isNearItem(rock)) {
-            setShowPopup(true);
-          }
+        // case "Enter":
+        //   if (player.isNearItem(hiveOne)) {
+        //     setShowPopup(true);
+        //   }
+        //   break;
+        case "w":
+          const items = { rock, hiveOne /* add other sprites here */ }; // Define other items here
+          Object.entries(items).forEach(([key, item]) => {
+            if (player.isNearItem(item) && !interactedItems[key]) {
+              setShowPopup(true); // Show the question popup
+              setCurrentItem(key); // Set the current item being interacted with
+              player.setCurrentItem(items[key]); // Update player's currentItem
+              setGetQuestion(true);
+            }
+          });
           break;
       }
     });
@@ -259,24 +316,37 @@ export default function GameLevel1() {
           break;
       }
     });
+
+    player.setInteractedItems(interactedItems);
+    player.setCurrentItem(currentItem);
   }, []);
+  // [interactedItems, currentItem]);
+
+  if (gameOver) {
+    return (
+      <div style={{ textAlign: "center" }}>
+        <h1>Game Over</h1>
+        <button onClick={restartGame}>Restart</button>
+      </div>
+    );
+  }
 
   return (
     <div>
       <canvas ref={canvasRef} />
       Hi
       {showPopup && (
-        <div
-          style={{
-            position: "absolute",
-            top: "20px",
-            left: "20px",
-            background: "white",
-            padding: "10px",
-          }}
-        >
-          <QuestionSelection />
-          <button onClick={() => setShowPopup(false)}>Close</button>
+        <QuizComponent
+          getQuestion={getQuestion}
+          setGetQuestion={setGetQuestion}
+        />
+      )}
+      {/* <div>Score: {score}</div>
+      <div>Level: {level}</div> */}
+      {gameOver && (
+        <div style={{ textAlign: "center" }}>
+          <h1>Game Over</h1>
+          <button onClick={restartGame}>Restart</button>
         </div>
       )}
     </div>

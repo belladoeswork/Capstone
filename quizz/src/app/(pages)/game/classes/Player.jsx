@@ -14,6 +14,8 @@ export class Player extends Sprite {
     frameRate,
     scale = 0.5,
     animations,
+    interactedItems,
+    currentItem,
   }) {
     super({ imageSrc, frameRate, scale });
     this.position = position;
@@ -36,6 +38,8 @@ export class Player extends Sprite {
 
     this.animations = animations;
     this.lastDirection = "right";
+    this.interactedItems = interactedItems;
+    this.currentItem = currentItem;
 
     for (let key in this.animations) {
       const image = new Image();
@@ -64,6 +68,7 @@ export class Player extends Sprite {
   }
 
   isNearItem(item) {
+    if (!item.visible) return false;
     const playerCenter = {
       x: this.hitbox.position.x + this.hitbox.width / 2,
       y: this.hitbox.position.y + this.hitbox.height / 2,
@@ -160,6 +165,18 @@ export class Player extends Sprite {
     this.applyGravity();
     this.updateHitbox();
     this.checkForVerticalCollisions();
+
+    if (this.currentItem && this.interactedItems[this.currentItem]) {
+      this.currentItem.visible = false;
+    }
+  }
+
+  setInteractedItems(interactedItems) {
+    this.interactedItems = interactedItems;
+  }
+
+  setCurrentItem(currentItem) {
+    this.currentItem = currentItem;
   }
 
   updateHitbox() {
@@ -267,22 +284,26 @@ export class Player extends Sprite {
   }
 }
 
-export class Rock extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.5 }) {
-    super({ position, imageSrc, context, scale });
-  }
+// export class Rock extends Sprite {
+//   constructor({ position, context, imageSrc, scale = 0.5 }) {
+//     super({ position, imageSrc, context, scale });
+//     this.visible = true;
+//   }
 
-  update() {
-    this.draw();
-  }
-}
+//   update() {
+//     if (!this.visible) return;
+//     this.draw();
+//   }
+// }
 
-export class HiveOne extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.5 }) {
-    super({ position, imageSrc, context, scale });
-  }
+// export class HiveOne extends Sprite {
+//   constructor({ position, context, imageSrc, scale = 0.5 }) {
+//     super({ position, imageSrc, context, scale });
+//     this.visible = true;
+//   }
 
-  update() {
-    this.draw();
-  }
-}
+//   update() {
+//     if (!this.visible) return;
+//     this.draw();
+//   }
+// }

@@ -1,5 +1,5 @@
 import QuestionAnswer from "@/components/Answer";
-import QuestionComponent from "@/components/Question";
+import QuestionComponent from "@/components/QuestionComponent";
 import QuestionSelection from "@/components/QuestionSelection";
 import { prisma } from "@/lib/prisma";
 

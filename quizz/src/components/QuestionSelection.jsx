@@ -1,52 +1,37 @@
-"use client";
-import React, { useState } from "react";
-import ScoreBoard from "./Score";
-import QuestionComponent from "./Question";
-import questionsData from "@/lib/question";
+// "use client";
+// import { useState } from "react";
+// import QuestionComponent from "./QuestionComponent";
 
-const QuestionSelection = () => {
-  const [currentLevel, setCurrentLevel] = useState(0);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [message, setMessage] = useState("");
+// const QuestionSelection = ({ questions, onAnswer }) => {
+//   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+//   const question = questions[currentQuestionIndex];
 
-  const handleAnswer = (isCorrect) => {
-    if (isCorrect) {
-      setMessage("");
-      const nextQuestionIndex = currentQuestionIndex + 1;
-      if (nextQuestionIndex < 5) {
-        setCurrentQuestionIndex(nextQuestionIndex);
-        setCorrectAnswers(correctAnswers + 1);
-      } else if (currentLevel < 3) {
-        setCurrentLevel(currentLevel + 1);
-        setCurrentQuestionIndex(0);
-        // setCorrectAnswers(0);
-      } else {
-        setMessage("Congratulations! You completed all levels!");
-      }
-    } else {
-      setMessage("Incorrect answer. The game is restarting.");
-      setCurrentLevel(0);
-      setCurrentQuestionIndex(0);
-      setCorrectAnswers(0);
-    }
-  };
+//   const handleNextQuestion = () => {
+//     if (currentQuestionIndex + 1 < questions.length) {
+//       setCurrentQuestionIndex(currentQuestionIndex + 1);
+//     }
+//   };
 
-  const currentQuestion = questionsData[currentLevel][currentQuestionIndex];
+//   return (
+//     <div>
+//       {question && (
+//         <>
+//           <QuestionComponent
+//             question={question.question}
+//             options={question.options}
+//             correctAnswer={question.answer}
+//             onAnswer={(isCorrect) => {
+//               onAnswer(isCorrect);
+//               if (isCorrect) {
+//                 handleNextQuestion();
+//               }
+//             }}
+//           />
+//           <button onClick={handleNextQuestion}>Get Question</button>
+//         </>
+//       )}
+//     </div>
+//   );
+// };
 
-  return (
-    <div>
-      <h2>Level: {currentLevel + 1}</h2>
-      <ScoreBoard correctAnswers={correctAnswers} />
-      <QuestionComponent
-        question={currentQuestion.question}
-        options={currentQuestion.options}
-        correctAnswer={currentQuestion.answer}
-        onAnswer={handleAnswer}
-      />
-      {message && <p>{message}</p>}
-    </div>
-  );
-};
-
-export default QuestionSelection;
+// export default QuestionSelection;
