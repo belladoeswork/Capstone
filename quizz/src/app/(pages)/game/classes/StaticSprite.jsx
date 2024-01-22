@@ -33,3 +33,14 @@ export class HiveOne extends StaticSprite {
     this.draw();
   }
 }
+
+export class HiveTwo extends StaticSprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    super({ position, imageSrc, context, scale });
+    this.visible = true;
+  }
+  update() {
+    if (!this.visible) return;
+    this.draw();
+  }
+}

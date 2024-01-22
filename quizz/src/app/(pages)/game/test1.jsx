@@ -16,7 +16,7 @@ import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 import { Sprite } from "./classes/Sprite.jsx"; // Assuming this is the correct import
 // ... (any other necessary imports)
 
-export default function GameTestTwo() {
+export default function GameTest() {
   // Game state
 
   // let currentQuestionIndex = -1;
@@ -26,9 +26,10 @@ export default function GameTestTwo() {
   const [gameOver, setGameOver] = useState(false);
   const [level, setLevel] = useState(0);
   const [score, setScore] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(-1);
   const [showQuestion, setShowQuestion] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [gameOverMessage, setGameOverMessage] = useState("");
+  const router = useRouter();
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -270,7 +271,6 @@ export default function GameTestTwo() {
           const items = { rock, hiveOne, hiveTwo };
           Object.entries(items).forEach(([key, item]) => {
             if (player.isNearItem(item) && !interactedItems[key]) {
-              setCurrentQuestion(questionsData[currentQuestionIndex]);
               setShowPopup(true);
               setCurrentItem(key);
               player.setCurrentItem(items[key]);
@@ -295,7 +295,7 @@ export default function GameTestTwo() {
           break;
       }
     });
-  }, [interactedItems]); // Add dependencies as needed
+  }, []); // Add dependencies as needed
 
   // useEffect(() => {
   //   // Respond to changes in currentQuestionIndex
@@ -311,9 +311,10 @@ export default function GameTestTwo() {
   // }, [currentQuestionIndex, questionsData, level]);
 
   const getNextQuestion = () => {
-    if (currentQuestionIndex + 1 < questionsData.length) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setCurrentQuestion(questionsData[currentQuestionIndex + 1]);
+    if (currentQuestionIndex + 1 < questionsData[level].length) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+      // currentQuestionIndex++;
+      console.log(currentQuestionIndex);
       setShowQuestion(true);
     } else {
       setShowQuestion(false);
@@ -327,8 +328,9 @@ export default function GameTestTwo() {
       setInteractedItems({ ...interactedItems, [itemKey]: false });
       setScore(score + 1);
       if ((score + 1) % 5 === 0) {
-        if (score + 1 < questionsData.length) {
+        if (level + 1 < questionsData.length) {
           setLevel(level + 1);
+          setCurrentQuestionIndex(-1);
         } else {
           setGameOver(true);
           setGameOverMessage("Congratulations! You completed all levels!");
@@ -344,6 +346,8 @@ export default function GameTestTwo() {
   const restartGame = () => {
     setScore(0);
     setLevel(0);
+    setCurrentQuestionIndex(-1);
+    // currentQuestionIndex = -1;
     setShowQuestion(false);
     setGameOver(false);
     setGameOverMessage("");
@@ -363,48 +367,17 @@ export default function GameTestTwo() {
       {!gameOver && (
         <>
           <canvas ref={canvasRef} />
-          <div
-            style={{
-              display: showPopup ? "flex" : "none",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              backgroundColor: "white",
-              padding: "20px",
-              borderRadius: "10px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              zIndex: 1000,
-            }}
-          >
-            {showPopup && (
-              <QuizTest
-                showQuestion={showQuestion}
-                question={currentQuestion}
-                handleAnswer={(isCorrect) =>
-                  handleAnswer(isCorrect, currentItem)
-                }
-                getNextQuestion={getNextQuestion}
-              />
-            )}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "100px",
-              fontSize: "50px",
-            }}
-          >
-            <h2>
-              Score: <span style={{ color: "#2274a5" }}>{score}</span>{" "}
-            </h2>
-            <h2>
-              Level: <span style={{ color: "#2274a5" }}>{level + 1}</span>{" "}
-            </h2>
-          </div>
+          {showPopup && (
+            <QuizTest
+              showQuestion={showQuestion}
+              question={questionsData[level][currentQuestionIndex]}
+              handleAnswer={(isCorrect) => handleAnswer(isCorrect, currentItem)}
+              getNextQuestion={getNextQuestion}
+            />
+          )}
+
+          <h2>Score: {score}</h2>
+          <h2>Level: {level + 1}</h2>
         </>
       )}
       {gameOver && (
@@ -412,7 +385,7 @@ export default function GameTestTwo() {
           <h1>Game Over</h1>
           <p>
             <a href="https://www.youtube.com/@hackmyhead">
-              Review Javascript Concepts with Max from Hackmyhead
+              Review Javascript Concepts
             </a>
           </p>
           <button onClick={restartGame}>Restart</button>
