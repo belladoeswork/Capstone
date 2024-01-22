@@ -12,13 +12,13 @@ import avatar4 from "@/assets/avatar/av4.jpg";
 
 import { CgCloseR } from "react-icons/cg";
 
-export default function AvatarOption({ selectAvatar, setSelectedAvatar }) {
+export default function AvatarOption({ selectedAvatar, setSelectedAvatar }) {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(true);
 
   const handleAvatarClick = (avatar) => {
     setSelectedAvatar(avatar);
-    console.log();
+    //console.log();
   };
   //console.log("AvatarOption component rendered");
 
@@ -34,12 +34,11 @@ export default function AvatarOption({ selectAvatar, setSelectedAvatar }) {
     >
       <div>
         <div className="modal-header">
-          <div className="closeModal-div">
-            <button onClick={handleCloseModal} className="closeIcon">
-              <CgCloseR />
-            </button>
-          </div>
-          <h3>Choose your Avatar</h3>
+          <button onClick={handleCloseModal} className="closeIcon">
+            <CgCloseR />
+          </button>
+
+          <h3 className="modalHeader-text">Choose your Avatar</h3>
         </div>
 
         <Image

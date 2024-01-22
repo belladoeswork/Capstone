@@ -321,6 +321,8 @@
   margin: 20px;
   padding: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-width: 50%;
 }
 
 .profile-image {
@@ -365,11 +367,18 @@
   padding: 8px;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 20px;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #623b5a;
+    &:active {
+      background-color: #0f3a5e;
+    }
+  }
 }
 
 /*END Profile Page*/
@@ -378,15 +387,16 @@
 .profile-modal {
   display: flex;
   position: fixed;
-  gap: 50px;
+  max-width: 50%;
+  gap: 20px;
   top: 300px; /*go up to 0 to move it higher*/
   right: 0px; /* -400px Start off-screen, adjust as needed */
-  width: 400px;
-  height: 100%;
+  max-height: 80%;
   background-color: white;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: right 0.3s ease-in-out;
+  overflow-y: auto;
 }
 
 .profile-modal.active {
@@ -395,7 +405,7 @@
 
 .modal-header {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   padding: 20px;
   color: #623b5a;
   font-size: 25px;
@@ -405,9 +415,14 @@
   font-size: 40px;
   color: #623b5a;
   border: none;
+  cursor: pointer;
+  background-color: transparent;
 }
-.closeModal-div {
-  background-color: white;
+
+.modalHeader-text {
+  display: flex;
+
+  padding-left: 60px;
 }
 
 .avatar-images {
@@ -416,6 +431,23 @@
   height: 100px;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+@media (max-width: 600px) {
+  .profile-modal {
+    width: 100%;
+    right: 0;
+  }
+
+  .modal-header {
+    font-size: 20px;
+  }
+
+  .avatar-images {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 /*AVATAR PAGE END*/
