@@ -1,27 +1,22 @@
 import { prisma } from "@/lib/prisma.js";
 import Image from "next/image.js";
 
-export default async function DisplayProfileImg({
-  user,
-  avatar,
-  selectedAvatar,
-  setSelectedAvatar,
-}) {
-  setSelectedAvatar(avatar);
-  console.log(setSelectedAvatar(avatar));
+export default async function SaveProfileImg({ user, avatar, selectedAvatar }) {
+  //console.log(setSelectedAvatar(avatar));
 
   try {
     //request to the API to update the user's avatar
     const response = await fetch("/api/updateAvatar", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         userId: user.id,
-        newAvatar: avatar,
+        selectedAvatar: avatar,
       }),
     });
+    console.log(selectedAvatar);
 
     if (response.ok) {
     } else {
@@ -34,7 +29,8 @@ export default async function DisplayProfileImg({
   return (
     <div>
       <p>Image</p>
-      <Image src={user.avatar} alt="Avatar Image" />{" "}
     </div>
   );
 }
+
+//<Image src={user.newAvatar} alt="Avatar Image" />{" "}

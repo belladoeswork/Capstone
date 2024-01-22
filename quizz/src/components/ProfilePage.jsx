@@ -7,12 +7,14 @@ import AvatarOption from "./AvatarOption.jsx";
 import { useRouter } from "next/navigation.js";
 
 import profileImg1 from "@/assets/avatar/9439685.jpg";
+import profileImg2 from "@/assets/avatar/9439833.jpg";
 
-export default function ProfilePage({ user }) {
+export default function ProfilePage({ user, profile }) {
   const router = useRouter();
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState(profileImg1);
+
   //const [avatarProfile, setAvatarProfile] = useState("avatar1");
 
   //const user = await fetchUser();
@@ -22,13 +24,14 @@ export default function ProfilePage({ user }) {
   }
 
   const handleEditProfileClick = () => {
-    console.log("Button clicked");
+    //console.log("Button clicked");
     setModalOpen(true);
   };
-
+  console.log(user.avatar);
   return (
     <div className="profile-container">
       <div>
+        <div>{user.avatar}</div>
         <Image
           src={selectedAvatar}
           alt={"avatar img"}

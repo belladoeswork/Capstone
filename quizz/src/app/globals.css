@@ -61,9 +61,10 @@
 }
 
 .login-register-logo {
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   margin-bottom: 20px;
+  border-radius: 50%;
 }
 
 .auth-input-field {

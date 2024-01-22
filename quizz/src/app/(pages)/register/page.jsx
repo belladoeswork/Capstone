@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation.js";
 
 import Image from "next/image.js";
-import Logo from "../../../assets/codeHero/logo1.png";
+import Logo from "../../../assets/codeHero/codeHeroLogo.png";
 
 export default function Register() {
   const [username, setUsername] = useState("");
