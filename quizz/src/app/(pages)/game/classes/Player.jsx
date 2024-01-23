@@ -166,7 +166,11 @@ export class Player extends Sprite {
     this.updateHitbox();
     this.checkForVerticalCollisions();
 
-    if (this.currentItem && this.interactedItems[this.currentItem]) {
+    // if (this.currentItem && this.interactedItems[this.currentItem]) {
+    //   this.currentItem.visible = false;
+    // }
+
+    if (this.currentItem && this.interactedItems[this.currentItem.key]) {
       this.currentItem.visible = false;
     }
   }
@@ -175,8 +179,12 @@ export class Player extends Sprite {
     this.interactedItems = interactedItems;
   }
 
-  setCurrentItem(currentItem) {
-    this.currentItem = currentItem;
+  // setCurrentItem(currentItem) {
+  //   this.currentItem = currentItem;
+  // }
+
+  setCurrentItem(item) {
+    this.currentItem = item;
   }
 
   updateHitbox() {

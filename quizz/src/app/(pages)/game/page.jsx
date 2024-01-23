@@ -220,9 +220,12 @@ export default function GameTestTwo() {
 
       player.checkForHorizontalCanvasCollision();
       player.update();
-      rock.update();
-      hiveOne.update();
-      hiveTwo.update();
+      //   rock.update();
+      //   hiveOne.update();
+      //   hiveTwo.update();
+      rock.update(interactedItems);
+      hiveOne.update(interactedItems);
+      hiveTwo.update(interactedItems);
 
       player.velocity.x = 0;
       if (keys.ArrowRight.pressed) {
@@ -273,7 +276,8 @@ export default function GameTestTwo() {
               setCurrentQuestion(questionsData[currentQuestionIndex]);
               setShowPopup(true);
               setCurrentItem(key);
-              player.setCurrentItem(items[key]);
+              player.setCurrentItem(item);
+              //   player.setCurrentItem(items[key]);
               // getNextQuestion();
               if (!showPopup) {
                 getNextQuestion();
@@ -324,7 +328,9 @@ export default function GameTestTwo() {
   const handleAnswer = (isCorrect, itemKey) => {
     setShowPopup(false);
     if (isCorrect) {
-      setInteractedItems({ ...interactedItems, [itemKey]: false });
+      //   setInteractedItems({ ...interactedItems, [itemKey]: false });
+      //   setInteractedItems((prev) => ({ ...prev, [itemKey]: true }));
+      setInteractedItems({ ...interactedItems, [itemKey]: true });
       setScore(score + 1);
       if ((score + 1) % 5 === 0) {
         if (score + 1 < questionsData.length) {
@@ -391,9 +397,9 @@ export default function GameTestTwo() {
           <div
             style={{
               display: "flex",
+              backgroundColor: "#F2F5FF",
               flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
+              paddingLeft: "200px",
               gap: "100px",
               fontSize: "50px",
             }}

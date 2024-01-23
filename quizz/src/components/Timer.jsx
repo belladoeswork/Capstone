@@ -7,7 +7,6 @@ export default function Timer() {
 
   const [timeRemaining, setTimeRemaining] = useState(STARTING_TIME);
   const [isTimeRunning, setIsTimeRunning] = useState(false);
-  const textBoxRef = useRef(null);
 
   useEffect(() => {
     if (isTimeRunning && timeRemaining > 0) {
