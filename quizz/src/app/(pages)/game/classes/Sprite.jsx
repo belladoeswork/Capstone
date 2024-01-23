@@ -4,11 +4,13 @@ export class Sprite {
     position,
     imageSrc,
     context,
+    animations,
     frameRate = 1,
     frameBuffer = 3,
     scale = 1,
   }) {
     this.position = position
+    this.animations = animations
     this.scale = scale
     this.context = context
     this.loaded = false
