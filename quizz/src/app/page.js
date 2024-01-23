@@ -1,17 +1,23 @@
 "use client";
 import Navbar from "@/components/Navbar.jsx";
 import Game from "@/components/Game.jsx";
-// import App from "./app.js";
+import PlayerSelection from "@/components/PlayerSelection.jsx";
+
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image.js";
 import CodeHero from "/public/assets/Level1.png";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { IoIosArrowDropup } from "react-icons/io";
+import GameLevel1 from "./(pages)/game/page.jsx";
 
 export default function Home() {
   const [hidePlayButton, setHidePlayButton] = useState(true);
   const [hideHowToButton, setHideHowToButton] = useState(true);
+  //
+  // const [gameStarted, setGameStarted] = useState(false);
+  // const [selectedPlayerData, setSelectedPlayerData] = useState(null);
+  //
 
   function handlePlayClick() {
     setHidePlayButton(false);
@@ -20,10 +26,19 @@ export default function Home() {
   function handleHowtoClick() {
     setHideHowToButton(!hideHowToButton);
   }
+
+  // const handlePlayerSelect = (playerData) => {
+  //   setSelectedPlayerData(playerData);
+  //   setGameStarted(true);
+  // };
+
   return (
     <main>
-      <Game />
-      {/* <App /> */}
+      {/* {!gameStarted && <PlayerSelection onPlayerSelect={handlePlayerSelect} />}
+
+      {gameStarted && selectedPlayerData && (
+        <GameLevel1 selectedPlayerData={selectedPlayerData} />
+      )} */}
 
       <div id="homepage-container">
         <div id="homepage-left-container">
@@ -79,10 +94,10 @@ export default function Home() {
               <div className="level-link-container">
                 <h2>Select Room</h2>
 
-                <Link href={`/game`}>Level 1</Link>
-                <Link href={`/game`}>Level 3</Link>
-                <Link href={`/game`}>Level 3</Link>
-                <Link href={`/speedTest`}>Level 4</Link>
+                <Link href={"/level"}>Level 1</Link>
+                <Link href={"/level"}>Level 2</Link>
+                <Link href={"/level"}>Level 3</Link>
+                <Link href={"/level"}>Level 4</Link>
               </div>
             </div>
           </div>

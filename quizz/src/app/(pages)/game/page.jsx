@@ -5,18 +5,29 @@ import {
   floorCollisions,
   platformCollisions,
 } from "../../../components/data/Collisions.js";
-import collision from "../../../helpers/utils.js";
 import { Sprite } from "./classes/Sprite.jsx";
 import { Player } from "./classes/Player.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
+import { useRouter } from 'next/navigation.js';
+// import level from "../level/page.jsx";
+import { levelData } from '../../../components/MapLevels.jsx';
 
-export default function GameLevel1() {
+
+export default function GameLevel1({selectedPlayerData, level}) {
+
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
 
     const context = canvas.getContext("2d");
+
+    const currentLevelData = levelData[level];
+
+    if (!currentLevelData) {
+      console.error(`Invalid level: ${level}`);
+      return;
+    }
 
     canvas.width = 1024;
     canvas.height = 576;
@@ -26,9 +37,14 @@ export default function GameLevel1() {
       height: canvas.height / 4,
     };
 
+    // const floorCollisions2D = [];
+    // for (let i = 0; i < floorCollisions.length; i += 36) {
+    //   floorCollisions2D.push(floorCollisions.slice(i, i + 36));
+    // }
+
     const floorCollisions2D = [];
-    for (let i = 0; i < floorCollisions.length; i += 36) {
-      floorCollisions2D.push(floorCollisions.slice(i, i + 36));
+    for (let i = 0; i < currentLevelData.floorCollisions.length; i += 36) {
+      floorCollisions2D.push(currentLevelData.floorCollisions.slice(i, i + 36));
     }
 
     const collisionBlocks = [];
@@ -47,9 +63,16 @@ export default function GameLevel1() {
       });
     });
 
+    
+
+    // const platformCollisions2D = [];
+    // for (let i = 0; i < platformCollisions.length; i += 36) {
+    //   platformCollisions2D.push(platformCollisions.slice(i, i + 36));
+    // }
+
     const platformCollisions2D = [];
-    for (let i = 0; i < platformCollisions.length; i += 36) {
-      platformCollisions2D.push(platformCollisions.slice(i, i + 36));
+    for (let i = 0; i < currentLevelData.platformCollisions.length; i += 36) {
+      platformCollisions2D.push(currentLevelData.platformCollisions.slice(i, i + 36));
     }
 
     const platformCollisionBlocks = [];
@@ -74,55 +97,14 @@ export default function GameLevel1() {
     const player = new Player({
       position: {
         x: 100,
-        y: 300,
+        y: 150,
       },
       collisionBlocks,
       platformCollisionBlocks,
       context: context,
-      imageSrc: "/assets/huntress/Idle.png",
+      imageSrc: selectedPlayerData.animations.Idle.imageSrc,
       frameRate: 8,
-      animations: {
-        Idle: {
-          imageSrc: "/assets/huntress/Idle.png",
-          frameRate: 8,
-          frameBuffer: 3,
-        },
-        Run: {
-          imageSrc: "/assets/huntress/Run.png",
-          frameRate: 8,
-          frameBuffer: 5,
-        },
-        Jump: {
-          imageSrc: "/assets/huntress/Jump.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-        Fall: {
-          imageSrc: "/assets/huntress/Fall.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-        FallLeft: {
-          imageSrc: "/assets/huntress/FallLeft.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-        RunLeft: {
-          imageSrc: "/assets/huntress/RunLeft.png",
-          frameRate: 8,
-          frameBuffer: 5,
-        },
-        IdleLeft: {
-          imageSrc: "/assets/huntress/IdleLeft.png",
-          frameRate: 8,
-          frameBuffer: 3,
-        },
-        JumpLeft: {
-          imageSrc: "/assets/huntress/JumpLeft.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-      },
+      animations: selectedPlayerData.animations,
     });
 
     const keys = {
@@ -140,7 +122,8 @@ export default function GameLevel1() {
         y: 0,
       },
       context: context,
-      imageSrc: "/assets/map1.png",
+      imageSrc: currentLevelData.imageSrc,
+
     });
 
     const backgroundImageHeight = 432;
@@ -152,7 +135,7 @@ export default function GameLevel1() {
       },
     };
 
-    function animate() {
+    const animate = () => {
       window.requestAnimationFrame(animate);
       context.fillStyle = "white";
       context.fillRect(0, 0, canvas.width, canvas.height);
@@ -161,18 +144,12 @@ export default function GameLevel1() {
       context.scale(4, 4);
       context.translate(camera.position.x, camera.position.y);
       background.update();
-      // collisionBlocks.forEach((collisionBlock) => {
-      //   collisionBlock.update()
-      // })
-
-      // platformCollisionBlocks.forEach((block) => {
-      //   block.update()
-      // })
 
       player.checkForHorizontalCanvasCollision();
       player.update();
 
       player.velocity.x = 0;
+
       if (keys.ArrowRight.pressed) {
         player.switchSprite("Run");
         player.velocity.x = 2;
@@ -199,7 +176,7 @@ export default function GameLevel1() {
       }
 
       context.restore();
-    }
+    };
 
     animate();
 
@@ -227,12 +204,12 @@ export default function GameLevel1() {
           break;
       }
     });
-  }, []);
+  }, [selectedPlayerData, level]);
 
   return (
     <div>
       <canvas ref={canvasRef} />
-      Hi
     </div>
   );
 }
+
