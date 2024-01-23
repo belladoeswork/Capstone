@@ -11,6 +11,9 @@ import { IoIosArrowDropdown } from "react-icons/io";
 import { IoIosArrowDropup } from "react-icons/io";
 import GameLevel1 from "./(pages)/game/page.jsx";
 
+
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
   const [hidePlayButton, setHidePlayButton] = useState(true);
   const [hideHowToButton, setHideHowToButton] = useState(true);
