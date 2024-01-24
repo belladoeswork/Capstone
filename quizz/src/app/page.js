@@ -2,6 +2,7 @@
 import Navbar from "@/components/Navbar.jsx";
 import Game from "@/components/Game.jsx";
 import PlayerSelection from "@/components/PlayerSelection.jsx";
+import Footer from "@/components/Footer.jsx";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -45,15 +46,20 @@ export default function Home() {
           <div className="container">
             <h1 className="typed">A JavaScript Escape Room</h1>
           </div>
-          <p>
-            Welcome to Code Hero! A game where your journey to becoming a
-            Javascript master coder begins.
-            <br />
-            <br />
-            Ready to start your odyssey? Sharpen your mind, prepare your
-            keyboard, and step into the world of "Code Hero" Your future as a
-            coding expert awaits!
-          </p>
+          <div className="home-description">
+            <p>Welcome to Code Hero!</p>
+            <p>
+              A game where your journey to becoming a Javascript master coder
+              begins.
+            </p>
+            <p>Ready to start your odyssey?</p>{" "}
+            <p>
+              Sharpen your mind, prepare your keyboard, and step into the world
+              of
+            </p>
+            <span className="span-codeHero">"Code Hero" </span>
+            <p>Your future as a coding expert awaits!</p>
+          </div>
           <div id="how-to-play-container">
             <button
               id="howto-btn"
@@ -81,7 +87,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           <div id="play-now-container">
             {/* hide play now button if clicked */}
             <div style={{ display: !hidePlayButton ? "none" : "flex" }}>
@@ -104,10 +109,13 @@ export default function Home() {
         </div>
 
         <div id="homepage-right-container">
-          <Image src={CodeHero} alt="Level One Map" />
-          Find the questions and answer them correctly to beat the level.
+          <Image src={CodeHero} alt="Level One Map" className="homepage-img" />
+          <p className="homepage-ptag">
+            Find the questions and answer them correctly to beat the level.
+          </p>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

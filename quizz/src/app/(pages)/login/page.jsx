@@ -31,6 +31,7 @@ export default function Login() {
   return (
     <div className="login-register-container">
       <Image className="login-register-logo" src={Logo} alt="CodeHero Logo" />
+      <h1 className="typed-login">Welcome to CodeHero</h1>
       <form onSubmit={handleLogin}>
         <input
           value={username}

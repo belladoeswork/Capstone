@@ -6,18 +6,13 @@ import { FaTrophy } from "react-icons/fa6";
 import AvatarOption from "./AvatarOption.jsx";
 import { useRouter } from "next/navigation.js";
 
-import profileImg1 from "@/assets/avatar/9439685.jpg";
-import profileImg2 from "@/assets/avatar/9439833.jpg";
+import avatar6 from "@/assets/avatar/avatar6.jpg";
 
-export default function ProfilePage({ user, profile }) {
+export default function ProfilePage({ user }) {
   const router = useRouter();
 
   const [isModalOpen, setModalOpen] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(profileImg1);
-
-  //const [avatarProfile, setAvatarProfile] = useState("avatar1");
-
-  //const user = await fetchUser();
+  const [selectedAvatar, setSelectedAvatar] = useState(avatar6);
 
   if (!user) {
     return <div>Loading...</div>;
@@ -31,10 +26,9 @@ export default function ProfilePage({ user, profile }) {
   return (
     <div className="profile-container">
       <div>
-        <div>{user.avatar}</div>
         <Image
-          src={selectedAvatar}
-          alt={"avatar img"}
+          src={`/${user.avatar}.jpg`}
+          alt={"avatar"}
           className="profile-image"
           width={100}
           height={100}
@@ -56,7 +50,10 @@ export default function ProfilePage({ user, profile }) {
                 Choose an Avatar
               </button>
               <div style={{ display: isModalOpen ? "flex" : "none" }}>
-                <AvatarOption setSelectedAvatar={setSelectedAvatar} />
+                <AvatarOption
+                  setSelectedAvatar={setSelectedAvatar}
+                  user={user}
+                />
               </div>
             </div>
           </div>
