@@ -9,7 +9,7 @@ export async function PUT(request, response) {
   try {
     const { userId } = response.params;
 
-    const { newAvatar } = await request.json();
+    const { avatar } = await request.json();
     const user = await fetchUser();
 
     //is user logged in?
@@ -20,9 +20,11 @@ export async function PUT(request, response) {
       });
     }
     // Use Prisma to update the user's avatar
+    //console.log(userId, avatar);
+
     const updatedAvatar = await prisma.user.update({
       where: { id: userId },
-      data: { avatar: newAvatar },
+      data: { avatar: avatar },
     });
 
     return NextResponse.json({ success: true, updatedAvatar });
