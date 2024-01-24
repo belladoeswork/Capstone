@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   floorCollisions,
   platformCollisions,
@@ -8,14 +8,14 @@ import {
 import { Sprite } from "./classes/Sprite.jsx";
 import { Player } from "./classes/Player.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
-import { useRouter } from 'next/navigation.js';
+import { useRouter } from "next/navigation.js";
 // import level from "../level/page.jsx";
-import { levelData } from '../../../components/MapLevels.jsx';
+import { levelData } from "../../../components/MapLevels.jsx";
 
-
-export default function GameLevel1({selectedPlayerData, level}) {
-
+export default function GameLevel1({ selectedPlayerData, level }) {
   const canvasRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
+
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -36,11 +36,6 @@ export default function GameLevel1({selectedPlayerData, level}) {
       width: canvas.width / 4,
       height: canvas.height / 4,
     };
-
-    // const floorCollisions2D = [];
-    // for (let i = 0; i < floorCollisions.length; i += 36) {
-    //   floorCollisions2D.push(floorCollisions.slice(i, i + 36));
-    // }
 
     const floorCollisions2D = [];
     for (let i = 0; i < currentLevelData.floorCollisions.length; i += 36) {
@@ -63,16 +58,11 @@ export default function GameLevel1({selectedPlayerData, level}) {
       });
     });
 
-    
-
-    // const platformCollisions2D = [];
-    // for (let i = 0; i < platformCollisions.length; i += 36) {
-    //   platformCollisions2D.push(platformCollisions.slice(i, i + 36));
-    // }
-
     const platformCollisions2D = [];
     for (let i = 0; i < currentLevelData.platformCollisions.length; i += 36) {
-      platformCollisions2D.push(currentLevelData.platformCollisions.slice(i, i + 36));
+      platformCollisions2D.push(
+        currentLevelData.platformCollisions.slice(i, i + 36)
+      );
     }
 
     const platformCollisionBlocks = [];
@@ -123,7 +113,6 @@ export default function GameLevel1({selectedPlayerData, level}) {
       },
       context: context,
       imageSrc: currentLevelData.imageSrc,
-
     });
 
     const backgroundImageHeight = 432;
@@ -136,7 +125,9 @@ export default function GameLevel1({selectedPlayerData, level}) {
     };
 
     const animate = () => {
-      window.requestAnimationFrame(animate);
+      if (!isPaused) {
+        window.requestAnimationFrame(animate);
+      }
       context.fillStyle = "white";
       context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -191,6 +182,9 @@ export default function GameLevel1({selectedPlayerData, level}) {
         case "ArrowUp":
           player.velocity.y = -4;
           break;
+        case " ":
+          setIsPaused(!isPaused);
+          break;
       }
     });
 
@@ -204,7 +198,7 @@ export default function GameLevel1({selectedPlayerData, level}) {
           break;
       }
     });
-  }, [selectedPlayerData, level]);
+  }, [selectedPlayerData, level, isPaused]);
 
   return (
     <div>
@@ -212,4 +206,3 @@ export default function GameLevel1({selectedPlayerData, level}) {
     </div>
   );
 }
-

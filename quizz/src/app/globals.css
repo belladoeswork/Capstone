@@ -530,6 +530,7 @@
   background-color: #f2f5ff;
   padding: 20px;
   box-sizing: border-box;
+  border-radius: 30px;
   text-align: center;
   border: 1px solid #333;
   max-width: 700px;
@@ -589,15 +590,16 @@
   gap: 10px;
   width: 200px;
   height: 170px;
-  border: 1px solid #623b5a !important;
+  border: 3px solid #623b5a !important;
+  border-radius: 2%;
 
   overflow: hidden;
-  background: #723e147f;
+  background: #d29f387d;
   margin-bottom: 10px;
   /* transition: all 0.1s ease-out; */
 }
 
-.characterBox:hover {
+.character-box:hover {
   color: rgb(191, 255, 241);
 }
 
@@ -614,59 +616,6 @@
   cursor: pointer;
 }
 
-.selectedBox {
+/* .selectedBox {
   border: 1px solid rgb(24, 240, 255) !important;
 }
-
-/*FOOTER START*/
-.footer-basic {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 0;
-  gap: 80px;
-  background-color: #ffffff;
-  color: #4b4c4d;
-  text-align: center;
-}
-
-.socialContainer {
-}
-
-.footer-basic ul a:hover {
-  opacity: 1;
-}
-
-.footer-basic .social {
-  text-align: center;
-  padding-bottom: 25px;
-  border: none;
-}
-
-.footer-basic .social > a {
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  display: inline-block;
-
-  border-radius: 50%;
-
-  color: inherit;
-  opacity: 0.75;
-}
-
-.footer-basic .social > a:hover {
-  opacity: 0.9;
-}
-
-.footer-basic .copyright {
-  display: flex;
-  flex-direction: column;
-  margin-top: 15px;
-  text-align: center;
-  font-size: 13px;
-  color: #aaa;
-  margin-bottom: 0;
-}
-/*FOOTER END*/
