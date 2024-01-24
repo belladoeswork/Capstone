@@ -37,7 +37,7 @@ const questionsData = [
     question: "How can you add a comment in a JavaScript file?",
     options: [
       "<!-- This is a comment -->",
-      "/* This is a comment */",
+      "* This is a comment *",
       "// This is a comment",
     ],
     answer: "// This is a comment",
@@ -176,7 +176,7 @@ const questionsData = [
   {
     id: 20,
     question: "Which of these is a way to handle promises?",
-    options: ["await", "async", "defer"],
+    options: ["await", "sync", "defer"],
     answer: "await",
   },
   {

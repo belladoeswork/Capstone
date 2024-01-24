@@ -1,6 +1,5 @@
 "use client";
 
-// GameLevel1.jsx
 import React, { useRef, useEffect, useState } from "react";
 import {
   floorCollisions,
@@ -13,13 +12,9 @@ import QuizTest from "@/components/QuizTest.jsx";
 import { Player } from "./classes/Player.jsx";
 import { Rock, HiveOne, HiveTwo } from "./classes/StaticSprite.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
-import { Sprite } from "./classes/Sprite.jsx"; // Assuming this is the correct import
-// ... (any other necessary imports)
+import { Sprite } from "./classes/Sprite.jsx";
 
-export default function GameTestTwo() {
-  // Game state
-
-  // let currentQuestionIndex = -1;
+export default function GameTestThree() {
   const [showPopup, setShowPopup] = useState(false);
   const [currentItem, setCurrentItem] = useState(null);
   const [interactedItems, setInteractedItems] = useState({});
@@ -156,8 +151,8 @@ export default function GameTestTwo() {
 
     const rock = new Rock({
       position: {
-        x: 310, // x position of the rock
-        y: 310, // y position of the rock
+        x: 310,
+        y: 310,
       },
       context: context,
       imageSrc: "/assets/Rocks.png",
@@ -199,9 +194,7 @@ export default function GameTestTwo() {
       },
     };
 
-    // Game animation loop
     function animate() {
-      // requestAnimationFrame(animate);
       window.requestAnimationFrame(animate);
       context.fillStyle = "white";
       context.fillRect(0, 0, canvas.width, canvas.height);
@@ -210,19 +203,10 @@ export default function GameTestTwo() {
       context.scale(4, 4);
       context.translate(camera.position.x, camera.position.y);
       background.update();
-      // collisionBlocks.forEach((collisionBlock) => {
-      //   collisionBlock.update()
-      // })
-
-      // platformCollisionBlocks.forEach((block) => {
-      //   block.update()
-      // })
 
       player.checkForHorizontalCanvasCollision();
       player.update();
-      //   rock.update();
-      //   hiveOne.update();
-      //   hiveTwo.update();
+
       rock.update(interactedItems);
       hiveOne.update(interactedItems);
       hiveTwo.update(interactedItems);
@@ -257,18 +241,20 @@ export default function GameTestTwo() {
     }
     animate();
 
-    // Event listeners for player movement and interaction
     window.addEventListener("keydown", (event) => {
       switch (event.key) {
         case "ArrowRight":
           keys.ArrowRight.pressed = true;
           break;
+
         case "ArrowLeft":
           keys.ArrowLeft.pressed = true;
           break;
+
         case "ArrowUp":
           player.velocity.y = -4;
           break;
+
         case "Enter":
           const items = { rock, hiveOne, hiveTwo };
           Object.entries(items).forEach(([key, item]) => {
@@ -277,15 +263,12 @@ export default function GameTestTwo() {
               setShowPopup(true);
               setCurrentItem(key);
               player.setCurrentItem(item);
-              //   player.setCurrentItem(items[key]);
-              // getNextQuestion();
               if (!showPopup) {
                 getNextQuestion();
               }
             }
           });
           break;
-        // ... (other cases as needed)
       }
     });
 
@@ -299,21 +282,10 @@ export default function GameTestTwo() {
           break;
       }
     });
-  }, [interactedItems]); // Add dependencies as needed
+  }, [interactedItems]);
+  //   [interactedItems]);
 
-  // useEffect(() => {
-  //   // Respond to changes in currentQuestionIndex
-  //   if (
-  //     currentQuestionIndex >= 0 &&
-  //     currentQuestionIndex < questionsData[level].length
-  //   ) {
-  //     setShowQuestion(true);
-  //   } else {
-  //     setShowQuestion(false);
-  //     // Handle end of questions logic here
-  //   }
-  // }, [currentQuestionIndex, questionsData, level]);
-
+  useEffect(() => {}, []);
   const getNextQuestion = () => {
     if (currentQuestionIndex + 1 < questionsData.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -328,8 +300,6 @@ export default function GameTestTwo() {
   const handleAnswer = (isCorrect, itemKey) => {
     setShowPopup(false);
     if (isCorrect) {
-      //   setInteractedItems({ ...interactedItems, [itemKey]: false });
-      //   setInteractedItems((prev) => ({ ...prev, [itemKey]: true }));
       setInteractedItems({ ...interactedItems, [itemKey]: true });
       setScore(score + 1);
       if ((score + 1) % 5 === 0) {
@@ -341,9 +311,7 @@ export default function GameTestTwo() {
         }
       }
     } else {
-      // ... (handle wrong answer)
       setGameOver(true);
-      // setGameOverMessage("");
     }
   };
 
