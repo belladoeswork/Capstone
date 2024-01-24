@@ -105,6 +105,7 @@ export default function playerSelection({ onPlayerSelect }) {
   useEffect(() => {
     const canvas1 = canvasRef1.current;
     const context1 = canvas1.getContext("2d");
+
     spriteRef1.current = new Sprite({
       position: { x: 0, y: 0 },
       ...playerData.huntress.animations.Idle,
@@ -113,9 +114,9 @@ export default function playerSelection({ onPlayerSelect }) {
 
     const canvas2 = canvasRef2.current;
     const context2 = canvas2.getContext("2d");
+
     spriteRef2.current = new Sprite({
       position: { x: 0, y: 0 },
-
       ...playerData.warrior.animations.Idle,
       context: context2,
     });
