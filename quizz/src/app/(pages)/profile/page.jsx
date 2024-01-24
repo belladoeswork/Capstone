@@ -4,6 +4,7 @@ import AvatarOption from "@/components/AvatarOption.jsx";
 
 import ProfilePage from "@/components/ProfilePage.jsx";
 import { prisma } from "@/lib/prisma.js";
+
 //import SaveProfileImg from "@/components/SaveProfileImg.jsx";
 
 export default async function Profile({ avatar }) {
