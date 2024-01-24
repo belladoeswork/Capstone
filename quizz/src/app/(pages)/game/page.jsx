@@ -16,22 +16,6 @@ export default function GameLevel1({ selectedPlayerData, level }) {
   const canvasRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
 
-  const handleKeyDown = (event) => {
-    switch (event.key) {
-      case "ArrowRight":
-        keys.ArrowRight.pressed = true;
-        break;
-      case "ArrowLeft":
-        keys.ArrowLeft.pressed = true;
-        break;
-      case "ArrowUp":
-        player.velocity.y = -4;
-        break;
-      case " ": // Add this case
-        setIsPaused(!isPaused);
-        break;
-    }
-  };
 
   useEffect(() => {
     const canvas = canvasRef.current;

@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^5.8.0",
+    "@prisma/client": "^5.9.0-dev.38",
     "bcrypt": "^5.1.1",
     "cookies-next": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
@@ -21,6 +21,6 @@
     "use-sound": "^4.0.1"
   },
   "devDependencies": {
-    "prisma": "^5.8.0"
+    "prisma": "^5.9.0-dev.38"
   }
 }
