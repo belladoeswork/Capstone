@@ -1,26 +1,54 @@
-import { Sprite } from "./Sprite.jsx";
-import collision from "../../../../helpers/utils.js";
-import platformCollision from "../../../../helpers/utils2.js";
+// "use client"
 
-const gravity = 0.1;
+// import React from "react";
+// import { useEffect, useRef } from "react";
+// import { CELL_SIZE } from "../../helpers/consts.js";
 
-export class Player extends Sprite {
+//  function Sprite({ image, frameCoord, size = 16 }) {
+//    const canvasRef = useRef();
+//    useEffect(() => {
+//      /** @type {HTMLCanvasElement} */
+//      const canvasEl = canvasRef.current;
+//      const ctx = canvasEl.getContext("2d");
+
+//      //Clear out anything in the canvas tag
+//      ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+
+//      //Draw a graphic to the canvas tag
+//      const tileSheetX = Number(frameCoord.split("x")[0]);
+//      const tileSheetY = Number(frameCoord.split("x")[1]);
+
+//      ctx.drawImage(
+//        image, // Image to pull from
+//        tileSheetX * CELL_SIZE, // Left X corner of frame
+//        tileSheetY * CELL_SIZE, // Top Y corner of frame
+//        size, //How much to crop from the sprite sheet (X)
+//        size, //How much to crop from the sprite sheet (Y)
+//        0, //Where to place this on canvas tag X (0)
+//        0, //Where to place this on canvas tag Y (0)
+//        size, //How large to scale it (X)
+//        size //How large to scale it (Y)
+//      );
+//    }, [image, frameCoord, size]);
+
+//    return <canvas width={size} height={size} ref={canvasRef} />;
+//  }
+
+//  const MemoizedSprite = React.memo(Sprite);
+// export default MemoizedSprite;
+
+class Player extends Sprite {
   constructor({
     position,
     collisionBlocks,
     platformCollisionBlocks,
     imageSrc,
-    context,
     frameRate,
     scale = 0.5,
     animations,
-    key,
   }) {
     super({ imageSrc, frameRate, scale });
     this.position = position;
-    this.context = context;
-    this.key = key;
-
     this.velocity = {
       x: 0,
       y: 1,
@@ -39,8 +67,6 @@ export class Player extends Sprite {
 
     this.animations = animations;
     this.lastDirection = "right";
-    // this.interactedItems = interactedItems;
-    // this.currentItem = currentItem;
 
     for (let key in this.animations) {
       const image = new Image();
@@ -61,31 +87,11 @@ export class Player extends Sprite {
 
   switchSprite(key) {
     if (this.image === this.animations[key].image || !this.loaded) return;
-    // if (
-    //   this.image === this.sprites.Attack.image &&
-    //   this.currentFrame < this.sprites.Attack.frameMax - 1
-    // )
-    //   return;
+
     this.currentFrame = 0;
     this.image = this.animations[key].image;
     this.frameBuffer = this.animations[key].frameBuffer;
     this.frameRate = this.animations[key].frameRate;
-  }
-
-  isNearItem(item) {
-    const playerCenter = {
-      x: this.hitbox.position.x + this.hitbox.width / 2,
-      y: this.hitbox.position.y + this.hitbox.height / 2,
-    };
-    const itemCenter = {
-      x: item.position.x + item.width / 2,
-      y: item.position.y + item.height / 2,
-    };
-    const distance = Math.hypot(
-      itemCenter.x - playerCenter.x,
-      itemCenter.y - playerCenter.y
-    );
-    return distance < 50;
   }
 
   updateCamerabox() {
@@ -160,6 +166,25 @@ export class Player extends Sprite {
     this.updateHitbox();
 
     this.updateCamerabox();
+    // c.fillStyle = 'rgba(0, 0, 255, 0.2)'
+    // c.fillRect(
+    //   this.camerabox.position.x,
+    //   this.camerabox.position.y,
+    //   this.camerabox.width,
+    //   this.camerabox.height
+    // )
+
+    // draws out the image
+    // c.fillStyle = 'rgba(0, 255, 0, 0.2)'
+    // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+
+    // c.fillStyle = 'rgba(255, 0, 0, 0.2)'
+    // c.fillRect(
+    //   this.hitbox.position.x,
+    //   this.hitbox.position.y,
+    //   this.hitbox.width,
+    //   this.hitbox.height
+    // )
 
     this.draw();
 
@@ -169,19 +194,7 @@ export class Player extends Sprite {
     this.applyGravity();
     this.updateHitbox();
     this.checkForVerticalCollisions();
-
-    // if (this.currentItem && this.interactedItems[this.currentItem.key]) {
-    //   this.currentItem.visible = false;
-    // }
   }
-
-  // setInteractedItems(interactedItems) {
-  //   this.interactedItems = interactedItems;
-  // }
-
-  // setCurrentItem(item) {
-  //   this.currentItem = item;
-  // }
 
   updateHitbox() {
     this.hitbox = {
@@ -285,52 +298,5 @@ export class Player extends Sprite {
         }
       }
     }
-  }
-}
-export class Worm extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.5 }) {
-    const frameRate = 9;
-    const frameBuffer = 5;
-    super({
-      position,
-      imageSrc,
-      context,
-      scale,
-      frameRate,
-      frameBuffer,
-      key: "worm",
-    });
-  }
-}
-
-export class Man extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.5 }) {
-    const frameRate = 8;
-    const frameBuffer = 7;
-    super({
-      position,
-      imageSrc,
-      context,
-      scale,
-      frameRate,
-      frameBuffer,
-      key: "man",
-    });
-  }
-}
-
-export class Chest extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.3 }) {
-    const frameRate = 5;
-    const frameBuffer = 30;
-    super({
-      position,
-      imageSrc,
-      context,
-      scale,
-      frameRate,
-      frameBuffer,
-      key: "chest",
-    });
   }
 }

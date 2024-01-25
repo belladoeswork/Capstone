@@ -7,6 +7,7 @@ import HowTo from "@/components/HowToScreen.jsx";
 import GameLevel1 from "../game/page.jsx";
 import { IoVolumeMedium, IoVolumeMute } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
+import { Rock, HiveOne, HiveTwo, Worm } from "../game/classes/StaticSprite.jsx";
 
 export default function levelPage() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -72,9 +73,11 @@ export default function levelPage() {
       {!gameStarted && <PlayerSelection onPlayerSelect={handlePlayerSelect} />}
 
       {gameStarted && selectedPlayerData && (
-        <GameLevel1 selectedPlayerData={selectedPlayerData} level="level1" />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <GameLevel1 selectedPlayerData={selectedPlayerData} level="level1" />
+        </div>
       )}
-      
+
       <div className="btnhelp">
         <Link href={"/howto"}>
           <button className="btnhelpoutline">

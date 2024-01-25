@@ -8,23 +8,25 @@ export class Sprite {
     frameRate = 1,
     frameBuffer = 3,
     scale = 1,
+    key,
   }) {
-    this.position = position
-    this.animations = animations
-    this.scale = scale
-    this.context = context
-    this.loaded = false
-    this.image = new Image()
+    this.position = position;
+    this.animations = animations;
+    this.scale = scale;
+    this.context = context;
+    this.loaded = false;
+    this.image = new Image();
     this.image.onload = () => {
-      this.width = (this.image.width / this.frameRate) * this.scale
-      this.height = this.image.height * this.scale
-      this.loaded = true
-    }
-    this.image.src = imageSrc
-    this.frameRate = frameRate
-    this.currentFrame = 0
-    this.frameBuffer = frameBuffer
-    this.elapsedFrames = 0
+      this.width = (this.image.width / this.frameRate) * this.scale;
+      this.height = this.image.height * this.scale;
+      this.loaded = true;
+    };
+    this.image.src = imageSrc;
+    this.frameRate = frameRate;
+    this.currentFrame = 0;
+    this.frameBuffer = frameBuffer;
+    this.elapsedFrames = 0;
+    this.key = key;
   }
 
   draw() {
@@ -38,7 +40,7 @@ export class Sprite {
       },
       width: this.image.width / this.frameRate,
       height: this.image.height,
-    }
+    };
 
     this.context.drawImage(
       this.image,
@@ -50,20 +52,20 @@ export class Sprite {
       this.position.y,
       this.width,
       this.height
-    )
+    );
   }
 
   update() {
-    this.draw()
-    this.updateFrames()
+    this.draw();
+    this.updateFrames();
   }
 
   updateFrames() {
-    this.elapsedFrames++
+    this.elapsedFrames++;
 
     if (this.elapsedFrames % this.frameBuffer === 0) {
-      if (this.currentFrame < this.frameRate - 1) this.currentFrame++
-      else this.currentFrame = 0
+      if (this.currentFrame < this.frameRate - 1) this.currentFrame++;
+      else this.currentFrame = 0;
     }
   }
 }

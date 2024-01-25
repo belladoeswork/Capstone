@@ -45,7 +45,14 @@ const playerData = {
         frameRate: 2,
         frameBuffer: 3,
       },
+      Attack1: {
+        imageSrc: "/assets/huntress/Attack1.png",
+        frameRate: 5,
+        frameBuffer: 3,
+      },
     },
+    // interactedItems: interactedItems,
+    // currentItem: currentItem,
   },
 
   warrior: {
@@ -90,11 +97,20 @@ const playerData = {
         frameRate: 2,
         frameBuffer: 3,
       },
+      Attack: {
+        imageSrc: "/assets/warrior/Attack1.png",
+        frameRate: 4,
+        frameBuffer: 3,
+      },
     },
+    // interactedItems: interactedItems,
+    // currentItem: currentItem,
   },
 };
 
 export default function playerSelection({ onPlayerSelect }) {
+  // const [currentItem, setCurrentItem] = useState(null);
+  // const [interactedItems, setInteractedItems] = useState({});
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedPlayerData, setSelectedPlayerData] = useState(null);
   const canvasRef1 = useRef(null);

@@ -324,6 +324,7 @@
   color: #623b5a;
   font-size: 25px;
 }
+
 .homepage-ptag {
   color: #623b5a;
 }
@@ -423,6 +424,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
 }
+
 .profileButton-div {
   display: flex;
 }
@@ -441,8 +443,10 @@
   text-decoration: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
+
   &:hover {
     background-color: #623b5a;
+
     &:active {
       background-color: #0f3a5e;
     }
@@ -457,8 +461,10 @@
   position: fixed;
   max-width: 50%;
   gap: 20px;
-  top: 300px; /*go up to 0 to move it higher*/
-  right: 0px; /* -400px Start off-screen, adjust as needed */
+  top: 300px;
+  /*go up to 0 to move it higher*/
+  right: 0px;
+  /* -400px Start off-screen, adjust as needed */
   max-height: 80%;
   background-color: white;
   padding: 20px;
@@ -709,7 +715,7 @@
 .explainer-clock {
   font-size: 20px;
   line-height: 1.3;
-  margin: 20px ;
+  margin: 20px;
   text-align: left;
 }
 
@@ -724,15 +730,19 @@
   0% {
     transform: scale(1) rotate(0);
   }
+
   25% {
     transform: scale(1.1) rotate(-10deg);
   }
+
   50% {
     transform: scale(1) rotate(0);
   }
+
   75% {
     transform: scale(1.1) rotate(10deg);
   }
+
   100% {
     transform: scale(1) rotate(0);
   }
@@ -751,7 +761,9 @@
   width: 100%;
 }
 
-.arrows-up, .arrows-left, .arrows-right {
+.arrows-up,
+.arrows-left,
+.arrows-right {
   animation: pulse 1s infinite;
 }
 
@@ -759,9 +771,171 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/* .selectedBox {
+  border: 1px solid rgb(24, 240, 255) !important;
+<<<<<<<<< Temporary merge branch 1
+} */
+
+.game-container {
+  position: relative;
+}
+
+.volume-control {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.volume-control:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.btnhelp {
+  z-index: 1;
+  display: inline-block;
+  position: absolute;
+  right: 18px;
+  top: 100px;
+}
+
+.btnhelpoutline {
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  border: 2px solid #623b5a;
+  color: #623b5a;
+  transition: 0.25s all ease-in-out;
+  background-color: #f2f5ff;
+}
+
+.btnIcon {
+  font-size: 25px;
+  margin-right: 0;
+  vertical-align: middle;
+}
+
+.btnhelp span {
+  display: inline-block;
+}
+
+.btnhelp:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+/* How to page */
+
+.main-container {
+  width: 100%;
+  min-height: 100vh;
+  color: white;
+  text-align: center;
+  padding: 10vh 0;
+  transition: 0.3s all ease-out;
+  background-color: #623b5a;
+}
+
+.cont-title {
+  text-transform: uppercase;
+  font-family: "Press Start 2P";
+  color: white;
+  letter-spacing: 0.1em;
+  text-shadow: 0px 2px 2px white;
+  margin-bottom: 20px;
+}
+
+.explainer {
+  font-size: 20px;
+  line-height: 1.3;
+  margin: 5vh 0;
+  text-align: right;
+}
+
+.section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.explainer-clock {
+  font-size: 20px;
+  line-height: 1.3;
+  margin: 20px;
+  text-align: left;
+}
+
+
+.clock-anim {
+  font-size: 100px;
+  animation: alarmAnimation 1s infinite;
+  margin: 50px;
+}
+
+@keyframes alarmAnimation {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+
+  25% {
+    transform: scale(1.1) rotate(-10deg);
+  }
+
+  50% {
+    transform: scale(1) rotate(0);
+  }
+
+  75% {
+    transform: scale(1.1) rotate(10deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+.arrows-anim {
+  font-size: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.arrows-horizontal {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.arrows-up,
+.arrows-left,
+.arrows-right {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
   100% {
     transform: scale(1);
   }
@@ -860,7 +1034,7 @@
 .explainer-clock {
   font-size: 20px;
   line-height: 1.3;
-  margin: 20px ;
+  margin: 20px;
   text-align: left;
 }
 
@@ -875,15 +1049,19 @@
   0% {
     transform: scale(1) rotate(0);
   }
+
   25% {
     transform: scale(1.1) rotate(-10deg);
   }
+
   50% {
     transform: scale(1) rotate(0);
   }
+
   75% {
     transform: scale(1.1) rotate(10deg);
   }
+
   100% {
     transform: scale(1) rotate(0);
   }
@@ -902,7 +1080,9 @@
   width: 100%;
 }
 
-.arrows-up, .arrows-left, .arrows-right {
+.arrows-up,
+.arrows-left,
+.arrows-right {
   animation: pulse 1s infinite;
 }
 
@@ -910,9 +1090,11 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
@@ -920,8 +1102,6 @@
 
 
 
-=========
-}
 
 /*FOOTER START*/
 .footer-basic {
@@ -936,6 +1116,7 @@
 }
 
 .socialContainer {
+  display: flex;
 }
 
 .footer-basic ul a:hover {
@@ -948,7 +1129,7 @@
   border: none;
 }
 
-.footer-basic .social > a {
+.footer-basic .social>a {
   font-size: 24px;
   width: 40px;
   height: 40px;
@@ -961,7 +1142,7 @@
   opacity: 0.75;
 }
 
-.footer-basic .social > a:hover {
+.footer-basic .social>a:hover {
   opacity: 0.9;
 }
 
@@ -974,5 +1155,77 @@
   color: #aaa;
   margin-bottom: 0;
 }
+
 /*FOOTER END*/
->>>>>>>>> Temporary merge branch 2
+/* >>>>>>>>>Temporary merge branch 2 .gameWelcomeModelContainter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  width: 300px;
+  margin-left: 50px; */
+/* } */
+
+.gameWelcomeModelContainter {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.gameWelcomeModelButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Popup container styling */
+.popup-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Question styling */
+.popup-question {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Options container styling */
+.popup-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Option button styling */
+.popup-option-button {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s;
+}
+
+.popup-option-button:hover {
+  background-color: #e0e0e0;
+}
