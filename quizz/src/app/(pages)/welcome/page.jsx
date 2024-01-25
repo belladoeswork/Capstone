@@ -1,5 +1,5 @@
 import Image from "next/image.js";
-import Logo from "../../../assets/codeHero/logo1.png";
+import logo from "@/assets/codeHero/codeHeroLogo.png";
 import Link from "next/link.js";
 import CodeHero from "/public/assets/Level1.png";
 
@@ -8,16 +8,13 @@ export default function Login() {
 
   return (
     <div className="welcome-container ">
-      <Image src={CodeHero} alt="Level One Map" className="welcome-logo" />
+      <Image src={logo} alt="logo" className="welcome-logo" />
 
-      <h3>
-        Welcome to <span id="welcomeSpan">CodeHero</span>
-      </h3>
-      <Link href={"/login"} id="welcomeBtn">
-        Login
-      </Link>
+      <h3>Thanks for playing</h3>
+      <h1 className="typed-welcome">CodeHero</h1>
     </div>
   );
 }
 
 //<Image className="welcome-logo" src={Logo} alt="CodeHero Logo" />
+//id="welcomeSpan"

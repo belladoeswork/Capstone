@@ -16,7 +16,7 @@ model User {
   id        String     @id @default(uuid())
   username  String     @unique
   password  String
-  avatar    String?    @default("avatar6")
+  avatar    String     @default("avatar6")
   badge     String?
   createdAt DateTime   @default(now())
   answers   Answer[]

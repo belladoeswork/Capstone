@@ -1,14 +1,15 @@
-import styles from "../app/page.module.css";
+//import Link from "next/link.js";
+import Image from "next/image.js";
 
 export default function NextLevelTransition() {
   return (
-    <div className={styles.myComponentContainer}>
-      <video className={styles.videoBackground} autoPlay muted loop>
-        <source src="/nextLevel.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      {/* Your component content goes here */}
-      <h1>Hello, I'm a component with a video background!</h1>
+    <div className="gif-nextLevel">
+      <Image
+        src="/assets/vids/nextLevel.gif"
+        alt="next level video"
+        width={200}
+        height={120}
+      />
     </div>
   );
 }

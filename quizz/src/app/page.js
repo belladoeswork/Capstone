@@ -2,7 +2,7 @@
 import Navbar from "@/components/Navbar.jsx";
 import Game from "@/components/Game.jsx";
 import PlayerSelection from "@/components/PlayerSelection.jsx";
-import Footer from "@/components/Footer.jsx";
+
 
 import Link from "next/link";
 import { useState } from "react";
@@ -12,8 +12,7 @@ import { IoIosArrowDropdown } from "react-icons/io";
 import { IoIosArrowDropup } from "react-icons/io";
 import GameLevel1 from "./(pages)/game/page.jsx";
 
-
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   const [hidePlayButton, setHidePlayButton] = useState(true);
@@ -50,7 +49,7 @@ export default function Home() {
             <h1 className="typed">A JavaScript Escape Room</h1>
           </div>
           <div className="home-description">
-            <p>Welcome to Code Hero!</p>
+            <p>Welcome to CodeHero!</p>
             <p>
               A game where your journey to becoming a Javascript master coder
               begins.
@@ -60,7 +59,7 @@ export default function Home() {
               Sharpen your mind, prepare your keyboard, and step into the world
               of
             </p>
-            <span className="span-codeHero">"Code Hero" </span>
+            <span className="span-codeHero">"CodeHero" </span>
             <p>Your future as a coding expert awaits!</p>
           </div>
           <div id="how-to-play-container">
@@ -113,12 +112,13 @@ export default function Home() {
 
         <div id="homepage-right-container">
           <Image src={CodeHero} alt="Level One Map" className="homepage-img" />
-          <p className="homepage-ptag">
-            Find the questions and answer them correctly to beat the level.
-          </p>
         </div>
       </div>
-      <Footer />
+     
     </main>
   );
 }
+
+/* <p className="homepage-ptag">
+            Find the questions and answer them correctly to beat the level.
+          </p>*/

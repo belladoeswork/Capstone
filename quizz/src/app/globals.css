@@ -23,8 +23,8 @@
 }
 
 .welcome-logo {
-  width: 80%;
-  height: 80%;
+  width: 30%;
+  height: 30%;
 }
 
 #welcomeBtn {
@@ -44,6 +44,19 @@
 
 #welcomeSpan {
   color: #2274a5;
+}
+
+.typed-welcome {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid;
+  width: 0;
+  animation: typing 3.5s steps(30, end) forwards, blinking 1s infinite;
+  font-family: "Press Start 2P";
+  color: #623b5a;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .login-register-container {
@@ -215,7 +228,7 @@
   display: flex;
   flex-direction: column;
   width: 600px;
-  height: 600px;
+
   /* justify-content: flex-end; */
   align-items: end;
   background-color: white;
@@ -465,6 +478,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: right 0.3s ease-in-out;
   overflow-y: auto;
+  border-radius: 5px;
 }
 
 .profile-modal.active {
@@ -923,19 +937,22 @@
 .footer-basic {
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
   padding: 40px 0;
-  gap: 80px;
   background-color: #2274a5;
-  color: #4b4c4d;
+  color: #623b5a;
   text-align: center;
 }
 
 .socialContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
 }
 
 .footer-basic ul a:hover {
-  opacity: 1;
+  opacity: 3;
 }
 
 .footer-basic .social {
@@ -950,15 +967,14 @@
   height: 40px;
   line-height: 40px;
   display: inline-block;
-
   border-radius: 50%;
-
-  color: inherit;
+  color: #623b5a;
   opacity: 0.75;
 }
 
 .footer-basic .social > a:hover {
   opacity: 0.9;
+  color: white;
 }
 
 .footer-basic .copyright {
@@ -966,23 +982,8 @@
   flex-direction: column;
   margin-top: 15px;
   text-align: center;
-  font-size: 13px;
-  color: #aaa;
+  font-size: 15px;
+  color: white;
   margin-bottom: 0;
 }
 /*FOOTER END*/
-
-/*NEXTLEVEL VID*/
-.my-component-container {
-  position: relative;
-}
-
-.video-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
