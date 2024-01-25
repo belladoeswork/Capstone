@@ -4,7 +4,10 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "avatar" TEXT,
+    "badge" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "noteId" TEXT,
+    "roomId" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -26,7 +29,9 @@ CREATE TABLE "Question" (
     "option2" TEXT,
     "option3" TEXT,
     "option4" TEXT,
+    "hint" TEXT,
     "roomId" TEXT NOT NULL,
+    "userId" TEXT,
 
     CONSTRAINT "Question_pkey" PRIMARY KEY ("id")
 );
@@ -62,13 +67,25 @@ CREATE TABLE "_AnswerToUser" (
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Question_title_key" ON "Question"("title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Note_userId_key" ON "Note"("userId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "_AnswerToUser_AB_unique" ON "_AnswerToUser"("A", "B");
 
 -- CreateIndex
 CREATE INDEX "_AnswerToUser_B_index" ON "_AnswerToUser"("B");
 
 -- AddForeignKey
+ALTER TABLE "User" ADD CONSTRAINT "User_roomId_fkey" FOREIGN KEY ("roomId") REFERENCES "Room"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Question" ADD CONSTRAINT "Question_roomId_fkey" FOREIGN KEY ("roomId") REFERENCES "Room"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Question" ADD CONSTRAINT "Question_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Answer" ADD CONSTRAINT "Answer_questionId_fkey" FOREIGN KEY ("questionId") REFERENCES "Question"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

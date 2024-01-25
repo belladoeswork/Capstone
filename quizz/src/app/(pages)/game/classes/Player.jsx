@@ -14,12 +14,13 @@ export class Player extends Sprite {
     frameRate,
     scale = 0.5,
     animations,
-    interactedItems,
-    currentItem,
+    key,
   }) {
     super({ imageSrc, frameRate, scale });
     this.position = position;
     this.context = context;
+    this.key = key;
+
     this.velocity = {
       x: 0,
       y: 1,
@@ -38,8 +39,8 @@ export class Player extends Sprite {
 
     this.animations = animations;
     this.lastDirection = "right";
-    this.interactedItems = interactedItems;
-    this.currentItem = currentItem;
+    // this.interactedItems = interactedItems;
+    // this.currentItem = currentItem;
 
     for (let key in this.animations) {
       const image = new Image();
@@ -60,7 +61,11 @@ export class Player extends Sprite {
 
   switchSprite(key) {
     if (this.image === this.animations[key].image || !this.loaded) return;
-
+    // if (
+    //   this.image === this.sprites.Attack.image &&
+    //   this.currentFrame < this.sprites.Attack.frameMax - 1
+    // )
+    //   return;
     this.currentFrame = 0;
     this.image = this.animations[key].image;
     this.frameBuffer = this.animations[key].frameBuffer;
@@ -68,7 +73,6 @@ export class Player extends Sprite {
   }
 
   isNearItem(item) {
-    if (!item.visible) return false;
     const playerCenter = {
       x: this.hitbox.position.x + this.hitbox.width / 2,
       y: this.hitbox.position.y + this.hitbox.height / 2,
@@ -81,7 +85,7 @@ export class Player extends Sprite {
       itemCenter.x - playerCenter.x,
       itemCenter.y - playerCenter.y
     );
-    return distance < 50; // distance threshold to consider the player is near the item
+    return distance < 50;
   }
 
   updateCamerabox() {
@@ -166,26 +170,18 @@ export class Player extends Sprite {
     this.updateHitbox();
     this.checkForVerticalCollisions();
 
-    // if (this.currentItem && this.interactedItems[this.currentItem]) {
+    // if (this.currentItem && this.interactedItems[this.currentItem.key]) {
     //   this.currentItem.visible = false;
     // }
-
-    if (this.currentItem && this.interactedItems[this.currentItem.key]) {
-      this.currentItem.visible = false;
-    }
   }
 
-  setInteractedItems(interactedItems) {
-    this.interactedItems = interactedItems;
-  }
-
-  // setCurrentItem(currentItem) {
-  //   this.currentItem = currentItem;
+  // setInteractedItems(interactedItems) {
+  //   this.interactedItems = interactedItems;
   // }
 
-  setCurrentItem(item) {
-    this.currentItem = item;
-  }
+  // setCurrentItem(item) {
+  //   this.currentItem = item;
+  // }
 
   updateHitbox() {
     this.hitbox = {
@@ -291,27 +287,50 @@ export class Player extends Sprite {
     }
   }
 }
+export class Worm extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 9;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "worm",
+    });
+  }
+}
 
-// export class Rock extends Sprite {
-//   constructor({ position, context, imageSrc, scale = 0.5 }) {
-//     super({ position, imageSrc, context, scale });
-//     this.visible = true;
-//   }
+export class Man extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 8;
+    const frameBuffer = 7;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "man",
+    });
+  }
+}
 
-//   update() {
-//     if (!this.visible) return;
-//     this.draw();
-//   }
-// }
-
-// export class HiveOne extends Sprite {
-//   constructor({ position, context, imageSrc, scale = 0.5 }) {
-//     super({ position, imageSrc, context, scale });
-//     this.visible = true;
-//   }
-
-//   update() {
-//     if (!this.visible) return;
-//     this.draw();
-//   }
-// }
+export class Chest extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.3 }) {
+    const frameRate = 5;
+    const frameBuffer = 30;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "chest",
+    });
+  }
+}

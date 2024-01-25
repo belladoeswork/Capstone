@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image.js";
-import Logo from "../../../assets/codeHero/logo1.png";
+import Logo from "../../../assets/codeHero/codeHeroLogo.png";
 import { useState } from "react";
 import { useRouter } from "next/navigation.js";
 
@@ -31,6 +31,7 @@ export default function Login() {
   return (
     <div className="login-register-container">
       <Image className="login-register-logo" src={Logo} alt="CodeHero Logo" />
+      <h1 className="typed-login">Welcome to CodeHero</h1>
       <form onSubmit={handleLogin}>
         <input
           value={username}

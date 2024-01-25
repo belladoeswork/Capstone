@@ -1,35 +1,52 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useState } from "react";
 import {
   floorCollisions,
   platformCollisions,
 } from "../../../components/data/Collisions.js";
-import collision from "../../../helpers/utils.js";
-import { useRouter } from "next/navigation.js";
-import questionsData from "@/lib/question";
-import QuizTest from "@/components/QuizTest.jsx";
-import { Player } from "./classes/Player.jsx";
-import { Rock, HiveOne, HiveTwo } from "./classes/StaticSprite.jsx";
-import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 import { Sprite } from "./classes/Sprite.jsx";
+import { Player, Worm, Man, Chest } from "./classes/Player.jsx";
+import { CollisionBlock } from "./classes/CollisionBlock.jsx";
+import { useRouter } from "next/navigation.js";
+// import level from "../level/page.jsx";
+import { levelData } from "../../../components/MapLevels.jsx";
+import Quiz from "@/components/Quiz.jsx";
+import questions from "@/lib/questions.jsx";
+import {
+  Rock,
+  HiveOne,
+  HiveTwo,
+  Cat,
+  RockThree,
+} from "./classes/StaticSprite.jsx";
 
-export default function GameTestThree() {
+export default function GameLevel1({ selectedPlayerData, level }) {
+  const canvasRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [currentItem, setCurrentItem] = useState(null);
   const [interactedItems, setInteractedItems] = useState({});
   const [gameOver, setGameOver] = useState(false);
-  const [level, setLevel] = useState(0);
-  const [score, setScore] = useState(0);
-  const [showQuestion, setShowQuestion] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const canvasRef = useRef(null);
+  const [showWelcome, setShowWelcome] = useState(true);
+
+  const closeWelcome = () => {
+    setShowWelcome(false);
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
 
     const context = canvas.getContext("2d");
+
+    const currentLevelData = levelData[level];
+
+    if (!currentLevelData) {
+      console.error(`Invalid level: ${level}`);
+      return;
+    }
 
     canvas.width = 1024;
     canvas.height = 576;
@@ -40,8 +57,8 @@ export default function GameTestThree() {
     };
 
     const floorCollisions2D = [];
-    for (let i = 0; i < floorCollisions.length; i += 36) {
-      floorCollisions2D.push(floorCollisions.slice(i, i + 36));
+    for (let i = 0; i < currentLevelData.floorCollisions.length; i += 36) {
+      floorCollisions2D.push(currentLevelData.floorCollisions.slice(i, i + 36));
     }
 
     const collisionBlocks = [];
@@ -61,8 +78,10 @@ export default function GameTestThree() {
     });
 
     const platformCollisions2D = [];
-    for (let i = 0; i < platformCollisions.length; i += 36) {
-      platformCollisions2D.push(platformCollisions.slice(i, i + 36));
+    for (let i = 0; i < currentLevelData.platformCollisions.length; i += 36) {
+      platformCollisions2D.push(
+        currentLevelData.platformCollisions.slice(i, i + 36)
+      );
     }
 
     const platformCollisionBlocks = [];
@@ -87,57 +106,14 @@ export default function GameTestThree() {
     const player = new Player({
       position: {
         x: 100,
-        y: 300,
+        y: 150,
       },
       collisionBlocks,
       platformCollisionBlocks,
       context: context,
-      imageSrc: "/assets/huntress/Idle.png",
+      imageSrc: selectedPlayerData.animations.Idle.imageSrc,
       frameRate: 8,
-      animations: {
-        Idle: {
-          imageSrc: "/assets/huntress/Idle.png",
-          frameRate: 8,
-          frameBuffer: 3,
-        },
-        Run: {
-          imageSrc: "/assets/huntress/Run.png",
-          frameRate: 8,
-          frameBuffer: 5,
-        },
-        Jump: {
-          imageSrc: "/assets/huntress/Jump.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-        Fall: {
-          imageSrc: "/assets/huntress/Fall.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-        FallLeft: {
-          imageSrc: "/assets/huntress/FallLeft.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-        RunLeft: {
-          imageSrc: "/assets/huntress/RunLeft.png",
-          frameRate: 8,
-          frameBuffer: 5,
-        },
-        IdleLeft: {
-          imageSrc: "/assets/huntress/IdleLeft.png",
-          frameRate: 8,
-          frameBuffer: 3,
-        },
-        JumpLeft: {
-          imageSrc: "/assets/huntress/JumpLeft.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-      },
-      interactedItems: interactedItems,
-      currentItem: currentItem,
+      animations: selectedPlayerData.animations,
     });
 
     const keys = {
@@ -147,34 +123,127 @@ export default function GameTestThree() {
       ArrowLeft: {
         pressed: false,
       },
+      // Enter: {
+      //   pressed: false,
+      // },
     };
 
-    const rock = new Rock({
-      position: {
-        x: 310,
-        y: 310,
-      },
-      context: context,
-      imageSrc: "/assets/Rocks.png",
-    });
+    let rock;
+    let hiveOne;
+    let hiveTwo;
+    let worm;
+    let cat;
+    let man;
+    let chest;
+    let rockThree;
 
-    const hiveOne = new HiveOne({
-      position: {
-        x: 100,
-        y: 315,
-      },
-      context: context,
-      imageSrc: "/assets/Hive-One.png",
-    });
+    const spriteLoader = (level) => {
+      if (level === "level1") {
+        rock = new Rock({
+          position: {
+            x: 410,
+            y: 410,
+          },
+          context: context,
+          imageSrc: "/assets/Rocks.png",
+        });
 
-    const hiveTwo = new HiveTwo({
-      position: {
-        x: 100,
-        y: 200,
-      },
-      context: context,
-      imageSrc: "/assets/Hive-Two.png",
-    });
+        rockThree = new RockThree({
+          position: {
+            x: 530,
+            y: 380,
+          },
+          context: context,
+          imageSrc: "/assets/Rock3.png",
+        });
+
+        hiveOne = new HiveOne({
+          position: {
+            x: 100,
+            y: 315,
+          },
+          context: context,
+          imageSrc: "/assets/Hive-One.png",
+        });
+
+        hiveTwo = new HiveTwo({
+          position: {
+            x: 100,
+            y: 200,
+          },
+          context: context,
+          imageSrc: "/assets/RockTwo.png",
+        });
+
+        cat = new Cat({
+          position: {
+            x: 360,
+            y: 180,
+          },
+          context: context,
+          imageSrc: "/assets/Cat.png",
+        });
+
+        worm = new Worm({
+          position: {
+            x: 80,
+            y: 195,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/Worm/Idle.png",
+          frameRate: 9,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/Worm/Idle.png",
+              frameRate: 9,
+              frameBuffer: 3,
+            },
+          },
+        });
+
+        man = new Man({
+          position: {
+            x: 50,
+            y: 365,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/Man.png",
+          frameRate: 5,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/Man.png",
+              frameRate: 5,
+              frameBuffer: 1,
+            },
+          },
+        });
+
+        chest = new Chest({
+          position: {
+            x: 370,
+            y: 340,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/Chest.png",
+          frameRate: 3,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/Chest.png",
+              frameRate: 3,
+              frameBuffer: 5,
+            },
+          },
+        });
+      }
+    };
+
+    spriteLoader(level);
 
     const background = new Sprite({
       position: {
@@ -182,7 +251,7 @@ export default function GameTestThree() {
         y: 0,
       },
       context: context,
-      imageSrc: "/assets/map1.png",
+      imageSrc: currentLevelData.imageSrc,
     });
 
     const backgroundImageHeight = 432;
@@ -194,8 +263,10 @@ export default function GameTestThree() {
       },
     };
 
-    function animate() {
-      window.requestAnimationFrame(animate);
+    const animate = () => {
+      if (!isPaused) {
+        window.requestAnimationFrame(animate);
+      }
       context.fillStyle = "white";
       context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -207,11 +278,23 @@ export default function GameTestThree() {
       player.checkForHorizontalCanvasCollision();
       player.update();
 
-      rock.update(interactedItems);
-      hiveOne.update(interactedItems);
-      hiveTwo.update(interactedItems);
+      const spriteUpdateLoader = (level) => {
+        if (level === "level1") {
+          rock.update();
+          rockThree.update();
+          hiveOne.update();
+          hiveTwo.update();
+          worm.update();
+          cat.update();
+          man.update();
+          chest.update();
+        }
+      };
+
+      spriteUpdateLoader(level);
 
       player.velocity.x = 0;
+
       if (keys.ArrowRight.pressed) {
         player.switchSprite("Run");
         player.velocity.x = 2;
@@ -222,6 +305,10 @@ export default function GameTestThree() {
         player.velocity.x = -2;
         player.lastDirection = "left";
         player.shouldPanCameraToTheRight({ canvas, camera });
+        // } else if (keys.Enter.pressed) {
+        //   player.switchSprite("Attack");
+        //   // player.velocity.x = 2;
+        //   player.lastDirection = "left";
       } else if (player.velocity.y === 0) {
         if (player.lastDirection === "right") player.switchSprite("Idle");
         else player.switchSprite("IdleLeft");
@@ -238,7 +325,8 @@ export default function GameTestThree() {
       }
 
       context.restore();
-    }
+    };
+
     animate();
 
     window.addEventListener("keydown", (event) => {
@@ -254,18 +342,34 @@ export default function GameTestThree() {
         case "ArrowUp":
           player.velocity.y = -4;
           break;
-
+        case " ":
+          setIsPaused(!isPaused);
+          break;
         case "Enter":
-          const items = { rock, hiveOne, hiveTwo };
+          // keys.Enter.pressed = true;
+          const items = {
+            rock,
+            rockThree,
+            hiveOne,
+            hiveTwo,
+            worm,
+            cat,
+            man,
+            chest,
+          };
           Object.entries(items).forEach(([key, item]) => {
-            if (player.isNearItem(item) && !interactedItems[key]) {
-              setCurrentQuestion(questionsData[currentQuestionIndex]);
-              setShowPopup(true);
-              setCurrentItem(key);
-              player.setCurrentItem(item);
-              if (!showPopup) {
-                getNextQuestion();
+            if (player.isNearItem(item)) {
+              const sprite = item?.key;
+              const question = questions?.filter(
+                (question) =>
+                  question?.sprite?.toLowerCase() === sprite?.toLowerCase()
+              );
+              if (isQuestionAnswered(question[0])) {
+                alert(`you can't answer a question twice`);
+                return;
               }
+              setCurrentQuestion(question[0]);
+              setShowPopup(true);
             }
           });
           break;
@@ -280,117 +384,84 @@ export default function GameTestThree() {
         case "ArrowLeft":
           keys.ArrowLeft.pressed = false;
           break;
+        // case "Enter":
+        //   keys.Enter.pressed = false;
+        //   break;
       }
     });
-  }, [interactedItems]);
-  //   [interactedItems]);
+  }, [selectedPlayerData, level, isPaused]);
 
-  useEffect(() => {}, []);
-  const getNextQuestion = () => {
-    if (currentQuestionIndex + 1 < questionsData.length) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setCurrentQuestion(questionsData[currentQuestionIndex + 1]);
-      setShowQuestion(true);
-    } else {
-      setShowQuestion(false);
-      setGameOver(true);
-    }
+  const isQuestionAnswered = (question) => {
+    return question?.isAnswered;
   };
-
-  const handleAnswer = (isCorrect, itemKey) => {
-    setShowPopup(false);
-    if (isCorrect) {
-      setInteractedItems({ ...interactedItems, [itemKey]: true });
-      setScore(score + 1);
-      if ((score + 1) % 5 === 0) {
-        if (score + 1 < questionsData.length) {
-          setLevel(level + 1);
-        } else {
-          setGameOver(true);
-          setGameOverMessage("Congratulations! You completed all levels!");
-        }
-      }
-    } else {
-      setGameOver(true);
-    }
-  };
-
-  const restartGame = () => {
-    setScore(0);
-    setLevel(0);
-    setShowQuestion(false);
-    setGameOver(false);
-    setGameOverMessage("");
-  };
-
-  // if (gameOver) {
-  //   return (
-  //     <div style={{ textAlign: "center" }}>
-  //       <h1>Game Over</h1>
-  //       <button onClick={restartGame}>Restart</button>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div>
-      {!gameOver && (
-        <>
-          <canvas ref={canvasRef} />
+      <canvas ref={canvasRef} />
+      {showWelcome && (
+        <div
+          className="gameWelcomeModel"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+          }}
+        >
           <div
             style={{
-              display: showPopup ? "flex" : "none",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              backgroundColor: "white",
+              backgroundColor: "#fff",
               padding: "20px",
-              borderRadius: "10px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              zIndex: 1000,
+              borderRadius: "5px",
+              position: "relative",
             }}
           >
-            {showPopup && (
-              <QuizTest
-                showQuestion={showQuestion}
-                question={currentQuestion}
-                handleAnswer={(isCorrect) =>
-                  handleAnswer(isCorrect, currentItem)
-                }
-                getNextQuestion={getNextQuestion}
-              />
-            )}
+            <button
+              onClick={closeWelcome}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                cursor: "pointer",
+              }}
+            >
+              X
+            </button>
+            <p>
+              <br />
+              In your quest through lands untapped, <br />
+              Seek the objects where questions are trapped. <br />
+              When an item, animal, or man makes your curiosity stir, <br />
+              <span style={{ color: "#2274a5", fontWeight: "bolder" }}>
+                Press Enter
+              </span>
+              , as the seeker you were. <br />
+              Find and answer the questions to prove your worth, <br />
+              Show your wisdom, affirm your birth. <br />
+              For if you succeed in this cerebral sob, <br /> A grand reward
+              awaits: you'll earn a job!
+            </p>
           </div>
-          <div
-            style={{
-              display: "flex",
-              backgroundColor: "#F2F5FF",
-              flexDirection: "row",
-              paddingLeft: "200px",
-              gap: "100px",
-              fontSize: "50px",
-            }}
-          >
-            <h2>
-              Score: <span style={{ color: "#2274a5" }}>{score}</span>{" "}
-            </h2>
-            <h2>
-              Level: <span style={{ color: "#2274a5" }}>{level + 1}</span>{" "}
-            </h2>
-          </div>
-        </>
-      )}
-      {gameOver && (
-        <div style={{ textAlign: "center" }}>
-          <h1>Game Over</h1>
-          <p>
-            <a href="https://www.youtube.com/@hackmyhead">
-              Review Javascript Concepts with Max from Hackmyhead
-            </a>
-          </p>
-          <button onClick={restartGame}>Restart</button>
         </div>
+      )}
+      {currentQuestion && (
+        <Quiz
+          question={currentQuestion}
+          handleAnswer={(isCorrect) => handleAnswer(isCorrect, currentItem)}
+          showPopup={showPopup}
+          setShowPopup={setShowPopup}
+          gameOver={gameOver}
+          currentQuestion={currentQuestion}
+          setCurrentQuestion={setCurrentQuestion}
+          currentQuestionIndex={currentQuestionIndex}
+          setGameOver={setGameOver}
+          questions={questions}
+        />
       )}
     </div>
   );
