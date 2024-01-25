@@ -130,9 +130,18 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       ArrowLeft: {
         pressed: false,
       },
+<<<<<<< HEAD
       // Enter: {
       //   pressed: false,
       // },
+=======
+      Enter: {
+        pressed: false,
+      },
+      Enter: {
+        pressed: false,
+      },
+>>>>>>> 276c7c9 (bee and timer)
     };
 
     let rock;
@@ -352,6 +361,20 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         else player.switchSprite("FallLeft");
       }
 
+      // added for attacks
+      if (keys.Enter.pressed) {
+        player.switchSprite("AttackRight");
+        player.velocity.x = 2;
+        player.lastDirection = "right";
+        player.shouldPanCameraToTheLeft({ canvas, camera });
+      } else if (keys.Enter.pressed) {
+        player.switchSprite("AttackLeft");
+        player.velocity.x = -2;
+        player.lastDirection = "left";
+        player.shouldPanCameraToTheRight({ canvas, camera });
+      }
+
+
       context.restore();
     };
 
@@ -370,9 +393,10 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         case "ArrowUp":
           player.velocity.y = -4;
           break;
-        case " ":
-          setIsPaused(!isPaused);
+        case "Enter":
+          keys.Enter.pressed = true;
           break;
+<<<<<<< HEAD
         case "Enter":
           // keys.Enter.pressed = true;
           const items = {
@@ -401,6 +425,11 @@ export default function GameLevel1({ selectedPlayerData, level }) {
             }
           });
           break;
+=======
+          case "Enter":
+            keys.Enter.pressed = true;
+            break;
+>>>>>>> 276c7c9 (bee and timer)
       }
     });
 
@@ -412,9 +441,18 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         case "ArrowLeft":
           keys.ArrowLeft.pressed = false;
           break;
+<<<<<<< HEAD
         // case "Enter":
         //   keys.Enter.pressed = false;
         //   break;
+=======
+          case "Enter":
+            keys.Enter.pressed = false;
+            break;
+          case "Enter":
+            keys.Enter.pressed = false;
+            break;
+>>>>>>> 276c7c9 (bee and timer)
       }
     });
   }, [selectedPlayerData, level, isPaused]);

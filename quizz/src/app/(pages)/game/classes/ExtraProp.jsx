@@ -4,7 +4,7 @@ export class ExtraProp {
     this.frameY = 0;
     this.context = context;
     this.fps = 20;
-    this.frameInterval = 1000 / this.fps;
+    this.frameInterval = 100 / this.fps;
     this.frameTimer = 0;
     this.markedForDeletion = false;
     this.ready = false;
