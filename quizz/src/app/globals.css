@@ -973,8 +973,6 @@
   }
 }
 
-<<<<<<< main
-=======
 
 /* .selectedBox {
   border: 1px solid rgb(24, 240, 255) !important;
@@ -1137,7 +1135,6 @@
 
 
 
->>>>>>> main
 /*FOOTER START*/
 .footer-basic {
   display: flex;
@@ -1151,12 +1148,11 @@
 
 .socialContainer {
   display: flex;
-<<<<<<< main
+
   justify-content: center;
   align-items: center;
   gap: 100px;
-=======
->>>>>>> main
+
 }
 
 .footer-basic ul a:hover {
@@ -1196,8 +1192,7 @@
 }
 
 /*FOOTER END*/
-<<<<<<< main
-=======
+
 /* >>>>>>>>>Temporary merge branch 2 .gameWelcomeModelContainter {
   position: fixed;
   top: 0;
@@ -1270,4 +1265,3 @@
 .popup-option-button:hover {
   background-color: #e0e0e0;
 }
-/* >>>>>>> main */
