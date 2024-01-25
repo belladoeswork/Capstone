@@ -1,4 +1,6 @@
 import { FaGithub } from "react-icons/fa";
+import ConfettiPage from "./ConfettiPage.jsx";
+import NextLevelTransition from "./NextLevelTransition.jsx";
 
 export default function Footer() {
   return (
@@ -33,6 +35,8 @@ export default function Footer() {
         <div>
           <p className="copyright">Hackmyhead Bootcamp Oct 2023 - Jan 2024</p>
         </div>
+        <ConfettiPage />
+        <NextLevelTransition />
       </footer>
     </div>
   );
