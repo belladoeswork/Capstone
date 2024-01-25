@@ -733,7 +733,6 @@
   text-align: left;
 }
 
-
 .clock-anim {
   font-size: 100px;
   animation: alarmAnimation 1s infinite;
@@ -794,7 +793,6 @@
     transform: scale(1);
   }
 }
-
 
 /* .selectedBox {
   border: 1px solid rgb(24, 240, 255) !important;
@@ -953,12 +951,6 @@
   }
 }
 
-
-
-=========
-}
-
->>>>>>> main
 /*FOOTER START*/
 .footer-basic {
   display: flex;
@@ -971,6 +963,11 @@
 }
 
 .socialContainer {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
 }
 
 .footer-basic ul a:hover {
@@ -983,7 +980,7 @@
   border: none;
 }
 
-.footer-basic .social>a {
+.footer-basic .social > a {
   font-size: 24px;
   width: 40px;
   height: 40px;
@@ -994,7 +991,7 @@
   opacity: 0.75;
 }
 
-.footer-basic .social>a:hover {
+.footer-basic .social > a:hover {
   opacity: 0.9;
   color: white;
 }
@@ -1010,4 +1007,76 @@
 }
 
 /*FOOTER END*/
->>>>>>>>> Temporary merge branch 2
+
+/* >>>>>>>>>Temporary merge branch 2 .gameWelcomeModelContainter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  width: 300px;
+  margin-left: 50px; */
+/* } */
+
+.gameWelcomeModelContainter {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.gameWelcomeModelButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Popup container styling */
+.popup-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Question styling */
+.popup-question {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Options container styling */
+.popup-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Option button styling */
+.popup-option-button {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s;
+}
+
+.popup-option-button:hover {
+  background-color: #e0e0e0;
+}
