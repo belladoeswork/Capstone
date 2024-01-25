@@ -337,6 +337,7 @@
   color: #623b5a;
   font-size: 25px;
 }
+
 .homepage-ptag {
   color: #623b5a;
 }
@@ -436,6 +437,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
 }
+
 .profileButton-div {
   display: flex;
 }
@@ -454,8 +456,10 @@
   text-decoration: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
+
   &:hover {
     background-color: #623b5a;
+
     &:active {
       background-color: #0f3a5e;
     }
@@ -470,8 +474,10 @@
   position: fixed;
   max-width: 50%;
   gap: 20px;
-  top: 300px; /*go up to 0 to move it higher*/
-  right: 0px; /* -400px Start off-screen, adjust as needed */
+  top: 300px;
+  /*go up to 0 to move it higher*/
+  right: 0px;
+  /* -400px Start off-screen, adjust as needed */
   max-height: 80%;
   background-color: white;
   padding: 20px;
@@ -727,6 +733,7 @@
   text-align: left;
 }
 
+
 .clock-anim {
   font-size: 100px;
   animation: alarmAnimation 1s infinite;
@@ -737,15 +744,19 @@
   0% {
     transform: scale(1) rotate(0);
   }
+
   25% {
     transform: scale(1.1) rotate(-10deg);
   }
+
   50% {
     transform: scale(1) rotate(0);
   }
+
   75% {
     transform: scale(1.1) rotate(10deg);
   }
+
   100% {
     transform: scale(1) rotate(0);
   }
@@ -774,13 +785,16 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
 }
+
 
 /* .selectedBox {
   border: 1px solid rgb(24, 240, 255) !important;
@@ -888,15 +902,19 @@
   0% {
     transform: scale(1) rotate(0);
   }
+
   25% {
     transform: scale(1.1) rotate(-10deg);
   }
+
   50% {
     transform: scale(1) rotate(0);
   }
+
   75% {
     transform: scale(1.1) rotate(10deg);
   }
+
   100% {
     transform: scale(1) rotate(0);
   }
@@ -925,14 +943,22 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
 }
 
+
+
+=========
+}
+
+>>>>>>> main
 /*FOOTER START*/
 .footer-basic {
   display: flex;
@@ -945,10 +971,6 @@
 }
 
 .socialContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 100px;
 }
 
 .footer-basic ul a:hover {
@@ -961,7 +983,7 @@
   border: none;
 }
 
-.footer-basic .social > a {
+.footer-basic .social>a {
   font-size: 24px;
   width: 40px;
   height: 40px;
@@ -972,7 +994,7 @@
   opacity: 0.75;
 }
 
-.footer-basic .social > a:hover {
+.footer-basic .social>a:hover {
   opacity: 0.9;
   color: white;
 }
@@ -986,4 +1008,6 @@
   color: white;
   margin-bottom: 0;
 }
+
 /*FOOTER END*/
+>>>>>>>>> Temporary merge branch 2

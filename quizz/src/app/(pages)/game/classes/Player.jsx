@@ -14,10 +14,12 @@ export class Player extends Sprite {
     frameRate,
     scale = 0.5,
     animations,
+    key,
   }) {
     super({ imageSrc, frameRate, scale });
     this.position = position;
     this.context = context;
+    this.key = key;
 
     this.velocity = {
       x: 0,
@@ -37,6 +39,8 @@ export class Player extends Sprite {
 
     this.animations = animations;
     this.lastDirection = "right";
+    // this.interactedItems = interactedItems;
+    // this.currentItem = currentItem;
 
     for (let key in this.animations) {
       const image = new Image();
@@ -57,11 +61,31 @@ export class Player extends Sprite {
 
   switchSprite(key) {
     if (this.image === this.animations[key].image || !this.loaded) return;
-
+    // if (
+    //   this.image === this.sprites.Attack.image &&
+    //   this.currentFrame < this.sprites.Attack.frameMax - 1
+    // )
+    //   return;
     this.currentFrame = 0;
     this.image = this.animations[key].image;
     this.frameBuffer = this.animations[key].frameBuffer;
     this.frameRate = this.animations[key].frameRate;
+  }
+
+  isNearItem(item) {
+    const playerCenter = {
+      x: this.hitbox.position.x + this.hitbox.width / 2,
+      y: this.hitbox.position.y + this.hitbox.height / 2,
+    };
+    const itemCenter = {
+      x: item.position.x + item.width / 2,
+      y: item.position.y + item.height / 2,
+    };
+    const distance = Math.hypot(
+      itemCenter.x - playerCenter.x,
+      itemCenter.y - playerCenter.y
+    );
+    return distance < 50;
   }
 
   updateCamerabox() {
@@ -145,7 +169,19 @@ export class Player extends Sprite {
     this.applyGravity();
     this.updateHitbox();
     this.checkForVerticalCollisions();
+
+    // if (this.currentItem && this.interactedItems[this.currentItem.key]) {
+    //   this.currentItem.visible = false;
+    // }
   }
+
+  // setInteractedItems(interactedItems) {
+  //   this.interactedItems = interactedItems;
+  // }
+
+  // setCurrentItem(item) {
+  //   this.currentItem = item;
+  // }
 
   updateHitbox() {
     this.hitbox = {
@@ -249,5 +285,52 @@ export class Player extends Sprite {
         }
       }
     }
+  }
+}
+export class Worm extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 9;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "worm",
+    });
+  }
+}
+
+export class Man extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 8;
+    const frameBuffer = 7;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "man",
+    });
+  }
+}
+
+export class Chest extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.3 }) {
+    const frameRate = 5;
+    const frameBuffer = 30;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "chest",
+    });
   }
 }
