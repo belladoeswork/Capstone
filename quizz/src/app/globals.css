@@ -808,7 +808,7 @@
   display: inline-block;
   position: absolute;
   right: 18px;
-  top: 100px;
+  top: 150px;
 }
 
 .btnhelpoutline {
@@ -835,6 +835,27 @@
   cursor: pointer;
   transform: scale(1.1);
 }
+
+.clockhelp {
+  z-index: 2;
+  display: inline-block;
+  position: absolute;
+  right: 18px;
+  top: 100px;
+
+}
+
+.clockoutline {
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  border: 2px solid #623b5a;
+  color: #623b5a;
+  transition: 0.25s all ease-in-out;
+  background-color: #f2f5ff;
+  margin:10px
+}
+
 
 /* How to page */
 

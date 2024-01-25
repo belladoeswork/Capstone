@@ -7,9 +7,9 @@ import {
 } from "../../../components/data/Collisions.js";
 import { Sprite } from "./classes/Sprite.jsx";
 import { Player, Worm, Man, Chest } from "./classes/Player.jsx";
+import { ExtraProp, Bee } from "./classes/ExtraProp.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 import { useRouter } from "next/navigation.js";
-// import level from "../level/page.jsx";
 import { levelData } from "../../../components/MapLevels.jsx";
 import Quiz from "@/components/Quiz.jsx";
 import questions from "@/lib/questions.jsx";
@@ -20,6 +20,7 @@ import {
   Cat,
   RockThree,
 } from "./classes/StaticSprite.jsx";
+import TypingSpeed from "@/components/TypingSpeed.jsx";
 
 export default function GameLevel1({ selectedPlayerData, level }) {
   const canvasRef = useRef(null);
@@ -35,6 +36,10 @@ export default function GameLevel1({ selectedPlayerData, level }) {
   const closeWelcome = () => {
     setShowWelcome(false);
   };
+  // added for extras?
+  const bees = useRef([]);
+  const extraPropTimer = useRef(0);
+  const extraPropInterval = 1000;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -115,6 +120,8 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       frameRate: 8,
       animations: selectedPlayerData.animations,
     });
+
+    const bee = new Bee({ canvas, context });
 
     const keys = {
       ArrowRight: {
@@ -263,7 +270,9 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       },
     };
 
-    const animate = () => {
+    let lastTime = 0;
+
+    const animate = (currentTime) => {
       if (!isPaused) {
         window.requestAnimationFrame(animate);
       }
@@ -292,6 +301,25 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       };
 
       spriteUpdateLoader(level);
+
+      //added for bees
+      const deltaTime = currentTime - lastTime;
+      lastTime = currentTime;
+
+      bees.current.forEach((bee) => {
+        bee.update(deltaTime);
+        bee.draw();
+        if (bee.markedForDeletion) {
+          bees.current.splice(bees.current.indexOf(bee), 1);
+        }
+      });
+
+      if (extraPropTimer.current > extraPropInterval) {
+        bees.current.push(new Bee({ canvas, context }));
+        extraPropTimer.current = 0;
+      } else {
+        extraPropTimer.current += deltaTime;
+      }
 
       player.velocity.x = 0;
 
@@ -327,7 +355,7 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       context.restore();
     };
 
-    animate();
+    animate(0);
 
     window.addEventListener("keydown", (event) => {
       switch (event.key) {
