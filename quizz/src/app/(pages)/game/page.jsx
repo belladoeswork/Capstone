@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   floorCollisions,
   platformCollisions,
@@ -283,7 +283,7 @@ export default function GameLevel1({ selectedPlayerData, level }) {
           rock.update();
           rockThree.update();
           hiveOne.update();
-          hiveTwo.update();
+          // hiveTwo.update();
           worm.update();
           cat.update();
           man.update();
