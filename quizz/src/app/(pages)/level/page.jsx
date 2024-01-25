@@ -73,7 +73,9 @@ export default function levelPage() {
       {!gameStarted && <PlayerSelection onPlayerSelect={handlePlayerSelect} />}
 
       {gameStarted && selectedPlayerData && (
-        <GameLevel1 selectedPlayerData={selectedPlayerData} level="level1" />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <GameLevel1 selectedPlayerData={selectedPlayerData} level="level1" />
+        </div>
       )}
 
       <div className="btnhelp">

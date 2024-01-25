@@ -1,8 +1,10 @@
 const questions = [
   {
     id: 1,
-    sprite: "rock",
+    sprite: "rockThree",
     type: "multiple-choice",
+    message:
+      "You're not dumb as a rock! You've found a question! Answer correctly and earn a point",
     question:
       "What is the correct syntax for declaring a variable in JavaScript?",
     isAnswered: false,
@@ -23,10 +25,11 @@ const questions = [
   {
     id: 2,
     type: "multiple-choice",
-    sprite: "rockTwo",
+    sprite: "rock",
+    message: "You've found a question! Answer correctly and earn a point",
     question: "Which of these is a boolean data type?",
     isAnswered: false,
-    options: ["'true'", "true", "1"],
+    options: ["'true'", "1"],
     answer: "true",
     hint: "A boolean data type represents one of two values: true or false.",
     resultMessage: {
@@ -39,6 +42,7 @@ const questions = [
     id: 3,
     type: "multiple-choice",
     sprite: "HiveOne",
+    message: "You've found a question! Answer correctly and earn a point",
     question: "How do you create a function in JavaScript?",
     isAnswered: false,
     options: [
@@ -58,7 +62,8 @@ const questions = [
   {
     id: 4,
     type: "multiple-choice",
-    sprite: "worm2",
+    sprite: "worm",
+    message: "You've found a question! Answer correctly and earn a point",
     question: "What does the following code return: console.log(10 == '10');?",
     isAnswered: false,
     options: ["true", "false", "SyntaxError"],
@@ -75,11 +80,12 @@ const questions = [
     id: 5,
     type: "multiple-choice",
     sprite: "cat",
+    message: "MEOW!! You've found a question! Answer correctly to earn a point",
     question: "How can you add a comment in a JavaScript file?",
     isAnswered: false,
     options: [
       "<!-- This is a comment -->",
-      "/* This is a comment */",
+      "/* This is a comment /",
       "// This is a comment",
     ],
     answer: "// This is a comment",
@@ -94,39 +100,40 @@ const questions = [
   {
     id: 6,
     type: "message",
-    sprite: "worm",
+    sprite: "man",
+    message: "",
     question:
-      "Show you're wise, not feeble or meek,Not as dumb as the item you seek",
+      "Hint! Show you're wise, not feeble or meek, not as dumb as the ITEM you seek",
     isAnswered: false,
     options: ["Ready"],
     answer: " ",
-    hint: "In JavaScript, single-line comments are created using two forward slashes.",
+    hint: "",
     resultMessage: {
-      correct:
-        "Correct! '// This is a comment' is how you add a single-line comment in JavaScript.",
-      wrong:
-        "Wrong! Remember, single-line comments in JavaScript use two forward slashes.",
+      correct: "",
+      wrong: "",
     },
   },
 
-  //   {
-  //     id: 6,
-  //     type: "multiple-choice",
-  //     question: "Which JavaScript function finds the largest number in an array?",
-  //     options: [
-  //       "array.max()",
-  //       "Math.max(...array)",
-  //       "array.sort().pop()",
-  //       "array.findMax()",
-  //     ],
-  //     answer: "Math.max(...array)",
-  //     hint: "There's a built-in object in JavaScript that deals with mathematical operations.",
-  //     resultMessage: {
-  //       correct:
-  //         "Correct! 'Math.max(...array)' is used to find the largest number in an array.",
-  //       wrong: "Wrong! Use 'Math.max(...array)' to find the largest number.",
-  //     },
-  //   },
+  {
+    id: 7,
+    type: "multiple-choice",
+    sprite: "chest",
+    question: "Which JavaScript function finds the largest number in an array?",
+    message: "You've found a question! Answer correctly to earn a point",
+    options: [
+      "array.max()",
+      "Math.max(...array)",
+      "array.sort().pop()",
+      "array.findMax()",
+    ],
+    answer: "Math.max(...array)",
+    hint: "There's a built-in object in JavaScript that deals with mathematical operations.",
+    resultMessage: {
+      correct:
+        "Correct! 'Math.max(...array)' is used to find the largest number in an array.",
+      wrong: "Wrong! Use 'Math.max(...array)' to find the largest number.",
+    },
+  },
   //   {
   //     id: 7,
   //     type: "multiple-choice",

@@ -6,14 +6,20 @@ import {
   platformCollisions,
 } from "../../../components/data/Collisions.js";
 import { Sprite } from "./classes/Sprite.jsx";
-import { Player, Worm } from "./classes/Player.jsx";
+import { Player, Worm, Man, Chest } from "./classes/Player.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 import { useRouter } from "next/navigation.js";
 // import level from "../level/page.jsx";
 import { levelData } from "../../../components/MapLevels.jsx";
 import Quiz from "@/components/Quiz.jsx";
 import questions from "@/lib/questions.jsx";
-import { Rock, HiveOne, HiveTwo, Cat } from "./classes/StaticSprite.jsx";
+import {
+  Rock,
+  HiveOne,
+  HiveTwo,
+  Cat,
+  RockThree,
+} from "./classes/StaticSprite.jsx";
 
 export default function GameLevel1({ selectedPlayerData, level }) {
   const canvasRef = useRef(null);
@@ -127,64 +133,114 @@ export default function GameLevel1({ selectedPlayerData, level }) {
     let hiveTwo;
     let worm;
     let cat;
+    let man;
+    let chest;
+    let rockThree;
 
     const spriteLoader = (level) => {
       if (level === "level1") {
         rock = new Rock({
           position: {
-            x: 310,
-            y: 310,
+            x: 510,
+            y: 410,
           },
           context: context,
           imageSrc: "/assets/Rocks.png",
         });
-      }
 
-      hiveOne = new HiveOne({
-        position: {
-          x: 100,
-          y: 315,
-        },
-        context: context,
-        imageSrc: "/assets/Hive-One.png",
-      });
-
-      hiveTwo = new HiveTwo({
-        position: {
-          x: 100,
-          y: 200,
-        },
-        context: context,
-        imageSrc: "/assets/RockTwo.png",
-      });
-
-      cat = new Cat({
-        position: {
-          x: 360,
-          y: 180,
-        },
-        context: context,
-        imageSrc: "/assets/Cat.png",
-      });
-
-      worm = new Worm({
-        position: {
-          x: 50,
-          y: 360,
-        },
-        collisionBlocks,
-        platformCollisionBlocks,
-        context: context,
-        imageSrc: "/assets/Worm/Idle.png",
-        frameRate: 9,
-        animations: {
-          Idle: {
-            imageSrc: "/assets/Worm/Idle.png",
-            frameRate: 9,
-            frameBuffer: 3,
+        rockThree = new RockThree({
+          position: {
+            x: 530,
+            y: 380,
           },
-        },
-      });
+          context: context,
+          imageSrc: "/assets/Rock3.png",
+        });
+
+        hiveOne = new HiveOne({
+          position: {
+            x: 100,
+            y: 315,
+          },
+          context: context,
+          imageSrc: "/assets/Hive-One.png",
+        });
+
+        hiveTwo = new HiveTwo({
+          position: {
+            x: 100,
+            y: 200,
+          },
+          context: context,
+          imageSrc: "/assets/RockTwo.png",
+        });
+
+        cat = new Cat({
+          position: {
+            x: 360,
+            y: 180,
+          },
+          context: context,
+          imageSrc: "/assets/Cat.png",
+        });
+
+        worm = new Worm({
+          position: {
+            x: 80,
+            y: 195,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/Worm/Idle.png",
+          frameRate: 9,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/Worm/Idle.png",
+              frameRate: 9,
+              frameBuffer: 3,
+            },
+          },
+        });
+
+        man = new Man({
+          position: {
+            x: 50,
+            y: 365,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/Man.png",
+          frameRate: 5,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/Man.png",
+              frameRate: 5,
+              frameBuffer: 1,
+            },
+          },
+        });
+
+        chest = new Chest({
+          position: {
+            x: 370,
+            y: 340,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/Chest.png",
+          frameRate: 3,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/Chest.png",
+              frameRate: 3,
+              frameBuffer: 5,
+            },
+          },
+        });
+      }
     };
 
     spriteLoader(level);
@@ -225,10 +281,13 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       const spriteUpdateLoader = (level) => {
         if (level === "level1") {
           rock.update();
+          rockThree.update();
           hiveOne.update();
           hiveTwo.update();
           worm.update();
           cat.update();
+          man.update();
+          chest.update();
         }
       };
 
@@ -286,7 +345,16 @@ export default function GameLevel1({ selectedPlayerData, level }) {
           break;
         case "Enter":
           // keys.Enter.pressed = true;
-          const items = { rock, hiveOne, hiveTwo, worm, cat };
+          const items = {
+            rock,
+            rockThree,
+            hiveOne,
+            hiveTwo,
+            worm,
+            cat,
+            man,
+            chest,
+          };
           Object.entries(items).forEach(([key, item]) => {
             if (player.isNearItem(item)) {
               const sprite = item?.key;
@@ -326,6 +394,7 @@ export default function GameLevel1({ selectedPlayerData, level }) {
   };
   return (
     <div>
+      <canvas ref={canvasRef} />
       {showWelcome && (
         <div
           className="gameWelcomeModel"
@@ -340,8 +409,6 @@ export default function GameLevel1({ selectedPlayerData, level }) {
             alignItems: "center",
             justifyContent: "center",
             zIndex: 1000,
-            width: "300px",
-            marginLeft: "50px",
           }}
         >
           <div
@@ -364,9 +431,15 @@ export default function GameLevel1({ selectedPlayerData, level }) {
               X
             </button>
             <p>
-              In your quest through lands untapped. Seek the objects where
-              questions are trapped. When an item or even snakes makes your
-              curiosity stir. Press Enter, as the seeker you were
+              <br />
+              In your quest through lands untapped, <br />
+              Seek the objects where questions are trapped. <br />
+              When an item, animal, or man makes your curiosity stir, <br />
+              Press Enter, as the seeker you were. <br />
+              Find and answer the questions to prove your worth, <br />
+              Show your wisdom, affirm your birth. <br />
+              For if you succeed in this cerebral sob, <br /> A grand reward
+              awaits: you'll earn a job!
             </p>
           </div>
         </div>
@@ -385,7 +458,6 @@ export default function GameLevel1({ selectedPlayerData, level }) {
           questions={questions}
         />
       )}
-      <canvas ref={canvasRef} />
     </div>
   );
 }

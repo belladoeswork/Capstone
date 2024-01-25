@@ -290,7 +290,7 @@ export class Player extends Sprite {
 export class Worm extends Sprite {
   constructor({ position, context, imageSrc, scale = 0.5 }) {
     const frameRate = 9;
-    const frameBuffer = 3;
+    const frameBuffer = 5;
     super({
       position,
       imageSrc,
@@ -299,6 +299,38 @@ export class Worm extends Sprite {
       frameRate,
       frameBuffer,
       key: "worm",
+    });
+  }
+}
+
+export class Man extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 8;
+    const frameBuffer = 7;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "man",
+    });
+  }
+}
+
+export class Chest extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.3 }) {
+    const frameRate = 5;
+    const frameBuffer = 30;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "chest",
     });
   }
 }

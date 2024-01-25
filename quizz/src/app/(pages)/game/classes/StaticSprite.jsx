@@ -56,3 +56,9 @@ export class Cat extends StaticSprite {
     super({ position, imageSrc, context, scale, key: "cat" });
   }
 }
+
+export class RockThree extends StaticSprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    super({ position, imageSrc, context, scale, key: "rock" });
+  }
+}
