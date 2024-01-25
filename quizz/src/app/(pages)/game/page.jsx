@@ -141,7 +141,7 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       if (level === "level1") {
         rock = new Rock({
           position: {
-            x: 510,
+            x: 410,
             y: 410,
           },
           context: context,
@@ -435,7 +435,10 @@ export default function GameLevel1({ selectedPlayerData, level }) {
               In your quest through lands untapped, <br />
               Seek the objects where questions are trapped. <br />
               When an item, animal, or man makes your curiosity stir, <br />
-              Press Enter, as the seeker you were. <br />
+              <span style={{ color: "#2274a5", fontWeight: "bolder" }}>
+                Press Enter
+              </span>
+              , as the seeker you were. <br />
               Find and answer the questions to prove your worth, <br />
               Show your wisdom, affirm your birth. <br />
               For if you succeed in this cerebral sob, <br /> A grand reward

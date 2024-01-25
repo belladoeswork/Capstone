@@ -1102,8 +1102,6 @@
 
 
 
-=========
-}
 
 /*FOOTER START*/
 .footer-basic {
@@ -1117,7 +1115,9 @@
   text-align: center;
 }
 
-.socialContainer {}
+.socialContainer {
+  display: flex;
+}
 
 .footer-basic ul a:hover {
   opacity: 1;
@@ -1157,7 +1157,7 @@
 }
 
 /*FOOTER END*/
->>>>>>>>>Temporary merge branch 2 .gameWelcomeModelContainter {
+/* >>>>>>>>>Temporary merge branch 2 .gameWelcomeModelContainter {
   position: fixed;
   top: 0;
   left: 0;
@@ -1169,8 +1169,8 @@
   justify-content: center;
   z-index: 1000;
   width: 300px;
-  margin-left: 50px;
-}
+  margin-left: 50px; */
+/* } */
 
 .gameWelcomeModelContainter {
   background-color: #fff;

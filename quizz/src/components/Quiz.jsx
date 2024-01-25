@@ -68,7 +68,12 @@ export default function Quiz({
 
             <div
               className="popup-options"
-              style={{ display: showOptions ? "flex" : "none" }}
+              style={{
+                display:
+                  question.type === "multiple-choice" || "message"
+                    ? "flex"
+                    : "none",
+              }}
             >
               {question?.options?.map((option, index) => (
                 <button
@@ -79,7 +84,11 @@ export default function Quiz({
                 </button>
               ))}
             </div>
-            <div style={{ display: showOptions ? "flex" : "none" }}>
+            <div
+              style={{
+                display: question.type === "input" ? "flex" : "none",
+              }}
+            >
               <form>
                 <input
                   type="text"

@@ -29,7 +29,7 @@ const questions = [
     message: "You've found a question! Answer correctly and earn a point",
     question: "Which of these is a boolean data type?",
     isAnswered: false,
-    options: ["'true'", "1"],
+    options: ["'true'", "true", "1"],
     answer: "true",
     hint: "A boolean data type represents one of two values: true or false.",
     resultMessage: {
