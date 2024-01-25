@@ -34,6 +34,8 @@ export default function Register() {
   return (
     <div className="login-register-container">
       <Image className="login-register-logo" src={Logo} alt="CodeHero Logo" />
+      <h1 className="typed-login">Welcome to CodeHero</h1>
+
       <form onSubmit={handleRegister}>
         <input
           value={username}
@@ -62,3 +64,5 @@ export default function Register() {
     </div>
   );
 }
+
+/**/
