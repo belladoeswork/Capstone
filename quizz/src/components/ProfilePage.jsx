@@ -22,12 +22,12 @@ export default function ProfilePage({ user }) {
     //console.log("Button clicked");
     setModalOpen(true);
   };
-  console.log(user.avatar);
+  //console.log(user.avatar);
   return (
     <div className="profile-container">
       <div>
         <Image
-          src={`/${user.avatar}.jpg`}
+          src={`/${user.avatar}.jpg` || "/assets/avatar/avatar6.jpg"}
           alt={"avatar"}
           className="profile-image"
           width={100}
@@ -39,7 +39,7 @@ export default function ProfilePage({ user }) {
           <h1 className="user-name">{user.username}</h1>
           <div className="level-indicator">
             <FaTrophy />
-            <p>Level:</p>
+            <p>Level: {user.level}</p>
           </div>
           <div className="profileButton-div">
             <div>

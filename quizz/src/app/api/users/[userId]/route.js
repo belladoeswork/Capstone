@@ -9,7 +9,7 @@ export async function PUT(request, response) {
   try {
     const { userId } = response.params;
 
-    const { avatar } = await request.json();
+    const { avatar, level } = await request.json();
     const user = await fetchUser();
 
     //is user logged in?
@@ -24,7 +24,7 @@ export async function PUT(request, response) {
 
     const updatedAvatar = await prisma.user.update({
       where: { id: userId },
-      data: { avatar: avatar },
+      data: { avatar: avatar, level: level },
     });
 
     return NextResponse.json({ success: true, updatedAvatar });

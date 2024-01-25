@@ -1,5 +1,7 @@
 import { FaGithub } from "react-icons/fa";
 
+//import NextLevelTransition from "./NextLevelTransition.jsx";
+
 export default function Footer() {
   return (
     <div>
@@ -31,7 +33,7 @@ export default function Footer() {
           </div>
         </div>
         <div>
-          <p className="copyright">Hackmyhead Bootcamp Oct 2023 - Jan 2024</p>
+          <p className="copyright">Bootcamp Oct 2023 - Jan 2024</p>
         </div>
       </footer>
     </div>
