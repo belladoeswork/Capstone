@@ -45,10 +45,6 @@ const playerData = {
         frameRate: 2,
         frameBuffer: 3,
       },
-<<<<<<< HEAD
-      Attack1: {
-        imageSrc: "/assets/huntress/Attack1.png",
-=======
       AttackLeft: {
         imageSrc: "/assets/huntress/AttackLeft.png",
         frameRate: 5,
@@ -56,7 +52,6 @@ const playerData = {
       },
       AttackRight: {
         imageSrc: "/assets/huntress/AttackRight.png",
->>>>>>> 276c7c9 (bee and timer)
         frameRate: 5,
         frameBuffer: 3,
       },
@@ -107,10 +102,9 @@ const playerData = {
         frameRate: 2,
         frameBuffer: 3,
       },
-<<<<<<< HEAD
       Attack: {
         imageSrc: "/assets/warrior/Attack1.png",
-=======
+      },
       AttackLeft: {
         imageSrc: "/assets/warrior/AttackLeft.png",
         frameRate: 4,
@@ -118,7 +112,6 @@ const playerData = {
       },
       AttackRight: {
         imageSrc: "/assets/warrior/AttackRight.png",
->>>>>>> 276c7c9 (bee and timer)
         frameRate: 4,
         frameBuffer: 3,
       },

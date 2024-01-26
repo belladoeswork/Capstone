@@ -32,6 +32,13 @@ export default function levelPage() {
     if (gameStarted) {
       audioElement.current.play();
     }
+
+    // Cleanup function
+  return () => {
+    audioElement.current.pause();
+    audioElement.current.currentTime = 0;
+  };
+    
   }, [gameStarted, isMuted]);
 
   useEffect(() => {

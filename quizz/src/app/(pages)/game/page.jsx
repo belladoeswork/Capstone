@@ -20,7 +20,6 @@ import {
   Cat,
   RockThree,
 } from "./classes/StaticSprite.jsx";
-import TypingSpeed from "@/components/TypingSpeed.jsx";
 
 export default function GameLevel1({ selectedPlayerData, level }) {
   const canvasRef = useRef(null);
@@ -130,18 +129,12 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       ArrowLeft: {
         pressed: false,
       },
-<<<<<<< HEAD
-      // Enter: {
-      //   pressed: false,
-      // },
-=======
       Enter: {
         pressed: false,
       },
       Enter: {
         pressed: false,
       },
->>>>>>> 276c7c9 (bee and timer)
     };
 
     let rock;
@@ -315,7 +308,16 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       const deltaTime = currentTime - lastTime;
       lastTime = currentTime;
 
+      if (extraPropTimer.current > extraPropInterval) {
+        bees.current.push(new Bee({ canvas, context }));
+        console.log("New bee created", Bee);
+        extraPropTimer.current = 0;
+      } else {
+        extraPropTimer.current += deltaTime;
+      }
+
       bees.current.forEach((bee) => {
+        console.log("Updating and drawing bee", bee);
         bee.update(deltaTime);
         bee.draw();
         if (bee.markedForDeletion) {
@@ -323,12 +325,7 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         }
       });
 
-      if (extraPropTimer.current > extraPropInterval) {
-        bees.current.push(new Bee({ canvas, context }));
-        extraPropTimer.current = 0;
-      } else {
-        extraPropTimer.current += deltaTime;
-      }
+
 
       player.velocity.x = 0;
 
@@ -396,40 +393,9 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         case "Enter":
           keys.Enter.pressed = true;
           break;
-<<<<<<< HEAD
-        case "Enter":
-          // keys.Enter.pressed = true;
-          const items = {
-            rock,
-            rockThree,
-            hiveOne,
-            hiveTwo,
-            worm,
-            cat,
-            man,
-            chest,
-          };
-          Object.entries(items).forEach(([key, item]) => {
-            if (player.isNearItem(item)) {
-              const sprite = item?.key;
-              const question = questions?.filter(
-                (question) =>
-                  question?.sprite?.toLowerCase() === sprite?.toLowerCase()
-              );
-              if (isQuestionAnswered(question[0])) {
-                alert(`you can't answer a question twice`);
-                return;
-              }
-              setCurrentQuestion(question[0]);
-              setShowPopup(true);
-            }
-          });
-          break;
-=======
           case "Enter":
             keys.Enter.pressed = true;
             break;
->>>>>>> 276c7c9 (bee and timer)
       }
     });
 
@@ -441,18 +407,12 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         case "ArrowLeft":
           keys.ArrowLeft.pressed = false;
           break;
-<<<<<<< HEAD
-        // case "Enter":
-        //   keys.Enter.pressed = false;
-        //   break;
-=======
           case "Enter":
             keys.Enter.pressed = false;
             break;
           case "Enter":
             keys.Enter.pressed = false;
             break;
->>>>>>> 276c7c9 (bee and timer)
       }
     });
   }, [selectedPlayerData, level, isPaused]);

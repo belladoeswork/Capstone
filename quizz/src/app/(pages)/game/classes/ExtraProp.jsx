@@ -1,3 +1,6 @@
+import { Sprite } from "./Sprite.jsx";
+
+
 export class ExtraProp {
   constructor(context) {
     this.frameX = 0;
@@ -55,30 +58,53 @@ export class ExtraProp {
   }
 }
 
-export class Bee extends ExtraProp {
+export class Bee extends Sprite {
   constructor({ canvas, context }) {
-    super(context);
-    this.x = 100;
-    this.y = 350;
-    this.image = new Image();
-    this.image.src = "/assets/bee.png";
+    super({
+      position: { x: canvas.width + Math.random() * canvas.width * 0.5, y: Math.random() * canvas.height * 0.5 },
+      context,
+      imageSrc: "/assets/bee.png",
+      frameRate: 4,
+      scale: 0.5,
+      animations: {
+        Fly: {
+          imageSrc: "/assets/bee.png",
+          frameRate: 4,
+          frameBuffer: 3,
+        },
+      },
+    });
+
+    this.speedX = 2;
+    this.speedY = 0;
+    this.frameX = 0;
+    this.frameY = 0;
+    this.loaded = true;
+
 
     this.image.onload = () => {
       console.log("Bee image loaded");
-      this.ready = true;
-      this.width = this.image.width;
-      this.height = this.image.height;
-
-      this.x = canvas.width + Math.random() * canvas.width * 0.5;
-
-      this.y = Math.random() * canvas.height * 0.5;
-      this.speedX = 2;
-      this.speedY = 0;
-      this.maxFrame = 3;
+      this.width = this.image.width / this.frameRate * this.scale;
+      this.height = this.image.height * this.scale;
     };
   }
 
   update(deltaTime) {
-    super.update(deltaTime);
+    console.log("Updating bee");
+    super.update();
+    this.updateFrames();
+    this.position.x -= this.speedX;
+    this.position.y += this.speedY;
+
+    if (this.position.x + this.width < 0) {
+      this.markedForDeletion = true;
+    }
+  }
+
+  draw() {
+    console.log("Drawing bee");
+    if (this.loaded) {
+      super.draw();
+    }
   }
 }
