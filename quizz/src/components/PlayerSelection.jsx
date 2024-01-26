@@ -45,86 +45,79 @@ const playerData = {
         frameRate: 2,
         frameBuffer: 3,
       },
-
-      Attack1: {
-        imageSrc: "/assets/huntress/Attack1.png",
-
-        AttackLeft: {
-          imageSrc: "/assets/huntress/AttackLeft.png",
-          frameRate: 5,
-          frameBuffer: 3,
-        },
-        AttackRight: {
-          imageSrc: "/assets/huntress/AttackRight.png",
-
-          frameRate: 5,
-          frameBuffer: 3,
-        },
+      AttackLeft: {
+        imageSrc: "/assets/huntress/AttackLeft.png",
+        frameRate: 5,
+        frameBuffer: 3,
       },
-      // interactedItems: interactedItems,
-      // currentItem: currentItem,
-    },
-
-    warrior: {
-      animations: {
-        Idle: {
-          imageSrc: "/assets/warrior/Idle.png",
-          frameRate: 8,
-          frameBuffer: 3,
-        },
-        Run: {
-          imageSrc: "/assets/warrior/Run.png",
-          frameRate: 8,
-          frameBuffer: 5,
-        },
-        Jump: {
-          imageSrc: "/assets/warrior/Jump.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-        Fall: {
-          imageSrc: "/assets/warrior/Fall.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-        FallLeft: {
-          imageSrc: "/assets/warrior/FallLeft.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-        RunLeft: {
-          imageSrc: "/assets/warrior/RunLeft.png",
-          frameRate: 8,
-          frameBuffer: 5,
-        },
-        IdleLeft: {
-          imageSrc: "/assets/warrior/IdleLeft.png",
-          frameRate: 8,
-          frameBuffer: 3,
-        },
-        JumpLeft: {
-          imageSrc: "/assets/warrior/JumpLeft.png",
-          frameRate: 2,
-          frameBuffer: 3,
-        },
-        Attack: {
-          imageSrc: "/assets/warrior/Attack1.png",
-        },
-        AttackLeft: {
-          imageSrc: "/assets/warrior/AttackLeft.png",
-          frameRate: 4,
-          frameBuffer: 3,
-        },
-        AttackRight: {
-          imageSrc: "/assets/warrior/AttackRight.png",
-
-          frameRate: 4,
-          frameBuffer: 3,
-        },
+      AttackRight: {
+        imageSrc: "/assets/huntress/AttackRight.png",
+        frameRate: 5,
+        frameBuffer: 3,
       },
-      // interactedItems: interactedItems,
-      // currentItem: currentItem,
     },
+    // interactedItems: interactedItems,
+    // currentItem: currentItem,
+  },
+
+  warrior: {
+    animations: {
+      Idle: {
+        imageSrc: "/assets/warrior/Idle.png",
+        frameRate: 8,
+        frameBuffer: 3,
+      },
+      Run: {
+        imageSrc: "/assets/warrior/Run.png",
+        frameRate: 8,
+        frameBuffer: 5,
+      },
+      Jump: {
+        imageSrc: "/assets/warrior/Jump.png",
+        frameRate: 2,
+        frameBuffer: 3,
+      },
+      Fall: {
+        imageSrc: "/assets/warrior/Fall.png",
+        frameRate: 2,
+        frameBuffer: 3,
+      },
+      FallLeft: {
+        imageSrc: "/assets/warrior/FallLeft.png",
+        frameRate: 2,
+        frameBuffer: 3,
+      },
+      RunLeft: {
+        imageSrc: "/assets/warrior/RunLeft.png",
+        frameRate: 8,
+        frameBuffer: 5,
+      },
+      IdleLeft: {
+        imageSrc: "/assets/warrior/IdleLeft.png",
+        frameRate: 8,
+        frameBuffer: 3,
+      },
+      JumpLeft: {
+        imageSrc: "/assets/warrior/JumpLeft.png",
+        frameRate: 2,
+        frameBuffer: 3,
+      },
+      Attack: {
+        imageSrc: "/assets/warrior/Attack1.png",
+      },
+      AttackLeft: {
+        imageSrc: "/assets/warrior/AttackLeft.png",
+        frameRate: 4,
+        frameBuffer: 3,
+      },
+      AttackRight: {
+        imageSrc: "/assets/warrior/AttackRight.png",
+        frameRate: 4,
+        frameBuffer: 3,
+      },
+    },
+    // interactedItems: interactedItems,
+    // currentItem: currentItem,
   },
 };
 
