@@ -543,24 +543,27 @@
 /* player-selection styles*/
 
 .container-box {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #f2f5ff;
+  background-color: white;
   padding: 20px;
   box-sizing: border-box;
   border-radius: 30px;
   text-align: center;
-  border: 1px solid #333;
+  /*border: 1px solid #333;*/
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 700px;
   width: 100%;
-  box-shadow: #333;
+  /*box-shadow: #333;*/
 }
 
 .player-selection {
   display: flex;
-  background-color: #f2f5ff;
+  background-color: white;
   padding: 20px;
   box-sizing: border-box;
   text-align: center;
@@ -569,10 +572,11 @@
 
 .player-selection button {
   border: none;
-  background-color: #623b5a;
+  background-color: #2274a5;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 18px;
   cursor: pointer;
+  font-size: 20px;
 }
 
 .player-selection canvas {
@@ -610,11 +614,11 @@
   gap: 10px;
   width: 200px;
   height: 170px;
-  border: 3px solid #623b5a !important;
+  border: 3px solid #2274a5 !important;
   border-radius: 2%;
 
   overflow: hidden;
-  background: #d29f387d;
+  background: white;
   margin-bottom: 10px;
   /* transition: all 0.1s ease-out; */
 }
@@ -666,13 +670,14 @@
 }
 
 .btnhelpoutline {
-  border-radius: 10px;
-  font-size: 18px;
+  border-radius: 8px;
+  font-size: 20px;
   font-weight: 400;
   border: 2px solid #623b5a;
   color: #623b5a;
+  width: 100px;
   transition: 0.25s all ease-in-out;
-  background-color: #f2f5ff;
+  background-color: white;
 }
 
 .btnIcon {

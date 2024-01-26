@@ -130,18 +130,9 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       ArrowLeft: {
         pressed: false,
       },
-<<<<<<< HEAD
       // Enter: {
       //   pressed: false,
       // },
-=======
-      Enter: {
-        pressed: false,
-      },
-      Enter: {
-        pressed: false,
-      },
->>>>>>> 276c7c9 (bee and timer)
     };
 
     let rock;
@@ -374,7 +365,6 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         player.shouldPanCameraToTheRight({ canvas, camera });
       }
 
-
       context.restore();
     };
 
@@ -396,7 +386,6 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         case "Enter":
           keys.Enter.pressed = true;
           break;
-<<<<<<< HEAD
         case "Enter":
           // keys.Enter.pressed = true;
           const items = {
@@ -425,11 +414,6 @@ export default function GameLevel1({ selectedPlayerData, level }) {
             }
           });
           break;
-=======
-          case "Enter":
-            keys.Enter.pressed = true;
-            break;
->>>>>>> 276c7c9 (bee and timer)
       }
     });
 
@@ -441,18 +425,9 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         case "ArrowLeft":
           keys.ArrowLeft.pressed = false;
           break;
-<<<<<<< HEAD
         // case "Enter":
         //   keys.Enter.pressed = false;
         //   break;
-=======
-          case "Enter":
-            keys.Enter.pressed = false;
-            break;
-          case "Enter":
-            keys.Enter.pressed = false;
-            break;
->>>>>>> 276c7c9 (bee and timer)
       }
     });
   }, [selectedPlayerData, level, isPaused]);

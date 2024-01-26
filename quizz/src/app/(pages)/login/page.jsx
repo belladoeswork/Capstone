@@ -54,8 +54,7 @@ export default function Login() {
         <button className="login-register-button">Login</button>
         <p>{error}</p>
       </form>
-      <p className="signIn-link">or</p>
-      <button className="google-button">Sign in with Google</button>
+
       <p className="signIn-link">
         Not yet a member?
         <a href="/register" className="signIn-link">

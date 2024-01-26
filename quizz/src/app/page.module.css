@@ -719,7 +719,6 @@
   text-align: left;
 }
 
-
 .clock-anim {
   font-size: 100px;
   animation: alarmAnimation 1s infinite;
@@ -780,7 +779,6 @@
     transform: scale(1);
   }
 }
-
 
 /* .selectedBox {
   border: 1px solid rgb(24, 240, 255) !important;
@@ -842,7 +840,6 @@
   position: absolute;
   right: 18px;
   top: 100px;
-
 }
 
 .clockoutline {
@@ -853,9 +850,8 @@
   color: #623b5a;
   transition: 0.25s all ease-in-out;
   background-color: #f2f5ff;
-  margin:10px
+  margin: 10px;
 }
-
 
 /* How to page */
 
@@ -899,7 +895,6 @@
   margin: 20px;
   text-align: left;
 }
-
 
 .clock-anim {
   font-size: 100px;
@@ -961,7 +956,6 @@
     transform: scale(1);
   }
 }
-
 
 /* .selectedBox {
   border: 1px solid rgb(24, 240, 255) !important;
@@ -1059,7 +1053,6 @@
   text-align: left;
 }
 
-
 .clock-anim {
   font-size: 100px;
   animation: alarmAnimation 1s infinite;
@@ -1120,78 +1113,6 @@
     transform: scale(1);
   }
 }
-
-
-
-
-/*FOOTER START*/
-.footer-basic {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 0;
-  gap: 80px;
-  background-color: #ffffff;
-  color: #4b4c4d;
-  text-align: center;
-}
-
-.socialContainer {
-  display: flex;
-}
-
-.footer-basic ul a:hover {
-  opacity: 1;
-}
-
-.footer-basic .social {
-  text-align: center;
-  padding-bottom: 25px;
-  border: none;
-}
-
-.footer-basic .social>a {
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  display: inline-block;
-
-  border-radius: 50%;
-
-  color: inherit;
-  opacity: 0.75;
-}
-
-.footer-basic .social>a:hover {
-  opacity: 0.9;
-}
-
-.footer-basic .copyright {
-  display: flex;
-  flex-direction: column;
-  margin-top: 15px;
-  text-align: center;
-  font-size: 13px;
-  color: #aaa;
-  margin-bottom: 0;
-}
-
-/*FOOTER END*/
-/* >>>>>>>>>Temporary merge branch 2 .gameWelcomeModelContainter {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  width: 300px;
-  margin-left: 50px; */
-/* } */
 
 .gameWelcomeModelContainter {
   background-color: #fff;
