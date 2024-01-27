@@ -334,3 +334,51 @@ export class Chest extends Sprite {
     });
   }
 }
+
+export class GemGold extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 11;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "gemgold",
+    });
+  }
+}
+
+export class FrogBlue extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 8;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "frogblue",
+    });
+  }
+}
+
+export class CatStretching extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 13;
+    const frameBuffer = 15;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "catstretching",
+    });
+  }
+}

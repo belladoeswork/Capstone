@@ -14,7 +14,7 @@ const questions = [
       "var: name = 'value';",
     ],
     answer: "var name = 'value';",
-    hint: "The correct syntax uses the keyword 'var' followed by the variable name and assignment operator.",
+    hint: "The correct syntax uses a keyword followed by the name and assignment operator.",
     resultMessage: {
       correct: "Remember this letter, it might come in handy: c",
     },
@@ -28,7 +28,7 @@ const questions = [
     isAnswered: false,
     options: ["'true'", "true", "1"],
     answer: "true",
-    hint: "A boolean data type represents one of two values: true or false.",
+    hint: "A boolean data type represents one of two values",
     resultMessage: {
       correct: "Remember this letter, it might come in handy: o",
     },
@@ -46,7 +46,7 @@ const questions = [
       "function = myFunction()",
     ],
     answer: "function myFunction()",
-    hint: "In JavaScript, a function is defined with the 'function' keyword, followed by a name, followed by parentheses ().",
+    hint: "A function is defined with a keyword, followed by a name, followed by parentheses ().",
     resultMessage: {
       correct: "Remember this letter, it might come in handy: d",
     },
@@ -115,16 +115,15 @@ const questions = [
     answer: "Math.max(...array)",
     hint: "There's a built-in object in JavaScript that deals with mathematical operations.",
     resultMessage: {
-      correct:
-        "Correct! 'Math.max(...array)' is used to find the largest number in an array.",
+      correct: "",
     },
   },
   {
     id: 8,
     type: "multiple-choice",
-    sprite: "",
+    sprite: "gemgold",
     question: "How do you reverse a string in JavaScript?",
-    message: "You've found a question! Answer correctly to earn a point",
+    message: "You've found a question! Answer correctly to earn a point.",
     isAnswered: false,
     options: [
       "string.reverse()",
@@ -133,16 +132,15 @@ const questions = [
       "string.split().reverse()",
     ],
     answer: "string.split('').reverse().join('')",
-    hint: "Think about splitting the string into an array of characters, reversing the array, and then joining the characters back together.",
+    hint: "Think about splitting the string into an array of characters.",
     resultMessage: {
-      correct:
-        "Correct! 'string.split('').reverse().join('')' reverses a string.",
+      correct: "",
     },
   },
   {
     id: 9,
     type: "multiple-choice",
-    sprite: "",
+    sprite: "frogblue",
     question:
       "Which of the following functions correctly checks if a string is a palindrome?",
     message: "You've found a question! Answer correctly to earn a point",
@@ -155,10 +153,9 @@ const questions = [
     ],
     answer:
       "function isPalindrome(str) { return str === str.split('').reverse().join(''); }",
-    hint: "A palindrome reads the same backward as forward. Consider reversing the string and comparing it with the original.",
+    hint: "A palindrome reads the same backward as forward.",
     resultMessage: {
-      correct:
-        "Correct! That function correctly checks if a string is a palindrome.",
+      correct: "",
     },
   },
   {
@@ -173,8 +170,7 @@ const questions = [
     answer: "FizzBuzz",
     hint: "This is a classic FizzBuzz problem. Check the conditions for divisibility by 3 and 5.",
     resultMessage: {
-      correct:
-        "Correct! The output for 15 in a FizzBuzz function is 'FizzBuzz'.",
+      correct: "",
     },
   },
   {
@@ -194,8 +190,7 @@ const questions = [
       "function countVowels(str) { return str.match(/[aeiou]/gi).length; }",
     hint: "Regular expressions can be very useful for pattern matching.",
     resultMessage: {
-      correct:
-        "Correct! 'function countVowels(str) { return str.match(/[aeiou]/gi).length; }' correctly counts the number of vowels.",
+      correct: "",
     },
   },
   {
@@ -213,8 +208,7 @@ const questions = [
     answer: "document.querySelector('')",
     hint: "The querySelector method is quite versatile. Remember how it can be used to select elements by ID.",
     resultMessage: {
-      correct:
-        "Correct! 'document.querySelector('')' is used to select an element by its ID.",
+      correct: "",
     },
   },
   {
@@ -229,8 +223,7 @@ const questions = [
     answer: "props",
     hint: "This is a mechanism in React for passing data from a parent component to a child component.",
     resultMessage: {
-      correct:
-        "Correct! Props are used to pass data to a component from outside in React.",
+      correct: "",
     },
   },
   {
@@ -245,8 +238,7 @@ const questions = [
     answer: "JavaScript Console",
     hint: "This tool is part of the browser's developer tools and is commonly used for logging output and running JavaScript.",
     resultMessage: {
-      correct:
-        "Correct! The JavaScript Console can be used for debugging JavaScript code in the browser.",
+      correct: "",
     },
   },
   {
@@ -264,8 +256,7 @@ const questions = [
     answer: "Attaches an event handler to an element",
     hint: "This method is used to listen for events on an element, like clicks or key presses.",
     resultMessage: {
-      correct:
-        "Correct! 'addEventListener' attaches an event handler to an element.",
+      correct: "",
     },
   },
   {
@@ -279,8 +270,7 @@ const questions = [
     answer: "document.documentElement",
     hint: "This object represents the entire HTML document and can be used as the root to access any other node.",
     resultMessage: {
-      correct:
-        "Correct! 'document.documentElement' is the root of the DOM tree.",
+      correct: "",
     },
   },
   {
@@ -298,8 +288,7 @@ const questions = [
     answer: "element.remove();",
     hint: "This method allows you to directly remove the element it's called on.",
     resultMessage: {
-      correct:
-        "Correct! 'element.remove();' is used to remove an element from the DOM.",
+      correct: "",
     },
   },
   {
@@ -317,8 +306,7 @@ const questions = [
     answer: "Executes a callback function if the promise is rejected",
     hint: "Think about error handling in promises.",
     resultMessage: {
-      correct:
-        "Correct! The .catch() method is used for error handling in promises.",
+      correct: "",
     },
   },
   {
@@ -336,8 +324,7 @@ const questions = [
     answer: "Allows the function to return a promise",
     hint: "This keyword enables the use of await within functions.",
     resultMessage: {
-      correct:
-        "Correct! The 'async' keyword allows a function to return a promise.",
+      correct: "",
     },
   },
   {
@@ -352,8 +339,7 @@ const questions = [
     answer: "1, 3, 2",
     hint: "Remember how the event loop and setTimeout work in JavaScript.",
     resultMessage: {
-      correct:
-        "Correct! The console will log '1, 3, 2' due to JavaScript's event loop and setTimeout behavior.",
+      correct: "",
     },
   },
   {
@@ -367,8 +353,7 @@ const questions = [
     answer: "await",
     hint: "This keyword is used in conjunction with async functions.",
     resultMessage: {
-      correct:
-        "Correct! 'await' is used to handle promises within async functions.",
+      correct: "",
     },
   },
   {
@@ -387,8 +372,7 @@ const questions = [
       "An object representing the eventual completion or failure of an asynchronous operation",
     hint: "It's a core object that represents the eventual completion (or failure) of an asynchronous operation.",
     resultMessage: {
-      correct:
-        "Correct! A Promise in JavaScript represents the eventual completion or failure of an asynchronous operation.",
+      correct: "",
     },
   },
 ];

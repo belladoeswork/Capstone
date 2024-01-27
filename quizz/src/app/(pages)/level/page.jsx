@@ -5,7 +5,6 @@ import PlayerSelection from "@/components/PlayerSelection.jsx";
 import GameLevel1 from "../game/page.jsx";
 import { IoVolumeMedium, IoVolumeMute } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
-import { Rock, HiveOne, HiveTwo, Worm } from "../game/classes/StaticSprite.jsx";
 import { IoMdAlarm } from "react-icons/io";
 
 export default function levelPage() {

@@ -4,6 +4,7 @@ import { ApiError } from "next/dist/server/api-utils";
 import Link from "next/link";
 import { useState } from "react";
 import NextLevelTransition from "./NextLevelTransition";
+import { IoIosHelpCircleOutline } from "react-icons/io";
 export default function Quiz({
   question,
   questions,
@@ -33,12 +34,14 @@ export default function Quiz({
       setResultMessage("correct!");
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
+      setShowHint(!showHint);
       if ((score + 1) % 5 === 0) {
         if (score + 1 < questions.length) {
           setTransition(true);
           setTimeout(() => {
             setLevel(level + 1);
             setTransition(false);
+            setResultMessage("");
           }, 9000);
         } else {
           setGameOver(true);
@@ -70,7 +73,7 @@ export default function Quiz({
       <div>
         {showPopup && (
           <div className="popup-container">
-            <h2>{question?.message}</h2>
+            <h2 className="popup-message">{question?.message}</h2>
             <h3 className="popup-question">{question?.question}</h3>
 
             <div
@@ -81,7 +84,7 @@ export default function Quiz({
             >
               {question?.options?.map((option, index) => (
                 <button
-                  type="submit"
+                  className="popup-option-button"
                   key={index}
                   onClick={() => handleAnswer(option === question.answer)}
                 >
@@ -89,16 +92,19 @@ export default function Quiz({
                 </button>
               ))}
             </div>
-            <button type="button" onClick={() => handleHint()}>
-              Hint
+            <button
+              className="popup-hint-button"
+              type="button"
+              onClick={() => handleHint()}
+            >
+              <IoIosHelpCircleOutline />
             </button>
-            {secretWord}
             <div
               style={{
                 display: question.type === "input" ? "flex" : "none",
               }}
             >
-              <form>
+              <form className="popup-input-container">
                 <input
                   type="text"
                   placeholder="Type answer here"
@@ -108,17 +114,23 @@ export default function Quiz({
                   }}
                 />
                 <button
+                  className="popup-option-button"
                   type="submit"
                   onClick={() => handleAnswer(inputAnswer === question.answer)}
                 >
                   submit
                 </button>
-                {/* <button type="button" onClick={() => handleHint()}>
-                  Hint
+                {/* <button
+                  className="popup-hint-button"
+                  type="button"
+                  onClick={() => handleHint()}
+                >
+                  <IoMdHelp />
                 </button> */}
               </form>
             </div>
             {showHint && <div className="hint">Hint: {question?.hint}</div>}
+            {secretWord}
           </div>
         )}
       </div>
@@ -138,11 +150,10 @@ export default function Quiz({
           Score: <span style={{ color: "#2274a5" }}>{score}</span>
         </h2>
         <h2>
-          Level: <span style={{ color: "#2274a5" }}>{level + 1}</span>
+          Level: <span style={{ color: "#2274a5" }}>{level}</span>
         </h2>
       </div>
-      {transition && <NextLevelTransition />}
-      {gameOver && <Link href={"/gameover"}></Link>}
+      <div>{transition && <NextLevelTransition />}</div>
     </div>
   );
 }

@@ -6,12 +6,21 @@ import {
   platformCollisions,
 } from "../../../components/data/Collisions.js";
 import { Sprite } from "./classes/Sprite.jsx";
-import { Player, Worm, Man, Chest } from "./classes/Player.jsx";
+import {
+  Player,
+  Worm,
+  Man,
+  Chest,
+  GemGold,
+  FrogBlue,
+  CatStretching,
+} from "./classes/Player.jsx";
 import { ExtraProp, Bee } from "./classes/ExtraProp.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 import { useRouter } from "next/navigation.js";
 import { levelData } from "../../../components/MapLevels.jsx";
 import Quiz from "@/components/Quiz.jsx";
+import { MdClose } from "react-icons/md";
 import questions from "@/lib/questions.jsx";
 import {
   Rock,
@@ -31,9 +40,8 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showWelcome, setShowWelcome] = useState(true);
-  // const [level, setLevel] = useState(0);
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const closeWelcome = () => {
     setShowWelcome(false);
@@ -155,8 +163,12 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
     let worm;
     let cat;
     let man;
+    let man2;
     let chest;
     let rockThree;
+    let gemgold;
+    let frogblue;
+    let catstretching;
 
     const spriteLoader = (level) => {
       if (level === 1) {
@@ -166,7 +178,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
             y: 410,
           },
           context: context,
-          imageSrc: "/assets/Rocks.png",
+          imageSrc: "/assets/npcs/Rocks.png",
         });
 
         rockThree = new RockThree({
@@ -175,7 +187,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
             y: 380,
           },
           context: context,
-          imageSrc: "/assets/Rock3.png",
+          imageSrc: "/assets/npcs/Rock3.png",
         });
 
         hiveOne = new HiveOne({
@@ -184,7 +196,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
             y: 315,
           },
           context: context,
-          imageSrc: "/assets/Hive-One.png",
+          imageSrc: "/assets/npcs/Hive-One.png",
         });
 
         hiveTwo = new HiveTwo({
@@ -193,16 +205,16 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
             y: 200,
           },
           context: context,
-          imageSrc: "/assets/RockTwo.png",
+          imageSrc: "/assets/npcs/RockTwo.png",
         });
 
         cat = new Cat({
           position: {
-            x: 360,
-            y: 180,
+            x: 10,
+            y: 380,
           },
           context: context,
-          imageSrc: "/assets/Cat.png",
+          imageSrc: "/assets/npcs/Cat.png",
         });
 
         worm = new Worm({
@@ -213,11 +225,11 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           collisionBlocks,
           platformCollisionBlocks,
           context: context,
-          imageSrc: "/assets/Worm/Idle.png",
+          imageSrc: "/assets/npcs/Worm/Idle.png",
           frameRate: 9,
           animations: {
             Idle: {
-              imageSrc: "/assets/Worm/Idle.png",
+              imageSrc: "/assets/npcs/Worm/Idle.png",
               frameRate: 9,
               frameBuffer: 3,
             },
@@ -232,11 +244,11 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           collisionBlocks,
           platformCollisionBlocks,
           context: context,
-          imageSrc: "/assets/Man.png",
+          imageSrc: "/assets/npcs/Man.png",
           frameRate: 5,
           animations: {
             Idle: {
-              imageSrc: "/assets/Man.png",
+              imageSrc: "/assets/npcs/Man.png",
               frameRate: 5,
               frameBuffer: 1,
             },
@@ -251,13 +263,89 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           collisionBlocks,
           platformCollisionBlocks,
           context: context,
-          imageSrc: "/assets/Chest.png",
+          imageSrc: "/assets/npcs/Chest.png",
           frameRate: 3,
           animations: {
             Idle: {
-              imageSrc: "/assets/Chest.png",
+              imageSrc: "/assets/npcs/Chest.png",
               frameRate: 3,
               frameBuffer: 5,
+            },
+          },
+        });
+
+        gemgold = new GemGold({
+          position: {
+            x: 370,
+            y: 10,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/GemGold.png",
+          frameRate: 11,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/GemGold.png",
+              frameRate: 11,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        frogblue = new FrogBlue({
+          position: {
+            x: 190,
+            y: 235,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/FrogBlueIdle.png",
+          frameRate: 8,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/FrogBlueIdle.png",
+              frameRate: 8,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        catstretching = new CatStretching({
+          position: {
+            x: 360,
+            y: 180,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/catstretching.png",
+          frameRate: 13,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/catstretching.png",
+              frameRate: 13,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        man2 = new Man({
+          position: {
+            x: 50,
+            y: 365,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/Man.png",
+          frameRate: 5,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/Man.png",
+              frameRate: 5,
+              frameBuffer: 1,
             },
           },
         });
@@ -303,7 +391,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
 
       const spriteUpdateLoader = (level) => {
         if (level === 1) {
-          rock.update();
+          // rock.update();
           rockThree.update();
           hiveOne.update();
           // hiveTwo.update();
@@ -311,6 +399,9 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           cat.update();
           man.update();
           chest.update();
+          gemgold.update();
+          frogblue.update();
+          catstretching.update();
         }
       };
 
@@ -417,6 +508,9 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
             cat,
             man,
             chest,
+            gemgold,
+            frogblue,
+            catstretching,
           };
           Object.entries(items).forEach(([key, item]) => {
             if (player.isNearItem(item)) {
@@ -479,39 +573,10 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
     <div>
       <canvas ref={canvasRef} />
       {showWelcome && (
-        <div
-          className="gameWelcomeModel"
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1000,
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "#fff",
-              padding: "20px",
-              borderRadius: "5px",
-              position: "relative",
-            }}
-          >
-            <button
-              onClick={closeWelcome}
-              style={{
-                position: "absolute",
-                top: "10px",
-                right: "10px",
-                cursor: "pointer",
-              }}
-            >
-              X
+        <div className="gameWelcomeModelContainter">
+          <div className="gameWelcomeModel">
+            <button className="gameWelcomeModelButton" onClick={closeWelcome}>
+              <MdClose />
             </button>
             <p>
               <br />
@@ -525,7 +590,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
               Find and answer the questions to prove your worth, <br />
               Show your wisdom, affirm your birth. <br />
               For if you succeed in this cerebral sob, <br /> A grand reward
-              awaits: you'll earn a job!
+              awaits: you're ready for a job!
             </p>
           </div>
         </div>
@@ -537,10 +602,10 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           showPopup={showPopup}
           setShowPopup={setShowPopup}
           gameOver={gameOver}
+          setGameOver={setGameOver}
           currentQuestion={currentQuestion}
           setCurrentQuestion={setCurrentQuestion}
           currentQuestionIndex={currentQuestionIndex}
-          setGameOver={setGameOver}
           questions={questions}
           setLevel={setLevel}
           level={level}
