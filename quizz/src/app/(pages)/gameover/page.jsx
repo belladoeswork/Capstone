@@ -2,6 +2,7 @@
 // import { useState } from "react";
 import TextEditor from "@/components/Notepad";
 import { useRouter } from "next/navigation.js";
+import GameOverComp from "@/components/GameOver.jsx";
 
 export default function GameOver() {
   return (
@@ -14,7 +15,7 @@ export default function GameOver() {
           font: "50px",
         }}
       >
-        GameOver
+        <GameOverComp />
       </div>
     </div>
   );

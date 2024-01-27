@@ -1,8 +1,8 @@
-import Confetti from "react-confetti/dist/types/Confetti.js";
+import Confetti from "@/components/ConfettiPage.jsx";
 
-export default function EndGameDisplay() {
+export default function WinGameDisplay() {
   return (
-    <div>
+    <div className="congrats-container">
       <h1>Congratulation</h1>
       <p className="typed-login">You are now a CodeHero!!</p>
       <p>Wishing you the best of luck on your coding journey.</p>

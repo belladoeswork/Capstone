@@ -8,19 +8,19 @@ export default function Footer() {
       <footer className="footer-basic">
         <div className="socialContainer">
           <div className="social">
-            <a href="#">
+            <a href="https://github.com/belladoeswork" target="_blank">
               <FaGithub />
               <p>Vanessa</p>
             </a>
           </div>
           <div className="social">
-            <a href="#">
+            <a href="https://github.com/ihirad " target="_blank">
               <FaGithub />
               <p>Izzy</p>
             </a>
           </div>
           <div className="social">
-            <a href="#">
+            <a href="https://github.com/Elri87" target="_blank">
               <FaGithub />
               <p>Elri</p>
             </a>

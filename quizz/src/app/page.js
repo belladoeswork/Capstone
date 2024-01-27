@@ -2,6 +2,7 @@
 import Navbar from "@/components/Navbar.jsx";
 import Game from "@/components/Game.jsx";
 import PlayerSelection from "@/components/PlayerSelection.jsx";
+import Footer from "@/components/Footer.jsx";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -112,6 +113,7 @@ export default function Home() {
           <Image src={CodeHero} alt="Level One Map" className="homepage-img" />
         </div>
       </div>
+      <Footer />
     </main>
   );
 }
