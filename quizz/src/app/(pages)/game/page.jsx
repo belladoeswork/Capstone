@@ -21,7 +21,7 @@ import {
   RockThree,
 } from "./classes/StaticSprite.jsx";
 
-export default function GameLevel1({ selectedPlayerData, level }) {
+export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
   const canvasRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -31,6 +31,7 @@ export default function GameLevel1({ selectedPlayerData, level }) {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showWelcome, setShowWelcome] = useState(true);
+  // const [level, setLevel] = useState(0);
 
   const router = useRouter();
 
@@ -44,10 +45,10 @@ export default function GameLevel1({ selectedPlayerData, level }) {
 
   function isColliding(rect1, rect2) {
     return (
-      rect1.position.x < rect2.position.x + rect2.width - 2 &&
-      rect1.position.x + rect1.width > rect2.position.x &&
-      rect1.position.y < rect2.position.y + rect2.height &&
-      rect1.position.y + rect1.height > rect2.position.y
+      rect1.position.x < rect2.position.x + rect2.width / 2 &&
+      rect1.position.x + rect1.width / 2 > rect2.position.x &&
+      rect1.position.y < rect2.position.y + rect2.height / 2 &&
+      rect1.position.y + rect1.height / 2 > rect2.position.y
     );
   }
 
@@ -158,7 +159,7 @@ export default function GameLevel1({ selectedPlayerData, level }) {
     let rockThree;
 
     const spriteLoader = (level) => {
-      if (level === "level1") {
+      if (level === 1) {
         rock = new Rock({
           position: {
             x: 410,
@@ -301,7 +302,7 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       player.update();
 
       const spriteUpdateLoader = (level) => {
-        if (level === "level1") {
+        if (level === 1) {
           rock.update();
           rockThree.update();
           hiveOne.update();
@@ -321,7 +322,6 @@ export default function GameLevel1({ selectedPlayerData, level }) {
 
       if (extraPropTimer.current > extraPropInterval) {
         bees.current.push(new Bee({ canvas, context }));
-        console.log("New bee created", Bee);
         extraPropTimer.current = 0;
       } else {
         extraPropTimer.current += deltaTime;
@@ -371,17 +371,17 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       }
 
       // added for attacks
-      if (keys.Enter.pressed) {
-        player.switchSprite("AttackRight");
-        player.velocity.x = 2;
-        player.lastDirection = "right";
-        player.shouldPanCameraToTheLeft({ canvas, camera });
-      } else if (keys.Enter.pressed) {
-        player.switchSprite("AttackLeft");
-        player.velocity.x = -2;
-        player.lastDirection = "left";
-        player.shouldPanCameraToTheRight({ canvas, camera });
-      }
+      // if (keys.d.pressed) {
+      //   player.switchSprite("AttackRight");
+      //   player.velocity.x = 2;
+      //   player.lastDirection = "right";
+      //   player.shouldPanCameraToTheLeft({ canvas, camera });
+      // } else if (keys.a.pressed) {
+      //   player.switchSprite("AttackLeft");
+      //   player.velocity.x = -2;
+      //   player.lastDirection = "left";
+      //   player.shouldPanCameraToTheRight({ canvas, camera });
+      // }
 
       context.restore();
     };
@@ -453,24 +453,27 @@ export default function GameLevel1({ selectedPlayerData, level }) {
           break;
       }
     });
-  }, [selectedPlayerData, level, isPaused, gameOver]);
+
+    const endOfGame = (gameOver) => {
+      if (gameOver) {
+        console.log("Game Over");
+        // router.push("/gameover");
+        // window.location.reload();
+        player.switchSprite("Death");
+        setTimeout(() => {
+          window.location.replace("/gameover");
+        }, 8000);
+
+        // router.refresh();
+        return;
+      }
+    };
+    endOfGame(gameOver);
+  }, [selectedPlayerData, level, isPaused]);
 
   const isQuestionAnswered = (question) => {
     return question?.isAnswered;
   };
-
-  function endOfGame(gameOver) {
-    if (gameOver) {
-      // Display game over message or handle it as you see fit
-      console.log("Game Over");
-      // router.push("/gameover");
-      // window.location.reload();
-      window.location.replace("/gameover");
-      // router.refresh();
-      return; // Stop the animation loop
-    }
-  }
-  endOfGame(gameOver);
 
   return (
     <div>
@@ -539,6 +542,8 @@ export default function GameLevel1({ selectedPlayerData, level }) {
           currentQuestionIndex={currentQuestionIndex}
           setGameOver={setGameOver}
           questions={questions}
+          setLevel={setLevel}
+          level={level}
         />
       )}
     </div>

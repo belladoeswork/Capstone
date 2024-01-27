@@ -13,8 +13,10 @@ export default function levelPage() {
   const [selectedPlayerData, setSelectedPlayerData] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const audioElement = useRef(new Audio("/audio/LittleR.ogg"));
-
   const [timeRemaining, setTimeRemaining] = useState(10 * 60);
+  const [level, setLevel] = useState(1);
+
+  // const user = await fetchUser();
 
   const handlePlayerSelect = (playerData) => {
     setSelectedPlayerData(playerData);
@@ -90,7 +92,9 @@ export default function levelPage() {
             </div>
             <GameLevel1
               selectedPlayerData={selectedPlayerData}
-              level="level1"
+              setLevel={setLevel}
+              level={level}
+              // level="level1"
             />
           </div>
         </div>

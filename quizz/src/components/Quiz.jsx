@@ -3,6 +3,7 @@
 import { ApiError } from "next/dist/server/api-utils";
 import Link from "next/link";
 import { useState } from "react";
+import NextLevelTransition from "./NextLevelTransition";
 export default function Quiz({
   question,
   questions,
@@ -15,26 +16,33 @@ export default function Quiz({
   setCurrentQuestion,
   setShowPopup,
   setGameOver,
+  level,
+  setLevel,
 }) {
-  const [level, setLevel] = useState(0);
+  // const [level, setLevel] = useState(0);
   const [score, setScore] = useState(0);
   const [showOptions, setShowOptions] = useState(true);
   const [resultMessage, setResultMessage] = useState("");
   const [secretWord, setSecretWord] = useState("");
   const [inputAnswer, setInputAnswer] = useState("");
   const [showHint, setShowHint] = useState(false);
+  const [transition, setTransition] = useState(false);
 
-  async function handleAnswer(isCorrect, itemKey) {
+  async function handleAnswer(isCorrect) {
     if (isCorrect && question?.type !== "message") {
       setResultMessage("correct!");
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
       if ((score + 1) % 5 === 0) {
         if (score + 1 < questions.length) {
-          setLevel(level + 1);
+          setTransition(true);
+          setTimeout(() => {
+            setLevel(level + 1);
+            setTransition(false);
+          }, 9000);
         } else {
           setGameOver(true);
-          setGameOverMessage("Congratulations! You completed all levels!");
+          setGameOverMessage("Congratulations! You Win");
         }
       }
       setShowPopup(false);
@@ -42,7 +50,6 @@ export default function Quiz({
       setShowPopup(false);
     } else {
       setResultMessage("wrong");
-      console.log("wrong");
       console.log(10 == "10");
       setGameOver(true);
     }
@@ -56,55 +63,6 @@ export default function Quiz({
 
   function handleHint() {
     setShowHint(!showHint);
-  }
-
-  // const handleAnswer = (isCorrect, itemKey) => {
-  //   if (isCorrect && question?.type !== "message") {
-  //     setResultMessage("correct!");
-  //     setSecretWord(question?.resultMessage.correct);
-  //     setScore(score + 1);
-  //     if ((score + 1) % 5 === 0) {
-  //       if (score + 1 < questions.length) {
-  //         setLevel(level + 1);
-  //       } else {
-  //         setGameOver(true);
-  //         setGameOverMessage("Congratulations! You completed all levels!");
-  //       }
-  //     }
-  //     setShowPopup(false);
-  //   } else if (question.type === "message") {
-  //     setShowPopup(false);
-  //   } else {
-  //     setResultMessage("wrong");
-  //     console.log("wrong");
-  //     console.log(10 == "10");
-  //     setGameOver(true);
-  //   }
-
-  //   questions?.map((quest) => {
-  //     if (quest.id === question.id) {
-  //       question.isAnswered = true;
-  //     }
-  //   });
-  // };
-
-  async function handleLevelClick() {
-    const response = await fetch(`/api/users/${user.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: user.id,
-        level,
-      }),
-    });
-    router.refresh();
-  }
-
-  function highestScore(score) {
-    if (score > user.score) {
-    }
   }
 
   return (
@@ -155,9 +113,9 @@ export default function Quiz({
                 >
                   submit
                 </button>
-                <button type="button" onClick={() => handleHint()}>
+                {/* <button type="button" onClick={() => handleHint()}>
                   Hint
-                </button>
+                </button> */}
               </form>
             </div>
             {showHint && <div className="hint">Hint: {question?.hint}</div>}
@@ -183,6 +141,7 @@ export default function Quiz({
           Level: <span style={{ color: "#2274a5" }}>{level + 1}</span>
         </h2>
       </div>
+      {transition && <NextLevelTransition />}
       {gameOver && <Link href={"/gameover"}></Link>}
     </div>
   );

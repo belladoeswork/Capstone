@@ -12,12 +12,12 @@ import {
 } from "./data/Collisions.js";
 
 const levelData = {
-  level1: {
+  1: {
     imageSrc: "/assets/map1.png",
     floorCollisions: floorCollisions,
     platformCollisions: platformCollisions,
   },
-  level2: {
+  2: {
     imageSrc: "/assets/maplev2.png",
     floorCollisions: floorCollisions1,
     platformCollisions: platformCollisions1,
