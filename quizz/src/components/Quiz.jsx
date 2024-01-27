@@ -55,7 +55,6 @@ export default function Quiz({
       setShowPopup(false);
     } else {
       setResultMessage("wrong");
-      console.log(10 == "10");
       setGameOver(true);
     }
 
@@ -129,25 +128,7 @@ export default function Quiz({
           </div>
         )}
       </div>
-      {/* <div
-        style={{
-          display: "flex",
-          alignItems: "end",
-          justifyContent: "center",
-          backgroundColor: "#F2F5FF",
-          flexDirection: "row",
-          gap: "100px",
-          fontSize: "30px",
-        }}
-      >
-        {resultMessage && <p className="result-message">{resultMessage}</p>}
-        <h2>
-          Score: <span style={{ color: "#2274a5" }}>{score}</span>
-        </h2>
-        <h2>
-          Level: <span style={{ color: "#2274a5" }}>{level}</span>
-        </h2>
-      </div> */}
+      {resultMessage && <p className="result-message">{resultMessage}</p>}
       <div>{transition && <NextLevelTransition />}</div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { Sprite } from "./Sprite.jsx";
-import collision from "../../../../helpers/utils.js";
-import platformCollision from "../../../../helpers/utils2.js";
+import collision from "../../../helpers/utils.js";
+import platformCollision from "../../../helpers/utils2.js";
 
 const gravity = 0.1;
 
@@ -285,108 +285,5 @@ export class Player extends Sprite {
         }
       }
     }
-  }
-}
-export class Worm extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.5 }) {
-    const frameRate = 9;
-    const frameBuffer = 5;
-    super({
-      position,
-      imageSrc,
-      context,
-      scale,
-      frameRate,
-      frameBuffer,
-      key: "worm",
-    });
-  }
-}
-
-export class Man extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.5 }) {
-    const frameRate = 8;
-    const frameBuffer = 7;
-    super({
-      position,
-      imageSrc,
-      context,
-      scale,
-      frameRate,
-      frameBuffer,
-      key: "man",
-    });
-  }
-}
-
-export class Chest extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.3 }) {
-    const frameRate = 5;
-    const frameBuffer = 30;
-    super({
-      position,
-      imageSrc,
-      context,
-      scale,
-      frameRate,
-      frameBuffer,
-      key: "chest",
-    });
-
-    this.isOpen = false;
-  }
-  toggleOpen() {
-    this.isOpen = !this.isOpen;
-    this.imageSrc = this.isOpen
-      ? "/assets/npcs/Chest.png"
-      : "/assets/npcs/chestclosed.png";
-  }
-}
-
-export class GemGold extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.5 }) {
-    const frameRate = 11;
-    const frameBuffer = 5;
-    super({
-      position,
-      imageSrc,
-      context,
-      scale,
-      frameRate,
-      frameBuffer,
-      key: "gemgold",
-    });
-  }
-}
-
-export class FrogBlue extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.5 }) {
-    const frameRate = 8;
-    const frameBuffer = 5;
-    super({
-      position,
-      imageSrc,
-      context,
-      scale,
-      frameRate,
-      frameBuffer,
-      key: "frogblue",
-    });
-  }
-}
-
-export class CatStretching extends Sprite {
-  constructor({ position, context, imageSrc, scale = 0.5 }) {
-    const frameRate = 13;
-    const frameBuffer = 15;
-    super({
-      position,
-      imageSrc,
-      context,
-      scale,
-      frameRate,
-      frameBuffer,
-      key: "catstretching",
-    });
   }
 }

@@ -1,24 +1,22 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import {
-  floorCollisions,
-  platformCollisions,
-} from "../../../components/data/Collisions.js";
+import { floorCollisions, platformCollisions } from "../data/Collisions.js";
 import { Sprite } from "./classes/Sprite.jsx";
+import { Player } from "./classes/Player.jsx";
 import {
-  Player,
+  ExtraProp,
+  Bee,
   Worm,
   Man,
   Chest,
   GemGold,
   FrogBlue,
   CatStretching,
-} from "./classes/Player.jsx";
-import { ExtraProp, Bee } from "./classes/ExtraProp.jsx";
+} from "./classes/ExtraProp.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 import { useRouter } from "next/navigation.js";
-import { levelData } from "../../../components/MapLevels.jsx";
+import { levelData } from "../MapLevels.jsx";
 import Quiz from "@/components/Quiz.jsx";
 import { MdClose } from "react-icons/md";
 import questions from "@/lib/questions.jsx";
@@ -29,6 +27,7 @@ import {
   Cat,
   RockThree,
 } from "./classes/StaticSprite.jsx";
+import FetchLevel from "@/components/FetchLevel.jsx";
 
 export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
   const canvasRef = useRef(null);
@@ -629,7 +628,6 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           fontSize: "30px",
         }}
       >
-        {/* {resultMessage && <p className="result-message">{resultMessage}</p>} */}
         <h2>
           Score: <span style={{ color: "#2274a5" }}>{score}</span>
         </h2>
