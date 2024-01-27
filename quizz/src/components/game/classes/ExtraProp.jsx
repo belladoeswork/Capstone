@@ -84,14 +84,12 @@ export class Bee extends Sprite {
     this.loaded = true;
 
     this.image.onload = () => {
-      // console.log("Bee image loaded");
-      this.width = (this.image.width / this.frameRate) * this.scale;
+      this.width = this.image.width / this.frameRate * this.scale;
       this.height = this.image.height * this.scale;
     };
   }
 
   update(deltaTime) {
-    // console.log("Updating bee");
     super.update();
     this.updateFrames();
     this.position.x -= this.speedX;
@@ -103,7 +101,6 @@ export class Bee extends Sprite {
   }
 
   draw() {
-    // console.log("Drawing bee");
     if (this.loaded) {
       super.draw();
     }

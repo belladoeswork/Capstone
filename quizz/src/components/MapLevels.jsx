@@ -7,8 +7,6 @@ import {
   platformCollisions1,
   floorCollisions2,
   platformCollisions2,
-  floorCollisions3,
-  platformCollisions3,
 } from "./data/Collisions.js";
 
 const levelData = {
@@ -17,12 +15,16 @@ const levelData = {
     floorCollisions: floorCollisions,
     platformCollisions: platformCollisions,
   },
-  2: {
-    imageSrc: "/assets/maplev2.png",
+  level2: {
+    imageSrc: "/assets/map2.png",
     floorCollisions: floorCollisions1,
     platformCollisions: platformCollisions1,
   },
-  // more levels
+  level3: {
+    imageSrc: "/assets/map3.png",
+    floorCollisions: floorCollisions2,
+    platformCollisions: platformCollisions2,
+  },
 };
 
 export default function levels() {
