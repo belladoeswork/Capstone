@@ -21,9 +21,11 @@ export default function Quiz({
   setGameOver,
   level,
   setLevel,
+  score,
+  setScore,
 }) {
   // const [level, setLevel] = useState(0);
-  const [score, setScore] = useState(0);
+  // const [score, setScore] = useState(0);
   const [showOptions, setShowOptions] = useState(true);
   const [resultMessage, setResultMessage] = useState("");
   const [secretWord, setSecretWord] = useState("");
@@ -38,7 +40,7 @@ export default function Quiz({
       setWinGame(true); //remove after testing
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
-      setShowHint(!showHint);
+      setShowHint(false);
       if ((score + 1) % 5 === 0) {
         if (score + 1 < questions.length) {
           setTransition(true);
@@ -58,7 +60,6 @@ export default function Quiz({
       setShowPopup(false);
     } else {
       setResultMessage("wrong");
-      console.log(10 == "10");
       setGameOver(true);
     }
 
@@ -125,39 +126,14 @@ export default function Quiz({
                 >
                   submit
                 </button>
-                {/* <button
-                  className="popup-hint-button"
-                  type="button"
-                  onClick={() => handleHint()}
-                >
-                  <IoMdHelp />
-                </button> */}
               </form>
             </div>
-            {showHint && <div className="hint">Hint: {question?.hint}</div>}
+            {showHint && <div className="hint">{question?.hint}</div>}
             {secretWord}
           </div>
         )}
       </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "end",
-          justifyContent: "center",
-          backgroundColor: "#F2F5FF",
-          flexDirection: "row",
-          gap: "100px",
-          fontSize: "30px",
-        }}
-      >
-        {resultMessage && <p className="result-message">{resultMessage}</p>}
-        <h2>
-          Score: <span style={{ color: "#2274a5" }}>{score}</span>
-        </h2>
-        <h2>
-          Level: <span style={{ color: "#2274a5" }}>{level}</span>
-        </h2>
-      </div>
+      {resultMessage && <p className="result-message">{resultMessage}</p>}
       <div>{transition && <NextLevelTransition />}</div>
       <div>{winGame && <WinGameDisplay />}</div>
     </div>

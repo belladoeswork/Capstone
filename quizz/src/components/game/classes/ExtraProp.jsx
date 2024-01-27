@@ -77,21 +77,19 @@ export class Bee extends Sprite {
       },
     });
 
-    this.speedX = 0.2;
+    this.speedX = 1;
     this.speedY = 0;
     this.frameX = 0;
     this.frameY = 0;
     this.loaded = true;
 
     this.image.onload = () => {
-      // console.log("Bee image loaded");
-      this.width = (this.image.width / this.frameRate) * this.scale;
+      this.width = this.image.width / this.frameRate * this.scale;
       this.height = this.image.height * this.scale;
     };
   }
 
   update(deltaTime) {
-    // console.log("Updating bee");
     super.update();
     this.updateFrames();
     this.position.x -= this.speedX;
@@ -103,9 +101,112 @@ export class Bee extends Sprite {
   }
 
   draw() {
-    // console.log("Drawing bee");
     if (this.loaded) {
       super.draw();
     }
+  }
+}
+
+export class Worm extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 9;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "worm",
+    });
+  }
+}
+
+export class Man extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 8;
+    const frameBuffer = 7;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "man",
+    });
+  }
+}
+
+export class Chest extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.3 }) {
+    const frameRate = 5;
+    const frameBuffer = 30;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "chest",
+    });
+
+    this.isOpen = false;
+  }
+  toggleOpen() {
+    this.isOpen = !this.isOpen;
+    this.imageSrc = this.isOpen
+      ? "/assets/npcs/Chest.png"
+      : "/assets/npcs/chestclosed.png";
+  }
+}
+
+export class GemGold extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 11;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "gemgold",
+    });
+  }
+}
+
+export class FrogBlue extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 8;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "frogblue",
+    });
+  }
+}
+
+export class CatStretching extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 13;
+    const frameBuffer = 15;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "catstretching",
+    });
   }
 }

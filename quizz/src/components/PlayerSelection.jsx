@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import Game from "./Game.jsx";
-import { Sprite } from "../app/(pages)/game/classes/Sprite.jsx";
+import { Sprite } from "./game/classes/Sprite.jsx";
 
 const playerData = {
   huntress: {
