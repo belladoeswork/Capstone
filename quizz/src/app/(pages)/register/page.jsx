@@ -59,8 +59,6 @@ export default function Register() {
           Login
         </a>
       </p>
-      <p className="signIn-link">or</p>
-      <button className="google-button">Sign up with Google</button>
     </div>
   );
 }

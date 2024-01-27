@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 import NextLevelTransition from "./NextLevelTransition";
 import { IoIosHelpCircleOutline } from "react-icons/io";
+import WinGameDisplay from "./WinGameDisplay.jsx";
+
 export default function Quiz({
   question,
   questions,
@@ -30,10 +32,12 @@ export default function Quiz({
   const [inputAnswer, setInputAnswer] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [transition, setTransition] = useState(false);
+  const [winGame, setWinGame] = useState(false);
 
   async function handleAnswer(isCorrect) {
     if (isCorrect && question?.type !== "message") {
       setResultMessage("correct!");
+      setWinGame(true); //remove after testing
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
       setShowHint(false);
@@ -48,6 +52,7 @@ export default function Quiz({
         } else {
           setGameOver(true);
           setGameOverMessage("Congratulations! You Win");
+          setWinGame(true);
         }
       }
       setShowPopup(false);
@@ -130,6 +135,7 @@ export default function Quiz({
       </div>
       {resultMessage && <p className="result-message">{resultMessage}</p>}
       <div>{transition && <NextLevelTransition />}</div>
+      <div>{winGame && <WinGameDisplay />}</div>
     </div>
   );
 }

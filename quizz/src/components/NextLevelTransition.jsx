@@ -1,7 +1,14 @@
-//import Link from "next/link.js";
+"use client";
 import Image from "next/image.js";
+import { useState } from "react";
 
 export default function NextLevelTransition() {
+  const [nextLevel, setLevelSet] = useState(false);
+
+  const handleNextLevelButton = () => {
+    setLevelSet(true);
+  };
+
   return (
     <div
       className="gif-nextLevel"
@@ -19,6 +26,7 @@ export default function NextLevelTransition() {
         width={1050}
         height={700}
       />
+      <button onClick={() => handleNextLevelButton()}>Let's Go</button>
     </div>
   );
 }
