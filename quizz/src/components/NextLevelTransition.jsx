@@ -10,12 +10,21 @@ export default function NextLevelTransition() {
   };
 
   return (
-    <div className="gif-nextLevel">
+    <div
+      className="gif-nextLevel"
+      style={{
+        position: "absolute",
+        top: "0",
+        left: "50%",
+        transform: "translateX(-50%)",
+        zIndex: "1000",
+      }}
+    >
       <Image
         src="/assets/vids/nextLevel.gif"
         alt="next level video"
-        width={200}
-        height={120}
+        width={1050}
+        height={700}
       />
       <button onClick={() => handleNextLevelButton()}>Let's Go</button>
     </div>

@@ -2,7 +2,6 @@
 import Navbar from "@/components/Navbar.jsx";
 import Game from "@/components/Game.jsx";
 import PlayerSelection from "@/components/PlayerSelection.jsx";
-import Footer from "@/components/Footer.jsx";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -93,7 +92,7 @@ export default function Home() {
             {/* hide play now button if clicked */}
             <div style={{ display: !hidePlayButton ? "none" : "flex" }}>
               <button id="play-now-btn" type="button" onClick={handlePlayClick}>
-                Get Started
+                <Link href={"/level"}>Get Started</Link>
               </button>
             </div>
             {/* Show room options if the play now button is click  */}
@@ -101,7 +100,6 @@ export default function Home() {
               <div className="level-link-container">
                 <h2>Select Room</h2>
 
-                <Link href={"/level"}>Level 1</Link>
                 <Link href={"/level"}>Level 2</Link>
                 <Link href={"/level"}>Level 3</Link>
                 <Link href={"/level"}>Level 4</Link>
@@ -114,7 +112,6 @@ export default function Home() {
           <Image src={CodeHero} alt="Level One Map" className="homepage-img" />
         </div>
       </div>
-      <Footer />
     </main>
   );
 }

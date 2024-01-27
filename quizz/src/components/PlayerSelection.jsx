@@ -55,6 +55,11 @@ const playerData = {
         frameRate: 5,
         frameBuffer: 3,
       },
+      Death: {
+        imageSrc: "/assets/huntress/Death.png",
+        frameRate: 8,
+        frameBuffer: 3,
+      },
     },
     // interactedItems: interactedItems,
     // currentItem: currentItem,
@@ -113,6 +118,11 @@ const playerData = {
       AttackRight: {
         imageSrc: "/assets/warrior/AttackRight.png",
         frameRate: 4,
+        frameBuffer: 3,
+      },
+      Death: {
+        imageSrc: "/assets/warrior/Death.png",
+        frameRate: 8,
         frameBuffer: 3,
       },
     },

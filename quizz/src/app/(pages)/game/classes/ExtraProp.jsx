@@ -1,6 +1,5 @@
 import { Sprite } from "./Sprite.jsx";
 
-
 export class ExtraProp {
   constructor(context) {
     this.frameX = 0;
@@ -61,7 +60,10 @@ export class ExtraProp {
 export class Bee extends Sprite {
   constructor({ canvas, context }) {
     super({
-      position: { x: canvas.width + Math.random() * canvas.width * 0.5, y: Math.random() * canvas.height * 0.5 },
+      position: {
+        x: canvas.width + Math.random() * canvas.width * 0.5,
+        y: Math.random() * canvas.height * 0.5,
+      },
       context,
       imageSrc: "/assets/bee.png",
       frameRate: 4,
@@ -75,22 +77,21 @@ export class Bee extends Sprite {
       },
     });
 
-    this.speedX = 2;
+    this.speedX = 0.2;
     this.speedY = 0;
     this.frameX = 0;
     this.frameY = 0;
     this.loaded = true;
 
-
     this.image.onload = () => {
-      console.log("Bee image loaded");
-      this.width = this.image.width / this.frameRate * this.scale;
+      // console.log("Bee image loaded");
+      this.width = (this.image.width / this.frameRate) * this.scale;
       this.height = this.image.height * this.scale;
     };
   }
 
   update(deltaTime) {
-    console.log("Updating bee");
+    // console.log("Updating bee");
     super.update();
     this.updateFrames();
     this.position.x -= this.speedX;
@@ -102,7 +103,7 @@ export class Bee extends Sprite {
   }
 
   draw() {
-    console.log("Drawing bee");
+    // console.log("Drawing bee");
     if (this.loaded) {
       super.draw();
     }

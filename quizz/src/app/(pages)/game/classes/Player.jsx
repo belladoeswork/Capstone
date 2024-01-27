@@ -332,5 +332,61 @@ export class Chest extends Sprite {
       frameBuffer,
       key: "chest",
     });
+
+    this.isOpen = false;
+  }
+  toggleOpen() {
+    this.isOpen = !this.isOpen;
+    this.imageSrc = this.isOpen
+      ? "/assets/npcs/Chest.png"
+      : "/assets/npcs/chestclosed.png";
+  }
+}
+
+export class GemGold extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 11;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "gemgold",
+    });
+  }
+}
+
+export class FrogBlue extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 8;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "frogblue",
+    });
+  }
+}
+
+export class CatStretching extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 13;
+    const frameBuffer = 15;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "catstretching",
+    });
   }
 }
