@@ -5,16 +5,20 @@ import PlayerSelection from "@/components/PlayerSelection.jsx";
 import GameLevel1 from "../game/page.jsx";
 import { IoVolumeMedium, IoVolumeMute } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
-import { Rock, HiveOne, HiveTwo, Worm } from "../game/classes/StaticSprite.jsx";
 import { IoMdAlarm } from "react-icons/io";
+import TextEditor from "@/components/Notepad.jsx";
+import { CiStickyNote } from "react-icons/ci";
 
 export default function levelPage() {
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedPlayerData, setSelectedPlayerData] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const audioElement = useRef(new Audio("/audio/LittleR.ogg"));
-
   const [timeRemaining, setTimeRemaining] = useState(10 * 60);
+  const [level, setLevel] = useState(1);
+  const [showNote, setShowNote] = useState(false);
+
+  // const user = await fetchUser();
 
   const handlePlayerSelect = (playerData) => {
     setSelectedPlayerData(playerData);
@@ -34,11 +38,10 @@ export default function levelPage() {
     }
 
     // Cleanup function
-  return () => {
-    audioElement.current.pause();
-    audioElement.current.currentTime = 0;
-  };
-    
+    return () => {
+      audioElement.current.pause();
+      audioElement.current.currentTime = 0;
+    };
   }, [gameStarted, isMuted]);
 
   useEffect(() => {
@@ -79,18 +82,23 @@ export default function levelPage() {
       {gameStarted && selectedPlayerData && (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div>
-        <div className="clockhelp">
-          <button className="clockoutline">
-            <IoMdAlarm className="btnIcon" />
-            <span>
-              {" "}
-              {Math.floor(timeRemaining / 60)}:
-              {(timeRemaining % 60).toString().padStart(2, "0")}
-            </span>
-            </button>
+            <div className="clockhelp">
+              <button className="clockoutline">
+                <IoMdAlarm className="btnIcon" />
+                <span>
+                  {" "}
+                  {Math.floor(timeRemaining / 60)}:
+                  {(timeRemaining % 60).toString().padStart(2, "0")}
+                </span>
+              </button>
             </div>
-          <GameLevel1 selectedPlayerData={selectedPlayerData} level="level1" />
-        </div>
+            <GameLevel1
+              selectedPlayerData={selectedPlayerData}
+              setLevel={setLevel}
+              level={level}
+              // level="level1"
+            />
+          </div>
         </div>
       )}
 
@@ -102,6 +110,15 @@ export default function levelPage() {
           </button>
         </Link>
       </div>
+      <button
+        className="btnnote"
+        onClick={() => {
+          setShowNote(!showNote);
+        }}
+      >
+        <CiStickyNote />
+      </button>
+      <div className="textEditor-popup">{showNote && <TextEditor />}</div>
     </div>
   );
 }

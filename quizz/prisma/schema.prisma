@@ -6,11 +6,11 @@ generator client {
 }
 
 // prisma/schema.prisma
-// datasource db {
-//   provider  = "postgresql"
-//   url       = env("DATABASE_URL")
-//   directUrl = env("DIRECT_URL")
-// }
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
 
 model User {
   id        String     @id @default(uuid())
@@ -25,7 +25,7 @@ model User {
   questions Question[]
   room      Room?      @relation(fields: [roomId], references: [id])
   roomId    String?
-  level     Int?
+  level     Int        @default(1)
 }
 
 model Room {
