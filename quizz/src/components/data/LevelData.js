@@ -27,3 +27,5 @@ export const levelData = [
     platformCollisions: platformCollisions2,
   },
 ];
+
+

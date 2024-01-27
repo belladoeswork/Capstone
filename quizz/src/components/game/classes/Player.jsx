@@ -155,6 +155,7 @@ export class Player extends Sprite {
     }
   }
 
+
   update() {
     this.updateFrames();
     this.updateHitbox();
