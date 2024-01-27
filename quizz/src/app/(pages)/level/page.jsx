@@ -34,11 +34,10 @@ export default function levelPage() {
     }
 
     // Cleanup function
-  return () => {
-    audioElement.current.pause();
-    audioElement.current.currentTime = 0;
-  };
-    
+    return () => {
+      audioElement.current.pause();
+      audioElement.current.currentTime = 0;
+    };
   }, [gameStarted, isMuted]);
 
   useEffect(() => {
@@ -79,18 +78,21 @@ export default function levelPage() {
       {gameStarted && selectedPlayerData && (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div>
-        <div className="clockhelp">
-          <button className="clockoutline">
-            <IoMdAlarm className="btnIcon" />
-            <span>
-              {" "}
-              {Math.floor(timeRemaining / 60)}:
-              {(timeRemaining % 60).toString().padStart(2, "0")}
-            </span>
-            </button>
+            <div className="clockhelp">
+              <button className="clockoutline">
+                <IoMdAlarm className="btnIcon" />
+                <span>
+                  {" "}
+                  {Math.floor(timeRemaining / 60)}:
+                  {(timeRemaining % 60).toString().padStart(2, "0")}
+                </span>
+              </button>
             </div>
-          <GameLevel1 selectedPlayerData={selectedPlayerData} level="level1" />
-        </div>
+            <GameLevel1
+              selectedPlayerData={selectedPlayerData}
+              level="level1"
+            />
+          </div>
         </div>
       )}
 
@@ -102,6 +104,7 @@ export default function levelPage() {
           </button>
         </Link>
       </div>
+      {/* <Notepad /> */}
     </div>
   );
 }

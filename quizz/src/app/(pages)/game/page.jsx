@@ -32,6 +32,8 @@ export default function GameLevel1({ selectedPlayerData, level }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showWelcome, setShowWelcome] = useState(true);
 
+  const router = useRouter();
+
   const closeWelcome = () => {
     setShowWelcome(false);
   };
@@ -39,6 +41,15 @@ export default function GameLevel1({ selectedPlayerData, level }) {
   const bees = useRef([]);
   const extraPropTimer = useRef(0);
   const extraPropInterval = 1000;
+
+  function isColliding(rect1, rect2) {
+    return (
+      rect1.position.x < rect2.position.x + rect2.width - 2 &&
+      rect1.position.x + rect1.width > rect2.position.x &&
+      rect1.position.y < rect2.position.y + rect2.height &&
+      rect1.position.y + rect1.height > rect2.position.y
+    );
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -317,15 +328,16 @@ export default function GameLevel1({ selectedPlayerData, level }) {
       }
 
       bees.current.forEach((bee) => {
-        console.log("Updating and drawing bee", bee);
+        // console.log("Updating and drawing bee", bee);
         bee.update(deltaTime);
         bee.draw();
+        if (isColliding(bee, player)) {
+          setGameOver(true);
+        }
         if (bee.markedForDeletion) {
           bees.current.splice(bees.current.indexOf(bee), 1);
         }
       });
-
-
 
       player.velocity.x = 0;
 
@@ -371,7 +383,6 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         player.shouldPanCameraToTheRight({ canvas, camera });
       }
 
-
       context.restore();
     };
 
@@ -390,12 +401,39 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         case "ArrowUp":
           player.velocity.y = -4;
           break;
-        case "Enter":
-          keys.Enter.pressed = true;
+        case "a":
+          keys.a.pressed = true;
           break;
-          case "Enter":
-            keys.Enter.pressed = true;
-            break;
+        case "d":
+          keys.d.pressed = true;
+          break;
+        case "Enter" || "c":
+          const items = {
+            rock,
+            rockThree,
+            hiveOne,
+            hiveTwo,
+            worm,
+            cat,
+            man,
+            chest,
+          };
+          Object.entries(items).forEach(([key, item]) => {
+            if (player.isNearItem(item)) {
+              const sprite = item?.key;
+              const question = questions?.filter(
+                (question) =>
+                  question?.sprite?.toLowerCase() === sprite?.toLowerCase()
+              );
+              if (isQuestionAnswered(question[0])) {
+                alert(`you can't answer a question twice`);
+                return;
+              }
+              setCurrentQuestion(question[0]);
+              setShowPopup(true);
+            }
+          });
+          break;
       }
     });
 
@@ -407,19 +445,33 @@ export default function GameLevel1({ selectedPlayerData, level }) {
         case "ArrowLeft":
           keys.ArrowLeft.pressed = false;
           break;
-          case "Enter":
-            keys.Enter.pressed = false;
-            break;
-          case "Enter":
-            keys.Enter.pressed = false;
-            break;
+        case "a":
+          keys.a.pressed = false;
+          break;
+        case "d":
+          keys.d.pressed = false;
+          break;
       }
     });
-  }, [selectedPlayerData, level, isPaused]);
+  }, [selectedPlayerData, level, isPaused, gameOver]);
 
   const isQuestionAnswered = (question) => {
     return question?.isAnswered;
   };
+
+  function endOfGame(gameOver) {
+    if (gameOver) {
+      // Display game over message or handle it as you see fit
+      console.log("Game Over");
+      // router.push("/gameover");
+      // window.location.reload();
+      window.location.replace("/gameover");
+      // router.refresh();
+      return; // Stop the animation loop
+    }
+  }
+  endOfGame(gameOver);
+
   return (
     <div>
       <canvas ref={canvasRef} />
