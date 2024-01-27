@@ -332,6 +332,14 @@ export class Chest extends Sprite {
       frameBuffer,
       key: "chest",
     });
+
+    this.isOpen = false;
+  }
+  toggleOpen() {
+    this.isOpen = !this.isOpen;
+    this.imageSrc = this.isOpen
+      ? "/assets/npcs/Chest.png"
+      : "/assets/npcs/chestclosed.png";
   }
 }
 

@@ -1,34 +1,34 @@
+"use client";
 import { useState } from "react";
 
-export default function Notepad() {
+const TextEditor = () => {
   const [text, setText] = useState("");
 
+  const handleChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleClear = () => {
+    setText("");
+  };
+
   return (
-    <div id="notepadContainer">
-      <div className="page">
-        <div className="box">
-          <div className="boxContent">
-            <p id="notepadText">
-              <form>
-                <input
-                  id="notepadText"
-                  type="text"
-                  placeholder="Notes"
-                  value={text}
-                  onChange={(e) => {
-                    setText(e.target.value);
-                  }}
-                />
-                <button
-                //   onClick={() => handleAnswer(text === question.answer)}
-                >
-                  Save
-                </button>
-              </form>
-            </p>
-          </div>
-        </div>
+    <div className="text-editor">
+      <textarea
+        id="text-editor-textarea"
+        value={text}
+        onChange={handleChange}
+        placeholder="Start typing..."
+        rows="10"
+        cols="50"
+      />
+      <div>
+        <button id="text-editor-button" onClick={handleClear}>
+          Clear
+        </button>
       </div>
     </div>
   );
-}
+};
+
+export default TextEditor;

@@ -264,11 +264,11 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           platformCollisionBlocks,
           context: context,
           imageSrc: "/assets/npcs/Chest.png",
-          frameRate: 3,
+          frameRate: 5,
           animations: {
             Idle: {
-              imageSrc: "/assets/npcs/Chest.png",
-              frameRate: 3,
+              imageSrc: "/assets/npcs/chestclosed.png",
+              frameRate: 5,
               frameBuffer: 5,
             },
           },
@@ -513,6 +513,10 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
             catstretching,
           };
           Object.entries(items).forEach(([key, item]) => {
+            const chest = items.chest; // Assuming 'chest' is in your items object
+            if (player.isNearItem(chest)) {
+              chest.toggleOpen(); // Toggle the chest open/close
+            }
             if (player.isNearItem(item)) {
               const sprite = item?.key;
               const question = questions?.filter(

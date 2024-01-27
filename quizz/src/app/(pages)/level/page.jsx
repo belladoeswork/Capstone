@@ -6,6 +6,8 @@ import GameLevel1 from "../game/page.jsx";
 import { IoVolumeMedium, IoVolumeMute } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { IoMdAlarm } from "react-icons/io";
+import TextEditor from "@/components/Notepad.jsx";
+import { CiStickyNote } from "react-icons/ci";
 
 export default function levelPage() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -14,6 +16,7 @@ export default function levelPage() {
   const audioElement = useRef(new Audio("/audio/LittleR.ogg"));
   const [timeRemaining, setTimeRemaining] = useState(10 * 60);
   const [level, setLevel] = useState(1);
+  const [showNote, setShowNote] = useState(false);
 
   // const user = await fetchUser();
 
@@ -107,7 +110,15 @@ export default function levelPage() {
           </button>
         </Link>
       </div>
-      {/* <Notepad /> */}
+      <button
+        className="btnnote"
+        onClick={() => {
+          setShowNote(!showNote);
+        }}
+      >
+        <CiStickyNote />
+      </button>
+      <div className="textEditor-popup">{showNote && <TextEditor />}</div>
     </div>
   );
 }
