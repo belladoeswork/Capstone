@@ -40,6 +40,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showWelcome, setShowWelcome] = useState(true);
+  const [score, setScore] = useState(0);
 
   // const router = useRouter();
 
@@ -613,8 +614,29 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           questions={questions}
           setLevel={setLevel}
           level={level}
+          setScore={setScore}
+          score={score}
         />
       )}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "end",
+          justifyContent: "center",
+          backgroundColor: "#F2F5FF",
+          flexDirection: "row",
+          gap: "100px",
+          fontSize: "30px",
+        }}
+      >
+        {/* {resultMessage && <p className="result-message">{resultMessage}</p>} */}
+        <h2>
+          Score: <span style={{ color: "#2274a5" }}>{score}</span>
+        </h2>
+        <h2>
+          Level: <span style={{ color: "#2274a5" }}>{level}</span>
+        </h2>
+      </div>
     </div>
   );
 }

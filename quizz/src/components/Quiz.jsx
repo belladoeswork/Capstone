@@ -19,9 +19,11 @@ export default function Quiz({
   setGameOver,
   level,
   setLevel,
+  score,
+  setScore,
 }) {
   // const [level, setLevel] = useState(0);
-  const [score, setScore] = useState(0);
+  // const [score, setScore] = useState(0);
   const [showOptions, setShowOptions] = useState(true);
   const [resultMessage, setResultMessage] = useState("");
   const [secretWord, setSecretWord] = useState("");
@@ -34,7 +36,7 @@ export default function Quiz({
       setResultMessage("correct!");
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
-      setShowHint(!showHint);
+      setShowHint(false);
       if ((score + 1) % 5 === 0) {
         if (score + 1 < questions.length) {
           setTransition(true);
@@ -120,21 +122,14 @@ export default function Quiz({
                 >
                   submit
                 </button>
-                {/* <button
-                  className="popup-hint-button"
-                  type="button"
-                  onClick={() => handleHint()}
-                >
-                  <IoMdHelp />
-                </button> */}
               </form>
             </div>
-            {showHint && <div className="hint">Hint: {question?.hint}</div>}
+            {showHint && <div className="hint">{question?.hint}</div>}
             {secretWord}
           </div>
         )}
       </div>
-      <div
+      {/* <div
         style={{
           display: "flex",
           alignItems: "end",
@@ -152,7 +147,7 @@ export default function Quiz({
         <h2>
           Level: <span style={{ color: "#2274a5" }}>{level}</span>
         </h2>
-      </div>
+      </div> */}
       <div>{transition && <NextLevelTransition />}</div>
     </div>
   );
