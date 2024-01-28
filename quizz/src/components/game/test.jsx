@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { floorCollisions, platformCollisions } from "../data/Collisions.js";
 import { Sprite } from "./classes/Sprite.jsx";
 import { Player } from "./classes/Player.jsx";
@@ -33,16 +33,12 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
   const [isPaused, setIsPaused] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [currentItem, setCurrentItem] = useState(null);
-  // const [interactedItems, setInteractedItems] = useState({});
+  const [interactedItems, setInteractedItems] = useState({});
   const [gameOver, setGameOver] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showWelcome, setShowWelcome] = useState(true);
   const [score, setScore] = useState(0);
-
-  useEffect(() => {
-    localStorage.removeItem("correctAnswerIds");
-  }, [level]);
 
   // const router = useRouter();
 
@@ -53,15 +49,6 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
   const bees = useRef([]);
   const extraPropTimer = useRef(0);
   const extraPropInterval = 1000;
-
-  function isColliding(rect1, rect2) {
-    return (
-      rect1.position.x < rect2.position.x + rect2.width / 2 &&
-      rect1.position.x + rect1.width / 2 > rect2.position.x &&
-      rect1.position.y < rect2.position.y + rect2.height / 2 &&
-      rect1.position.y + rect1.height / 2 > rect2.position.y
-    );
-  }
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -172,6 +159,25 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
     let gemgold;
     let frogblue;
     let catstretching;
+
+    const level1Items = () => ({
+      rock,
+      rockThree,
+      hiveOne,
+      hiveTwo,
+      worm,
+      cat,
+      man,
+      chest,
+      gemgold,
+    });
+
+    const level2Items = () => ({
+      frogblue,
+      catstretching,
+      man2, // if man2 is supposed to be in level 2
+      // ... other items specific to level 2
+    });
 
     const spriteLoader = (level) => {
       if (level === 1) {
@@ -334,7 +340,6 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
             },
           },
         });
-
         frogblue = new FrogBlue({
           position: {
             x: 190,
@@ -408,7 +413,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
         if (level === 2) {
           catstretching.update();
           frogblue.update();
-          man2.update();
+          // man2.update();
         }
       };
 
@@ -502,19 +507,25 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           keys.d.pressed = true;
           break;
         case "Enter":
-          const items = {
-            rock: level === 1 ? rock : undefined,
-            rockThree: level === 1 ? rockThree : undefined,
-            hiveOne: level === 1 ? hiveOne : undefined,
-            hiveTwo: level === 1 ? hiveTwo : undefined,
-            worm: level === 1 ? worm : undefined,
-            cat: level === 1 ? cat : undefined,
-            man: level === 1 ? man : undefined,
-            chest: level === 1 ? chest : undefined,
-            gemgold: level === 1 ? gemgold : undefined,
-            frogblue: level === 2 ? frogblue : undefined,
-            catstretching: level === 2 ? catstretching : undefined,
-          };
+          let items = {};
+          if (level === 1) {
+            items = level1Items();
+          } else if (level === 2) {
+            items = level2Items();
+          }
+          // const items = {
+          //   rock: level === 1 ? rock : undefined,
+          //   rockThree: level === 1 ? rockThree : undefined,
+          //   hiveOne: level === 1 ? hiveOne : undefined,
+          //   hiveTwo: level === 1 ? hiveTwo : undefined,
+          //   worm: level === 1 ? worm : undefined,
+          //   cat: level === 1 ? cat : undefined,
+          //   man: level === 1 ? man : undefined,
+          //   chest: level === 1 ? chest : undefined,
+          //   gemgold: level === 1 ? gemgold : undefined,
+          //   frogblue: level === 2 ? frogblue : undefined,
+          //   catstretching: level === 2 ? catstretching : undefined,
+          // };
           // const items = {
           //   rock,
           //   rockThree,
@@ -535,28 +546,12 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
                 (question) =>
                   question?.sprite?.toLowerCase() === sprite?.toLowerCase()
               );
-
-              const correctAnswerIds = (
-                localStorage.getItem("correctAnswerIds") || ""
-              ).split(",");
-
-              console.log(
-                "items",
-                items,
-                "question",
-                question,
-                "correctAnwerIds",
-                correctAnswerIds
-              );
-
-              if (question[0]) {
-                if (correctAnswerIds.some((obj) => obj == question[0].id)) {
-                  alert(`you can't answer a question twice`);
-                  return;
-                }
-                setCurrentQuestion(question[0]);
-                setShowPopup(true);
+              if (isQuestionAnswered(question[0])) {
+                alert(`you can't answer a question twice`);
+                return;
               }
+              setCurrentQuestion(question[0]);
+              setShowPopup(true);
             }
           });
           break;
@@ -595,19 +590,6 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
   const isQuestionAnswered = (question) => {
     return question?.isAnswered;
   };
-
-  const onAnsswerQuestion = useCallback(() => {
-    if (currentQuestion && !isQuestionAnswered(currentQuestion)) {
-      setCurrentQuestion({ ...currentQuestion, isAnswered: true });
-      const correctAnswerIds = localStorage.getItem("correctAnswerIds") || "";
-      localStorage.setItem(
-        "correctAnswerIds",
-        correctAnswerIds.length > 0
-          ? `${correctAnswerIds},${currentQuestion.id}`
-          : currentQuestion.id
-      );
-    }
-  }, [currentQuestion]);
 
   return (
     <div>
@@ -651,7 +633,6 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           level={level}
           setScore={setScore}
           score={score}
-          onAnsswerQuestion={onAnsswerQuestion}
         />
       )}
       <div

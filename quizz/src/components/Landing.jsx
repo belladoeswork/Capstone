@@ -65,15 +65,14 @@ export default function Landing({ user }) {
             </div>
           </div>
           <div id="play-now-container">
-            <button id="play-now-btn">
-              <Link href={"/level"}>Get Started</Link>
-            </button>
+            <Link href={"/level"} id="play-now-btn">
+              Get Started
+            </Link>
           </div>
         </div>
-      </div>
-
-      <div id="homepage-right-container">
-        <Image src={CodeHero} alt="Level One Map" className="homepage-img" />
+        <div id="homepage-right-container">
+          <Image src={CodeHero} alt="Level One Map" className="homepage-img" />
+        </div>{" "}
       </div>
     </main>
   );

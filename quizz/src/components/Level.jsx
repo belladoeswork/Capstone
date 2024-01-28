@@ -95,6 +95,7 @@ export default function LevelPage({ user }) {
               setLevel={setLevel}
               level={level}
               user={user}
+              key={level}
             />
           </div>
         </div>

@@ -23,6 +23,7 @@ export default function Quiz({
   setLevel,
   score,
   setScore,
+  onAnsswerQuestion,
 }) {
   // const [level, setLevel] = useState(0);
   // const [score, setScore] = useState(0);
@@ -37,11 +38,12 @@ export default function Quiz({
   async function handleAnswer(isCorrect) {
     if (isCorrect && question?.type !== "message") {
       setResultMessage("correct!");
-      setWinGame(true); //remove after testing
+      onAnsswerQuestion();
+      // setWinGame(true); //remove after testing
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
       setShowHint(false);
-      if ((score + 1) % 5 === 0) {
+      if ((score + 1) % 2 === 0) {
         if (score + 1 < questions.length) {
           setTransition(true);
           setTimeout(() => {
@@ -50,7 +52,7 @@ export default function Quiz({
             setResultMessage("");
           }, 9000);
         } else {
-          setGameOver(true);
+          // setGameOver(true);
           setGameOverMessage("Congratulations! You Win");
           setWinGame(true);
         }
@@ -60,14 +62,14 @@ export default function Quiz({
       setShowPopup(false);
     } else {
       setResultMessage("wrong");
-      setGameOver(true);
+      // setGameOver(true);
     }
 
-    questions?.map((quest) => {
-      if (quest.id === question.id) {
-        question.isAnswered = true;
-      }
-    });
+    // questions?.map((quest) => {
+    //   if (quest.id === question.id) {
+    //     question.isAnswered = true;
+    //   }
+    // });
   }
 
   function handleHint() {
