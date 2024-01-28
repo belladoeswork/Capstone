@@ -10,8 +10,6 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const router = useRouter();
-
   async function handleRegister(e) {
     e.preventDefault();
     console.log(username, password);
@@ -30,6 +28,7 @@ export default function Register() {
     router.push("/");
     router.refresh();
   }
+  const router = useRouter();
 
   return (
     <div className="login-register-container">
@@ -56,7 +55,7 @@ export default function Register() {
       <p className="signIn-link">
         Already a member?
         <a href="/login" className="signIn-link">
-          Login
+          <span className="pTag-auth">Login</span>
         </a>
       </p>
     </div>

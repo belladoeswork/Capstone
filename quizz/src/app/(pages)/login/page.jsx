@@ -10,8 +10,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const router = useRouter();
-
   async function handleLogin(e) {
     e.preventDefault();
     //console.log(username, password);
@@ -27,6 +25,7 @@ export default function Login() {
     router.push("/");
     router.refresh();
   }
+  const router = useRouter();
 
   return (
     <div className="login-register-container">
@@ -46,11 +45,6 @@ export default function Login() {
           type="password"
           className="auth-input-field"
         />
-        <p className="pTag-auth">
-          <a href="/register" className="signIn-link">
-            Forgot your Password?
-          </a>
-        </p>
         <button className="login-register-button">Login</button>
         <p>{error}</p>
       </form>
@@ -59,7 +53,7 @@ export default function Login() {
         Not yet a member?
         <a href="/register" className="signIn-link">
           {" "}
-          Register
+          <span className="pTag-auth">Register</span>
         </a>
       </p>
     </div>

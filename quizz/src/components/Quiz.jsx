@@ -6,6 +6,7 @@ import { useState } from "react";
 import NextLevelTransition from "./NextLevelTransition";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import WinGameDisplay from "./WinGameDisplay.jsx";
+import GameOver from "./GameOver.jsx";
 
 export default function Quiz({
   question,
@@ -34,12 +35,13 @@ export default function Quiz({
   const [showHint, setShowHint] = useState(false);
   const [transition, setTransition] = useState(false);
   const [winGame, setWinGame] = useState(false);
+  const [looseGame, setLooseGame] = useState(false);
 
   async function handleAnswer(isCorrect) {
     if (isCorrect && question?.type !== "message") {
       setResultMessage("correct!");
       onAnsswerQuestion();
-      // setWinGame(true); //remove after testing
+      // setWinGame(false); //remove after testing
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
       setShowHint(false);
@@ -61,8 +63,10 @@ export default function Quiz({
     } else if (question.type === "message") {
       setShowPopup(false);
     } else {
-      setResultMessage("wrong");
-      // setGameOver(true);
+      setResultMessage("wrong"); //logic for game over
+      setGameOver(true);
+      setLooseGame(true);
+      setShowPopup(false);
     }
 
     // questions?.map((quest) => {
@@ -137,6 +141,7 @@ export default function Quiz({
       </div>
       {resultMessage && <p className="result-message">{resultMessage}</p>}
       <div>{transition && <NextLevelTransition />}</div>
+      <div>{looseGame && <GameOver />}</div>
       <div>{winGame && <WinGameDisplay />}</div>
     </div>
   );

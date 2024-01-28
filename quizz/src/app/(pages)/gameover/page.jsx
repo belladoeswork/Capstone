@@ -1,8 +1,5 @@
-// "use client";
-// import { useState } from "react";
-import TextEditor from "@/components/Notepad";
-import { useRouter } from "next/navigation.js";
 import GameOverComp from "@/components/GameOver.jsx";
+import WinGameDisplay from "@/components/WinGameDisplay.jsx";
 
 export default function GameOver() {
   return (
@@ -14,9 +11,7 @@ export default function GameOver() {
           alignItems: "center",
           font: "50px",
         }}
-      >
-        <GameOverComp />
-      </div>
+      ></div>
     </div>
   );
 }
