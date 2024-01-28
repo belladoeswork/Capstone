@@ -14,16 +14,19 @@ const levelData = {
     imageSrc: "/assets/map1.png",
     floorCollisions: floorCollisions,
     platformCollisions: platformCollisions,
+    collisionSymbol: 21557,
   },
   2: {
     imageSrc: "/assets/map2.png",
     floorCollisions: floorCollisions1,
     platformCollisions: platformCollisions1,
+    collisionSymbol: 21835,
   },
   3: {
     imageSrc: "/assets/map3.png",
     floorCollisions: floorCollisions2,
     platformCollisions: platformCollisions2,
+    collisionSymbol: 21835,
   },
 };
 

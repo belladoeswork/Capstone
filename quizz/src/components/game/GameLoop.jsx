@@ -88,7 +88,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
     const collisionBlocks = [];
     floorCollisions2D.forEach((row, y) => {
       row.forEach((symbol, x) => {
-        if (symbol === 21557) {
+        if (symbol === currentLevelData.collisionSymbol) {
           collisionBlocks.push(
             new CollisionBlock({
               position: {
@@ -111,7 +111,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
     const platformCollisionBlocks = [];
     platformCollisions2D.forEach((row, y) => {
       row.forEach((symbol, x) => {
-        if (symbol === 21557) {
+        if (symbol === currentLevelData.collisionSymbol) {
           platformCollisionBlocks.push(
             new CollisionBlock({
               position: {
