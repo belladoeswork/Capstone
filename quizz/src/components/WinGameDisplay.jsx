@@ -1,17 +1,20 @@
+import Link from "next/link.js";
+
 import Confetti from "@/components/ConfettiPage.jsx";
 
 export default function WinGameDisplay() {
   return (
     <div className="congrats-container">
-      <h1>Congratulation</h1>
-      <p className="typed-login">You are now a CodeHero!!</p>
-      <p>Wishing you the best of luck on your coding journey.</p>
-      <p>"Opportunities don't happen. You create them." - Chris Grosser</p>
-      <p>
-        "Success is not final, failure is not fatal: It is the courage to
-        continue that counts." - Winston Churchill
+      <h1 className="congrats-header">Congratulation!!</h1>
+      <h4 className="congrats-subheader">You are now a CodeHero!!</h4>
+
+      <p className="congrats-quote">
+        "Opportunities don't happen. You create them." - Chris Grosser
       </p>
-      <button>Play Again</button>
+
+      <Link href={"/"}>
+        <button className="congratsBtn">Home</button>
+      </Link>
       <Confetti />
     </div>
   );

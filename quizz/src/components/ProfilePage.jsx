@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation.js";
 
 import avatar6 from "@/assets/avatar/avatar6.jpg";
 
-export default function ProfilePage({ user }) {
-  const router = useRouter();
+import Link from "next/link.js";
 
+export default function ProfilePage({ user }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState(avatar6);
 
@@ -22,6 +22,7 @@ export default function ProfilePage({ user }) {
     //console.log("Button clicked");
     setModalOpen(true);
   };
+  const router = useRouter();
   //console.log(user.avatar);
   return (
     <div className="profile-container">
@@ -36,26 +37,24 @@ export default function ProfilePage({ user }) {
       </div>
       {user.id && (
         <div>
+          <div style={{ display: isModalOpen ? "flex" : "none" }}>
+            <AvatarOption setSelectedAvatar={setSelectedAvatar} user={user} />
+          </div>
           <h1 className="user-name">{user.username}</h1>
           <div className="level-indicator">
             <FaTrophy />
             <p>Level: {user.level}</p>
           </div>
           <div className="profileButton-div">
-            <div>
-              <button
-                onClick={handleEditProfileClick}
-                className="editProfile-button"
-              >
-                Choose an Avatar
-              </button>
-              <div style={{ display: isModalOpen ? "flex" : "none" }}>
-                <AvatarOption
-                  setSelectedAvatar={setSelectedAvatar}
-                  user={user}
-                />
-              </div>
-            </div>
+            <button
+              onClick={handleEditProfileClick}
+              className="editProfile-button"
+            >
+              Choose an Avatar
+            </button>
+            <Link href={"/"}>
+              <button className="editProfile-button">Play</button>
+            </Link>
           </div>
         </div>
       )}

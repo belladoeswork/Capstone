@@ -8,6 +8,7 @@ import CodeHero from "/public/assets/Level1.png";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { IoIosArrowDropup } from "react-icons/io";
 import GameLevel1 from "./game/GameLoop.jsx";
+import Footer from "./Footer.jsx";
 
 export default function Landing({ user }) {
   const [hideHowToButton, setHideHowToButton] = useState(true);
@@ -66,7 +67,9 @@ export default function Landing({ user }) {
           </div>
           <div id="play-now-container">
             <button id="play-now-btn">
-              <Link href={"/level"}>Get Started</Link>
+              <Link href={"/level"} className="changeColor">
+                PLAY
+              </Link>
             </button>
           </div>
         </div>
@@ -75,6 +78,7 @@ export default function Landing({ user }) {
       <div id="homepage-right-container">
         <Image src={CodeHero} alt="Level One Map" className="homepage-img" />
       </div>
+      <Footer />
     </main>
   );
 }
