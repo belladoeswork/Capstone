@@ -19,7 +19,10 @@ export default function AvatarOption({
 }) {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(true);
-  console.log(user);
+  const [isLoading, setIsLoading] = useState(false);
+
+  //console.log(user);
+
   async function handleAvatarClick(avatar) {
     const response = await fetch(`/api/users/${user.id}`, {
       method: "PUT",
@@ -31,6 +34,12 @@ export default function AvatarOption({
         avatar,
       }),
     });
+    setModalOpen(false);
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
     router.refresh();
     //console.log(avatar);
     //setSelectedAvatar(avatar);
@@ -54,43 +63,48 @@ export default function AvatarOption({
 
           <h3 className="modalHeader-text">Choose your Avatar</h3>
         </div>
-
-        <Image
-          src={avatar1}
-          alt={"avatar"}
-          className="avatar-images"
-          onClick={() => handleAvatarClick("avatar1")}
-        />
-        <Image
-          src={avatar2}
-          alt={"avatar"}
-          className="avatar-images"
-          onClick={() => handleAvatarClick("avatar2")}
-        />
-        <Image
-          src={avatar3}
-          alt={"avatar"}
-          className="avatar-images"
-          onClick={() => handleAvatarClick("avatar3")}
-        />
-        <Image
-          src={avatar4}
-          alt={"avatar"}
-          className="avatar-images"
-          onClick={() => handleAvatarClick("avatar4")}
-        />
-        <Image
-          src={avatar5}
-          alt={"avatar"}
-          className="avatar-images"
-          onClick={() => handleAvatarClick("avatar5")}
-        />
-        <Image
-          src={avatar6}
-          alt={"avatar"}
-          className="avatar-images"
-          onClick={() => handleAvatarClick("avatar6")}
-        />
+        <div disabled={isLoading}>
+          <Image
+            src={avatar1}
+            alt={"avatar"}
+            className="avatar-images"
+            onClick={() => handleAvatarClick("avatar1")}
+            disabled={isLoading}
+          />
+          <Image
+            src={avatar2}
+            alt={"avatar"}
+            className="avatar-images"
+            onClick={() => handleAvatarClick("avatar2")}
+          />
+          <Image
+            src={avatar3}
+            alt={"avatar"}
+            className="avatar-images"
+            onClick={() => handleAvatarClick("avatar3")}
+          />
+          <Image
+            src={avatar4}
+            alt={"avatar"}
+            className="avatar-images"
+            onClick={() => handleAvatarClick("avatar4")}
+          />
+          <Image
+            src={avatar5}
+            alt={"avatar"}
+            className="avatar-images"
+            onClick={() => handleAvatarClick("avatar5")}
+          />
+          <Image
+            src={avatar6}
+            alt={"avatar"}
+            className="avatar-images"
+            onClick={() => handleAvatarClick("avatar6")}
+          />
+          <div className="loader-container">
+            {isLoading && <div className="loader"></div>}
+          </div>
+        </div>
       </div>
     </div>
   );
