@@ -29,12 +29,6 @@ export class HiveOne extends StaticSprite {
   }
 }
 
-export class HiveTwo extends StaticSprite {
-  constructor({ position, context, imageSrc, scale = 0.5 }) {
-    super({ position, imageSrc, context, scale, key: "hiveTwo" });
-  }
-}
-
 export class Worm extends StaticSprite {
   constructor({ position, context, imageSrc, scale = 0.5 }) {
     const frameRate = 9;
@@ -60,5 +54,17 @@ export class Cat extends StaticSprite {
 export class RockThree extends StaticSprite {
   constructor({ position, context, imageSrc, scale = 0.5 }) {
     super({ position, imageSrc, context, scale, key: "rock" });
+  }
+}
+
+export class Moon extends StaticSprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    super({ position, imageSrc, context, scale, key: "moon" });
+  }
+}
+
+export class Box extends StaticSprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    super({ position, imageSrc, context, scale, key: "box" });
   }
 }

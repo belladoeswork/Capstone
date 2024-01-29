@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import { floorCollisions, platformCollisions } from "../data/Collisions.js";
 import { Sprite } from "./classes/Sprite.jsx";
 import { Player } from "./classes/Player.jsx";
@@ -13,6 +13,12 @@ import {
   GemGold,
   FrogBlue,
   CatStretching,
+  GemGreen,
+  GemBlue,
+  Snail,
+  ChestGold,
+  FrogGreen,
+  Boar,
 } from "./classes/ExtraProp.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 import { useRouter } from "next/navigation.js";
@@ -23,11 +29,11 @@ import questions from "@/lib/questions.jsx";
 import {
   Rock,
   HiveOne,
-  HiveTwo,
   Cat,
   RockThree,
+  Moon,
+  Box,
 } from "./classes/StaticSprite.jsx";
-import FetchLevel from "@/components/FetchLevel.jsx";
 
 export default function GameLevel1({
   selectedPlayerData,
@@ -39,12 +45,16 @@ export default function GameLevel1({
   const [isPaused, setIsPaused] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [currentItem, setCurrentItem] = useState(null);
-  const [interactedItems, setInteractedItems] = useState({});
+  // const [interactedItems, setInteractedItems] = useState({});
   const [gameOver, setGameOver] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showWelcome, setShowWelcome] = useState(true);
   const [score, setScore] = useState(0);
+
+  useEffect(() => {
+    localStorage.removeItem("correctAnswerIds");
+  }, [level]);
 
   // const router = useRouter();
 
@@ -234,16 +244,24 @@ export default function GameLevel1({
 
     let rock;
     let hiveOne;
-    let hiveTwo;
     let worm;
     let cat;
     let man;
     let man2;
+    let man3;
     let chest;
     let rockThree;
     let gemgold;
     let frogblue;
     let catstretching;
+    let gemgreen;
+    let gemblue;
+    let moon;
+    let box;
+    let snail;
+    let goldchest;
+    let froggreen;
+    let boar;
 
     const spriteLoader = (level) => {
       if (level === 1) {
@@ -265,31 +283,32 @@ export default function GameLevel1({
           imageSrc: "/assets/npcs/Rock3.png",
         });
 
-        hiveOne = new HiveOne({
-          position: {
-            x: 100,
-            y: 315,
-          },
-          context: context,
-          imageSrc: "/assets/npcs/Hive-One.png",
-        });
-
-        hiveTwo = new HiveTwo({
-          position: {
-            x: 100,
-            y: 200,
-          },
-          context: context,
-          imageSrc: "/assets/npcs/RockTwo.png",
-        });
-
         cat = new Cat({
           position: {
-            x: 10,
-            y: 380,
+            x: 360,
+            y: 180,
           },
           context: context,
           imageSrc: "/assets/npcs/Cat.png",
+        });
+
+        boar = new Boar({
+          position: {
+            x: 80,
+            y: 205,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/BoarIdle.png",
+          frameRate: 4,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/BoarIdle.png",
+              frameRate: 4,
+              frameBuffer: 5,
+            },
+          },
         });
 
         worm = new Worm({
@@ -367,45 +386,8 @@ export default function GameLevel1({
             },
           },
         });
-
-        frogblue = new FrogBlue({
-          position: {
-            x: 190,
-            y: 235,
-          },
-          collisionBlocks,
-          platformCollisionBlocks,
-          context: context,
-          imageSrc: "/assets/npcs/FrogBlueIdle.png",
-          frameRate: 8,
-          animations: {
-            Idle: {
-              imageSrc: "/assets/npcs/FrogBlueIdle.png",
-              frameRate: 8,
-              frameBuffer: 5,
-            },
-          },
-        });
-
-        catstretching = new CatStretching({
-          position: {
-            x: 360,
-            y: 180,
-          },
-          collisionBlocks,
-          platformCollisionBlocks,
-          context: context,
-          imageSrc: "/assets/npcs/catstretching.png",
-          frameRate: 13,
-          animations: {
-            Idle: {
-              imageSrc: "/assets/npcs/catstretching.png",
-              frameRate: 13,
-              frameBuffer: 5,
-            },
-          },
-        });
-
+      }
+      if (level === 2) {
         man2 = new Man({
           position: {
             x: 50,
@@ -421,6 +403,166 @@ export default function GameLevel1({
               imageSrc: "/assets/npcs/Man.png",
               frameRate: 5,
               frameBuffer: 1,
+            },
+          },
+        });
+
+        catstretching = new CatStretching({
+          position: {
+            x: 25,
+            y: 185,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/catstretching.png",
+          frameRate: 13,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/catstretching.png",
+              frameRate: 13,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        frogblue = new FrogBlue({
+          position: {
+            x: 190,
+            y: 245,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/FrogBlueIdle.png",
+          frameRate: 8,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/FrogBlueIdle.png",
+              frameRate: 8,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        gemgreen = new GemGreen({
+          position: {
+            x: 10,
+            y: 10,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/GemGreen.png",
+          frameRate: 11,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/GemGreen.png",
+              frameRate: 11,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        box = new Box({
+          position: {
+            x: 490,
+            y: 120,
+          },
+          context: context,
+          imageSrc: "/assets/npcs/Box.png",
+        });
+
+        hiveOne = new HiveOne({
+          position: {
+            x: 140,
+            y: 175,
+          },
+          context: context,
+          imageSrc: "/assets/npcs/Hive-One.png",
+        });
+      }
+      if (level === 3) {
+        moon = new Moon({
+          position: {
+            x: 370,
+            y: 20,
+          },
+          context: context,
+          imageSrc: "/assets/npcs/Moon.png",
+        });
+
+        snail = new Snail({
+          position: {
+            x: 10,
+            y: 220,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/SnailIdle.png",
+          frameRate: 8,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/SnailIdle.png",
+              frameRate: 8,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        goldchest = new ChestGold({
+          position: {
+            x: 300,
+            y: 320,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/GoldenChest.png",
+          frameRate: 5,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/GoldenChest.png",
+              frameRate: 5,
+              frameBuffer: 5,
+            },
+          },
+        });
+        froggreen = new FrogGreen({
+          position: {
+            x: 490,
+            y: 235,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/FrogGreenIdle.png",
+          frameRate: 8,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/FrogGreenIdle.png",
+              frameRate: 8,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        gemblue = new GemBlue({
+          position: {
+            x: 10,
+            y: 380,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/GemBlue.png",
+          frameRate: 11,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/GemBlue.png",
+              frameRate: 11,
+              frameBuffer: 5,
             },
           },
         });
@@ -471,15 +613,27 @@ export default function GameLevel1({
         if (level === 1) {
           // rock.update();
           rockThree.update();
-          hiveOne.update();
-          // hiveTwo.update();
-          worm.update();
+          // worm.update();
+          boar.update();
           cat.update();
           man.update();
           chest.update();
           gemgold.update();
-          frogblue.update();
+        }
+        if (level === 2) {
           catstretching.update();
+          frogblue.update();
+          // man2.update();
+          gemgreen.update();
+          box.update();
+          hiveOne.update();
+        }
+        if (level === 3) {
+          moon.update();
+          snail.update();
+          goldchest.update();
+          froggreen.update();
+          gemblue.update();
         }
       };
 
@@ -497,12 +651,8 @@ export default function GameLevel1({
       }
 
       bees.current.forEach((bee) => {
-        // console.log("Updating and drawing bee", bee);
         bee.update(deltaTime);
         bee.draw();
-        if (isColliding(bee, player)) {
-          setGameOver(true);
-        }
         if (bee.markedForDeletion) {
           bees.current.splice(bees.current.indexOf(bee), 1);
         }
@@ -540,15 +690,15 @@ export default function GameLevel1({
       }
 
       // Fullscreen functionality
-    // if (keys.f.pressed) {
-    //   if (!document.fullscreenElement) {
-    //     document.documentElement.requestFullscreen();
-    //   }
-    // } else if (keys.r.pressed) {
-    //   if (document.fullscreenElement) {
-    //     document.exitFullscreen();
-    //   }
-    // }
+      // if (keys.f.pressed) {
+      //   if (!document.fullscreenElement) {
+      //     document.documentElement.requestFullscreen();
+      //   }
+      // } else if (keys.r.pressed) {
+      //   if (document.fullscreenElement) {
+      //     document.exitFullscreen();
+      //   }
+      // }
 
       // added for attacks
       // if (keys.d.pressed) {
@@ -594,7 +744,7 @@ export default function GameLevel1({
       //   90 - camera.position.y
       // );
 
-     // Set the font and color for the text
+      // Set the font and color for the text
       context.font = '5px "Press Start 2P"';
 
       // Draw the score box
@@ -609,7 +759,6 @@ export default function GameLevel1({
         10 - camera.position.x,
         10 - camera.position.y
       );
-      
 
       // Draw the level box
       context.fillStyle = "rgba(0, 0, 0, 0.5)";
@@ -646,43 +795,47 @@ export default function GameLevel1({
         // case "d":
         //   keys.d.pressed = true;
         //   break;
-        // case "f":
-        //   keys.f.pressed = true;
-        //   break;
-        // case "r":
-        //   keys.r.pressed = true;
-        //   break;
-        case "Enter" || "c":
+        case "Enter":
           const items = {
-            rock,
-            rockThree,
-            hiveOne,
-            hiveTwo,
-            worm,
-            cat,
-            man,
-            chest,
-            gemgold,
-            frogblue,
-            catstretching,
+            rock: level === 1 ? rock : undefined,
+            rockThree: level === 1 ? rockThree : undefined,
+            // worm: level === 1 ? worm : undefined,
+            boar: level === 1 ? boar : undefined,
+            cat: level === 1 ? cat : undefined,
+            man: level === 1 ? man : undefined,
+            chest: level === 1 ? chest : undefined,
+            gemgold: level === 1 ? gemgold : undefined,
+            frogblue: level === 2 ? frogblue : undefined,
+            hiveOne: level === 2 ? hiveOne : undefined,
+            catstretching: level === 2 ? catstretching : undefined,
+            // man2: level === 2 ? man2 : undefined,
+            gemgreen: level === 2 ? gemgreen : undefined,
+            box: level === 2 ? box : undefined,
+            moon: level === 3 ? moon : undefined,
+            snail: level === 3 ? snail : undefined,
+            goldchest: level === 3 ? goldchest : undefined,
+            froggreen: level === 3 ? froggreen : undefined,
+            gemblue: level === 3 ? gemblue : undefined,
           };
           Object.entries(items).forEach(([key, item]) => {
-            const chest = items.chest; // Assuming 'chest' is in your items object
-            if (player.isNearItem(chest)) {
-              chest.toggleOpen(); // Toggle the chest open/close
-            }
-            if (player.isNearItem(item)) {
+            if (item && player.isNearItem(item)) {
               const sprite = item?.key;
               const question = questions?.filter(
                 (question) =>
                   question?.sprite?.toLowerCase() === sprite?.toLowerCase()
               );
-              if (isQuestionAnswered(question[0])) {
-                alert(`you can't answer a question twice`);
-                return;
+
+              const correctAnswerIds = (
+                localStorage.getItem("correctAnswerIds") || ""
+              ).split(",");
+              if (question[0]) {
+                if (correctAnswerIds.some((obj) => obj == question[0].id)) {
+                  alert(`you can't answer a question twice`);
+                  return;
+                }
+                setCurrentQuestion(question[0]);
+                setShowPopup(true);
               }
-              setCurrentQuestion(question[0]);
-              setShowPopup(true);
             }
           });
           break;
@@ -703,45 +856,49 @@ export default function GameLevel1({
         // case "d":
         //   keys.d.pressed = false;
         //   break;
-          // case "f":
-          //   // keys.f.pressed = false;
-          //   if (!document.fullscreenElement) {
-          //     document.documentElement.requestFullscreen();
-          //   }
-          //   break;
-          // case "r":
-          // // keys.r.pressed = false;
-          // if (document.fullscreenElement) {
-          //   document.exitFullscreen();
-          // }
-          //   break;
+        // case "f":
+        //   // keys.f.pressed = false;
+        //   if (!document.fullscreenElement) {
+        //     document.documentElement.requestFullscreen();
+        //   }
+        //   break;
+        // case "r":
+        // // keys.r.pressed = false;
+        // if (document.fullscreenElement) {
+        //   document.exitFullscreen();
+        // }
+        //   break;
       }
     });
 
-    const endOfGame = (gameOver) => {
-      if (gameOver) {
-        console.log("Game Over");
-        // router.push("/gameover");
-        // window.location.reload();
-        player.switchSprite("Death");
-        setTimeout(() => {
-          window.location.replace("/gameover");
-        }, 8000);
-
-        // router.refresh();
-        return;
-      }
-    };
-    endOfGame(gameOver);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    // const endOfGame = (gameOver) => {
+    //   if (gameOver) {
+    //     console.log("Game Over");
+    //     setTimeout(() => {
+    //       window.location.replace("/gameover");
+    //     }, 8000);
+    //     return;
+    //   }
+    // };
+    // endOfGame(gameOver);
   }, [selectedPlayerData, level, isPaused]);
 
   const isQuestionAnswered = (question) => {
     return question?.isAnswered;
   };
+
+  const onAnsswerQuestion = useCallback(() => {
+    if (currentQuestion && !isQuestionAnswered(currentQuestion)) {
+      setCurrentQuestion({ ...currentQuestion, isAnswered: true });
+      const correctAnswerIds = localStorage.getItem("correctAnswerIds") || "";
+      localStorage.setItem(
+        "correctAnswerIds",
+        correctAnswerIds.length > 0
+          ? `${correctAnswerIds},${currentQuestion.id}`
+          : currentQuestion.id
+      );
+    }
+  }, [currentQuestion]);
 
   return (
     <div>
@@ -785,6 +942,7 @@ export default function GameLevel1({
           level={level}
           setScore={setScore}
           score={score}
+          onAnsswerQuestion={onAnsswerQuestion}
         />
       )}
       {/* <div

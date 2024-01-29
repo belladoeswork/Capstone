@@ -43,7 +43,7 @@ export default function ProfilePage({ user }) {
           <h1 className="user-name">{user.username}</h1>
           <div className="level-indicator">
             <FaTrophy />
-            <p>Level: {user.level}</p>
+            <p>Last Level: {user.level}</p>
           </div>
           <div className="profileButton-div">
             <button

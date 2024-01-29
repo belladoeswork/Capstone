@@ -2,8 +2,9 @@ import Landing from "@/components/Landing";
 import { fetchUser } from "@/lib/fetchUser";
 
 export const dynamic = "force-dynamic";
-const user = await fetchUser();
-export default function Home() {
+
+export default async function Home() {
+  const user = await fetchUser();
   return (
     <main>
       <Landing user={user} />

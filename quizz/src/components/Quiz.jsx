@@ -24,6 +24,7 @@ export default function Quiz({
   setLevel,
   score,
   setScore,
+  onAnsswerQuestion,
 }) {
   // const [level, setLevel] = useState(0);
   // const [score, setScore] = useState(0);
@@ -34,26 +35,27 @@ export default function Quiz({
   const [showHint, setShowHint] = useState(false);
   const [transition, setTransition] = useState(false);
   const [winGame, setWinGame] = useState(false);
-  const [looseGame, setLooseGame] = useState(false);
+  const [loseGame, setLoseGame] = useState(false);
 
   async function handleAnswer(isCorrect) {
     if (isCorrect && question?.type !== "message") {
-      setResultMessage("correct!");
-      setWinGame(false); //remove after testing
+      setResultMessage("Correct");
+      onAnsswerQuestion();
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
       setShowHint(false);
       if ((score + 1) % 5 === 0) {
-        if (score + 1 < questions.length) {
+        // if (score + 1 < questions.length) {
+        if (level + 1 < 4) {
           setTransition(true);
+          setResultMessage("");
           setTimeout(() => {
             setLevel(level + 1);
             setTransition(false);
             setResultMessage("");
-          }, 9000);
+          }, 6000);
         } else {
-          setGameOver(true);
-          setGameOverMessage("Congratulations! You Win");
+          setResultMessage("");
           setWinGame(true);
         }
       }
@@ -61,17 +63,17 @@ export default function Quiz({
     } else if (question.type === "message") {
       setShowPopup(false);
     } else {
-      setResultMessage("wrong"); //logic for game over
+      setResultMessage("");
       setGameOver(true);
-      setLooseGame(true);
+      setLoseGame(true);
       setShowPopup(false);
     }
 
-    questions?.map((quest) => {
-      if (quest.id === question.id) {
-        question.isAnswered = true;
-      }
-    });
+    // questions?.map((quest) => {
+    //   if (quest.id === question.id) {
+    //     question.isAnswered = true;
+    //   }
+    // });
   }
 
   function handleHint() {
@@ -137,9 +139,10 @@ export default function Quiz({
           </div>
         )}
       </div>
-      {resultMessage && <p className="result-message">{resultMessage}</p>}
+      <h2 className="result-message">{resultMessage}</h2>
+      {/* {resultMessage && <p className="result-message">{resultMessage}</p>} */}
       <div>{transition && <NextLevelTransition />}</div>
-      <div>{looseGame && <GameOver />}</div>
+      <div>{loseGame && <GameOver />}</div>
       <div>{winGame && <WinGameDisplay />}</div>
     </div>
   );
