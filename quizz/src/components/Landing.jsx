@@ -12,6 +12,7 @@ import Footer from "./Footer.jsx";
 
 export default function Landing({ user }) {
   const [hideHowToButton, setHideHowToButton] = useState(true);
+  const [error, setError] = useState("");
 
   function handleHowtoClick() {
     setHideHowToButton(!hideHowToButton);
@@ -66,12 +67,21 @@ export default function Landing({ user }) {
             </div>
           </div>
           <div id="play-now-container">
-            <button id="play-now-btn">
-              <Link href={"/level"} className="changeColor">
-                PLAY
-              </Link>
+            <button
+              id="play-now-btn"
+              className="changeColor"
+              onClick={() => {
+                if (!user.id) {
+                  setError("You must login or register to play");
+                } else {
+                  <Link href={"/level"}></Link>;
+                }
+              }}
+            >
+              Play
             </button>
-          </div>
+          </div>{" "}
+          {error}
         </div>
         <div id="homepage-right-container">
           <Image src={CodeHero} alt="Level One Map" className="homepage-img" />

@@ -35,7 +35,7 @@ export default function Quiz({
   const [showHint, setShowHint] = useState(false);
   const [transition, setTransition] = useState(false);
   const [winGame, setWinGame] = useState(false);
-  const [looseGame, setLooseGame] = useState(false);
+  const [loseGame, setLoseGame] = useState(false);
 
   async function handleAnswer(isCorrect) {
     if (isCorrect && question?.type !== "message") {
@@ -44,7 +44,7 @@ export default function Quiz({
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
       setShowHint(false);
-      if ((score + 1) % 2 === 0) {
+      if ((score + 1) % 5 === 0) {
         // if (score + 1 < questions.length) {
         if (level + 1 < 4) {
           setTransition(true);
@@ -65,7 +65,7 @@ export default function Quiz({
     } else {
       setResultMessage("");
       setGameOver(true);
-      setLooseGame(true);
+      setLoseGame(true);
       setShowPopup(false);
     }
 
@@ -142,7 +142,7 @@ export default function Quiz({
       <h2 className="result-message">{resultMessage}</h2>
       {/* {resultMessage && <p className="result-message">{resultMessage}</p>} */}
       <div>{transition && <NextLevelTransition />}</div>
-      <div>{looseGame && <GameOver />}</div>
+      <div>{loseGame && <GameOver />}</div>
       <div>{winGame && <WinGameDisplay />}</div>
     </div>
   );
