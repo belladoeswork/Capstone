@@ -84,7 +84,7 @@ export class Bee extends Sprite {
     this.loaded = true;
 
     this.image.onload = () => {
-      this.width = this.image.width / this.frameRate * this.scale;
+      this.width = (this.image.width / this.frameRate) * this.scale;
       this.height = this.image.height * this.scale;
     };
   }
@@ -198,7 +198,7 @@ export class FrogBlue extends Sprite {
 export class CatStretching extends Sprite {
   constructor({ position, context, imageSrc, scale = 0.5 }) {
     const frameRate = 13;
-    const frameBuffer = 15;
+    const frameBuffer = 30;
     super({
       position,
       imageSrc,
@@ -207,6 +207,102 @@ export class CatStretching extends Sprite {
       frameRate,
       frameBuffer,
       key: "catstretching",
+    });
+  }
+}
+
+export class Boar extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 4;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "boar",
+    });
+  }
+}
+
+export class GemGreen extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 10;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "gemgreen",
+    });
+  }
+}
+
+export class GemBlue extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 18;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "gemBlue",
+    });
+  }
+}
+
+export class FrogGreen extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 8;
+    const frameBuffer = 5;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "froggreen",
+    });
+  }
+}
+
+export class Snail extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.5 }) {
+    const frameRate = 8;
+    const frameBuffer = 30;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "snail",
+    });
+  }
+}
+
+export class ChestGold extends Sprite {
+  constructor({ position, context, imageSrc, scale = 0.3 }) {
+    const frameRate = 6;
+    const frameBuffer = 30;
+    super({
+      position,
+      imageSrc,
+      context,
+      scale,
+      frameRate,
+      frameBuffer,
+      key: "chestgold",
     });
   }
 }

@@ -13,6 +13,11 @@ import {
   GemGold,
   FrogBlue,
   CatStretching,
+  GemGreen,
+  GemBlue,
+  Snail,
+  ChestGold,
+  FrogGreen,
 } from "./classes/ExtraProp.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 import { useRouter } from "next/navigation.js";
@@ -23,9 +28,10 @@ import questions from "@/lib/questions.jsx";
 import {
   Rock,
   HiveOne,
-  HiveTwo,
   Cat,
   RockThree,
+  Moon,
+  Box,
 } from "./classes/StaticSprite.jsx";
 
 export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
@@ -162,16 +168,23 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
 
     let rock;
     let hiveOne;
-    let hiveTwo;
     let worm;
     let cat;
     let man;
     let man2;
+    let man3;
     let chest;
     let rockThree;
     let gemgold;
     let frogblue;
     let catstretching;
+    let gemgreen;
+    let gemblue;
+    let moon;
+    let box;
+    let snail;
+    let goldchest;
+    let froggreen;
 
     const spriteLoader = (level) => {
       if (level === 1) {
@@ -193,28 +206,10 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           imageSrc: "/assets/npcs/Rock3.png",
         });
 
-        hiveOne = new HiveOne({
-          position: {
-            x: 100,
-            y: 315,
-          },
-          context: context,
-          imageSrc: "/assets/npcs/Hive-One.png",
-        });
-
-        hiveTwo = new HiveTwo({
-          position: {
-            x: 100,
-            y: 200,
-          },
-          context: context,
-          imageSrc: "/assets/npcs/RockTwo.png",
-        });
-
         cat = new Cat({
           position: {
-            x: 10,
-            y: 380,
+            x: 360,
+            y: 180,
           },
           context: context,
           imageSrc: "/assets/npcs/Cat.png",
@@ -318,8 +313,8 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
 
         catstretching = new CatStretching({
           position: {
-            x: 360,
-            y: 180,
+            x: 25,
+            y: 185,
           },
           collisionBlocks,
           platformCollisionBlocks,
@@ -338,7 +333,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
         frogblue = new FrogBlue({
           position: {
             x: 190,
-            y: 235,
+            y: 245,
           },
           collisionBlocks,
           platformCollisionBlocks,
@@ -349,6 +344,128 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
             Idle: {
               imageSrc: "/assets/npcs/FrogBlueIdle.png",
               frameRate: 8,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        gemgreen = new GemGreen({
+          position: {
+            x: 10,
+            y: 10,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/GemGreen.png",
+          frameRate: 11,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/GemGreen.png",
+              frameRate: 11,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        box = new Box({
+          position: {
+            x: 490,
+            y: 120,
+          },
+          context: context,
+          imageSrc: "/assets/npcs/Box.png",
+        });
+
+        hiveOne = new HiveOne({
+          position: {
+            x: 140,
+            y: 175,
+          },
+          context: context,
+          imageSrc: "/assets/npcs/Hive-One.png",
+        });
+      }
+      if (level === 3) {
+        moon = new Moon({
+          position: {
+            x: 370,
+            y: 20,
+          },
+          context: context,
+          imageSrc: "/assets/npcs/Moon.png",
+        });
+
+        snail = new Snail({
+          position: {
+            x: 10,
+            y: 380,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/SnailIdle.png",
+          frameRate: 8,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/SnailIdle.png",
+              frameRate: 8,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        goldchest = new ChestGold({
+          position: {
+            x: 300,
+            y: 340,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/GoldenChest.png",
+          frameRate: 5,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/GoldenChest.png",
+              frameRate: 5,
+              frameBuffer: 5,
+            },
+          },
+        });
+        froggreen = new FrogGreen({
+          position: {
+            x: 490,
+            y: 235,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/FrogGreenIdle.png",
+          frameRate: 8,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/FrogGreenIdle.png",
+              frameRate: 8,
+              frameBuffer: 5,
+            },
+          },
+        });
+
+        gemblue = new GemBlue({
+          position: {
+            x: 10,
+            y: 200,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/GemBlue.png",
+          frameRate: 11,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/GemBlue.png",
+              frameRate: 11,
               frameBuffer: 5,
             },
           },
@@ -397,8 +514,6 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
         if (level === 1) {
           // rock.update();
           rockThree.update();
-          hiveOne.update();
-          // hiveTwo.update();
           worm.update();
           cat.update();
           man.update();
@@ -409,6 +524,16 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           catstretching.update();
           frogblue.update();
           man2.update();
+          gemgreen.update();
+          box.update();
+          hiveOne.update();
+        }
+        if (level === 3) {
+          moon.update();
+          snail.update();
+          goldchest.update();
+          froggreen.update();
+          gemblue.update();
         }
       };
 
@@ -495,25 +620,32 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
         case "ArrowUp":
           player.velocity.y = -4;
           break;
-        case "a":
-          keys.a.pressed = true;
-          break;
-        case "d":
-          keys.d.pressed = true;
-          break;
+        // case "a":
+        //   keys.a.pressed = true;
+        //   break;
+        // case "d":
+        //   keys.d.pressed = true;
+        //   break;
         case "Enter":
           const items = {
             rock: level === 1 ? rock : undefined,
             rockThree: level === 1 ? rockThree : undefined,
-            hiveOne: level === 1 ? hiveOne : undefined,
-            hiveTwo: level === 1 ? hiveTwo : undefined,
             worm: level === 1 ? worm : undefined,
             cat: level === 1 ? cat : undefined,
             man: level === 1 ? man : undefined,
             chest: level === 1 ? chest : undefined,
             gemgold: level === 1 ? gemgold : undefined,
             frogblue: level === 2 ? frogblue : undefined,
+            hiveOne: level === 2 ? hiveOne : undefined,
             catstretching: level === 2 ? catstretching : undefined,
+            man2: level === 2 ? man2 : undefined,
+            gemgreen: level === 2 ? gemgreen : undefined,
+            box: level === 2 ? box : undefined,
+            moon: level === 3 ? moon : undefined,
+            snail: level === 3 ? snail : undefined,
+            goldchest: level === 3 ? goldchest : undefined,
+            froggreen: level === 3 ? froggreen : undefined,
+            gemblue: level === 3 ? gemblue : undefined,
           };
           // const items = {
           //   rock,

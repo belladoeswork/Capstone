@@ -109,15 +109,15 @@ export default function LevelPage({ user }) {
           </button>
         </Link>
       </div>
-      <button
+      {/* <button
         className="btnnote"
         onClick={() => {
           setShowNote(!showNote);
         }}
       >
         <CiStickyNote />
-      </button>
-      <div className="textEditor-popup">{showNote && <TextEditor />}</div>
+      </button> */}
+      {/* <div className="textEditor-popup">{showNote && <TextEditor />}</div> */}
     </div>
   );
 }

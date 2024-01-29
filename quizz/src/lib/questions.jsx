@@ -1,7 +1,7 @@
 const questions = [
   {
     id: 1,
-    sprite: "rockThree",
+    sprite: "goldchest",
     type: "multiple-choice",
     message:
       "You're not dumb as a rock! You've found a question! Answer correctly to earn a point",
@@ -176,7 +176,7 @@ const questions = [
   {
     id: 11,
     type: "multiple-choice",
-    sprite: "",
+    sprite: "gemgreen",
     question: "Which function counts the number of vowels in a string?",
     message: "You've found a question! Answer correctly to earn a point",
     isAnswered: false,
@@ -244,7 +244,7 @@ const questions = [
   {
     id: 15,
     type: "multiple-choice",
-    sprite: "",
+    sprite: "gemblue",
     question: "What does the addEventListener method do?",
     message: "You've found a question! Answer correctly to earn a point",
     isAnswered: false,
@@ -262,7 +262,7 @@ const questions = [
   {
     id: 16,
     type: "multiple-choice",
-    sprite: "",
+    sprite: "snail",
     question: "Which object is the root of the DOM tree?",
     message: "You've found a question! Answer correctly to earn a point",
     isAnswered: false,
@@ -276,7 +276,7 @@ const questions = [
   {
     id: 17,
     type: "multiple-choice",
-    sprite: "",
+    sprite: "catstretching",
     question: "How do you remove an element from the DOM?",
     message: "You've found a question! Answer correctly to earn a point",
     isAnswered: false,
@@ -294,7 +294,7 @@ const questions = [
   {
     id: 18,
     type: "multiple-choice",
-    sprite: "",
+    sprite: "froggreen",
     question: "What does the .catch() method do for a promise?",
     message: "You've found a question! Answer correctly to earn a point",
     isAnswered: false,
@@ -329,14 +329,14 @@ const questions = [
   },
   {
     id: 20,
-    type: "multiple-choice",
-    sprite: "",
+    type: "input",
+    sprite: "box",
     question:
-      "What will be logged in the console when running this code?\n\nconsole.log('1');\nsetTimeout(() => console.log('2'), 0);\nconsole.log('3');",
+      "Fill in the blank: _, _, _ (e.g. abc)\n What will be logged in the console when running this code?\n\nconsole.log('1');\nsetTimeout(() => console.log('2'), 0);\nconsole.log('3');",
     message: "You've found a question! Answer correctly to earn a point",
     isAnswered: false,
     options: ["1, 2, 3", "2, 3, 1", "1, 3, 2"],
-    answer: "1, 3, 2",
+    answer: "132",
     hint: "Remember how the event loop and setTimeout work in JavaScript.",
     resultMessage: {
       correct: "",
@@ -345,7 +345,7 @@ const questions = [
   {
     id: 21,
     type: "multiple-choice",
-    sprite: "",
+    sprite: "moon",
     question: "Which of these is a way to handle promises?",
     message: "You've found a question! Answer correctly to earn a point",
     isAnswered: false,
@@ -371,6 +371,21 @@ const questions = [
     answer:
       "An object representing the eventual completion or failure of an asynchronous operation",
     hint: "It's a core object that represents the eventual completion (or failure) of an asynchronous operation.",
+    resultMessage: {
+      correct: "",
+    },
+  },
+  {
+    id: 23,
+    type: "message",
+    sprite: "man2",
+    message: "",
+    question:
+      "Hint! Congratulations you made it to level 2! Find a six sided dive where many reside.",
+    isAnswered: false,
+    options: ["Ready"],
+    answer: " ",
+    hint: "",
     resultMessage: {
       correct: "",
     },
