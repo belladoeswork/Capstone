@@ -25,6 +25,9 @@ export default function Quiz({
   score,
   setScore,
   onAnsswerQuestion,
+  loseGame,
+  setLoseGame,
+  user,
 }) {
   // const [level, setLevel] = useState(0);
   // const [score, setScore] = useState(0);
@@ -35,16 +38,22 @@ export default function Quiz({
   const [showHint, setShowHint] = useState(false);
   const [transition, setTransition] = useState(false);
   const [winGame, setWinGame] = useState(false);
-  const [loseGame, setLoseGame] = useState(false);
+  //const [loseGame, setLoseGame] = useState(false);
 
   async function handleAnswer(isCorrect) {
+    setResultMessage("");
     if (isCorrect && question?.type !== "message") {
       setResultMessage("Correct");
+      setTimeout(() => {
+        setResultMessage("");
+      }, 2000);
+
       onAnsswerQuestion();
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
       setShowHint(false);
-      if ((score + 1) % 5 === 0) {
+      if ((score + 1) % 2 === 0) {
+        //change back to 5 after testing
         // if (score + 1 < questions.length) {
         if (level + 1 < 4) {
           setTransition(true);
