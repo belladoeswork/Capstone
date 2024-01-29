@@ -623,7 +623,7 @@ export default function GameLevel1({
         if (level === 2) {
           catstretching.update();
           frogblue.update();
-          man2.update();
+          // man2.update();
           gemgreen.update();
           box.update();
           hiveOne.update();
@@ -808,7 +808,7 @@ export default function GameLevel1({
             frogblue: level === 2 ? frogblue : undefined,
             hiveOne: level === 2 ? hiveOne : undefined,
             catstretching: level === 2 ? catstretching : undefined,
-            man2: level === 2 ? man2 : undefined,
+            // man2: level === 2 ? man2 : undefined,
             gemgreen: level === 2 ? gemgreen : undefined,
             box: level === 2 ? box : undefined,
             moon: level === 3 ? moon : undefined,
@@ -817,19 +817,6 @@ export default function GameLevel1({
             froggreen: level === 3 ? froggreen : undefined,
             gemblue: level === 3 ? gemblue : undefined,
           };
-          // const items = {
-          //   rock,
-          //   rockThree,
-          //   hiveOne,
-          //   hiveTwo,
-          //   worm,
-          //   cat,
-          //   man,
-          //   chest,
-          //   gemgold,
-          //   frogblue,
-          //   // catstretching,
-          // };
           Object.entries(items).forEach(([key, item]) => {
             if (item && player.isNearItem(item)) {
               const sprite = item?.key;
@@ -841,16 +828,6 @@ export default function GameLevel1({
               const correctAnswerIds = (
                 localStorage.getItem("correctAnswerIds") || ""
               ).split(",");
-
-              console.log(
-                "items",
-                items,
-                "question",
-                question,
-                "correctAnwerIds",
-                correctAnswerIds
-              );
-
               if (question[0]) {
                 if (correctAnswerIds.some((obj) => obj == question[0].id)) {
                   alert(`you can't answer a question twice`);

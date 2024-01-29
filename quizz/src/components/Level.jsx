@@ -126,7 +126,7 @@ export default function LevelPage({ user }) {
                 </button>
               </Link>
             </div>
-            <button
+            {/* <button
               className="btnnote"
               onClick={() => {
                 setShowNote(!showNote);
@@ -134,7 +134,7 @@ export default function LevelPage({ user }) {
             >
               <CiStickyNote />
             </button>
-            <div className="textEditor-popup">{showNote && <TextEditor />}</div>
+            <div className="textEditor-popup">{showNote && <TextEditor />}</div> */}
             <div className="fullscreentoggle">
               <button onClick={goFullscreen}>F</button>
               <button onClick={exitFullscreen}>Esc</button>
