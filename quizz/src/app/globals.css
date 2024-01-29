@@ -745,17 +745,19 @@
   transform: scale(1.1);
 }
 
-.btnhelp {
+/* .btnhelp {
   z-index: 1;
   display: inline-block;
   position: absolute;
   right: 18px;
   top: 100px;
-}
+} */
 
 .btnhelpoutline {
+  display: flex; 
+  align-items: center;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
   border: 2px solid #623b5a;
   color: #623b5a;
@@ -772,6 +774,9 @@
 
 .btnhelp span {
   display: inline-block;
+  position: relative; 
+  top: 2px;
+  margin-left: 10px;
 }
 
 .btnhelp:hover {
@@ -910,7 +915,7 @@
   right: 18px;
   top: 150px;
 }
-
+/* 
 .btnhelpoutline {
   border-radius: 10px;
   font-size: 18px;
@@ -919,22 +924,22 @@
   color: #623b5a;
   transition: 0.25s all ease-in-out;
   background-color: #f2f5ff;
-}
+} */
 
-.btnIcon {
+/* .btnIcon {
   font-size: 25px;
   margin-right: 0;
   vertical-align: middle;
-}
+} */
 
-.btnhelp span {
+/* .btnhelp span {
   display: inline-block;
-}
-
+} */
+/* 
 .btnhelp:hover {
   cursor: pointer;
   transform: scale(1.1);
-}
+} */
 
 /* How to page */
 
@@ -1073,6 +1078,8 @@
 }
 
 .clockoutline {
+  display: flex; 
+  align-items: center;
   border-radius: 10px;
   font-size: 18px;
   font-weight: 400;
@@ -1080,10 +1087,14 @@
   color: #623b5a;
   transition: 0.25s all ease-in-out;
   background-color: #f2f5ff;
+  width: 100px;
 }
 
 .clockhelp span {
   display: inline-block;
+  position: relative; 
+  top: 3px;
+  margin-left: 10px;
 }
 
 /*FOOTER START*/
