@@ -18,6 +18,7 @@ import {
   Snail,
   ChestGold,
   FrogGreen,
+  Boar,
 } from "./classes/ExtraProp.jsx";
 import { CollisionBlock } from "./classes/CollisionBlock.jsx";
 import { useRouter } from "next/navigation.js";
@@ -185,6 +186,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
     let snail;
     let goldchest;
     let froggreen;
+    let boar;
 
     const spriteLoader = (level) => {
       if (level === 1) {
@@ -213,6 +215,25 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           },
           context: context,
           imageSrc: "/assets/npcs/Cat.png",
+        });
+
+        boar = new Boar({
+          position: {
+            x: 80,
+            y: 205,
+          },
+          collisionBlocks,
+          platformCollisionBlocks,
+          context: context,
+          imageSrc: "/assets/npcs/BoarIdle.png",
+          frameRate: 4,
+          animations: {
+            Idle: {
+              imageSrc: "/assets/npcs/BoarIdle.png",
+              frameRate: 4,
+              frameBuffer: 5,
+            },
+          },
         });
 
         worm = new Worm({
@@ -399,7 +420,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
         snail = new Snail({
           position: {
             x: 10,
-            y: 380,
+            y: 220,
           },
           collisionBlocks,
           platformCollisionBlocks,
@@ -418,7 +439,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
         goldchest = new ChestGold({
           position: {
             x: 300,
-            y: 340,
+            y: 320,
           },
           collisionBlocks,
           platformCollisionBlocks,
@@ -455,7 +476,7 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
         gemblue = new GemBlue({
           position: {
             x: 10,
-            y: 200,
+            y: 380,
           },
           collisionBlocks,
           platformCollisionBlocks,
@@ -514,7 +535,8 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
         if (level === 1) {
           // rock.update();
           rockThree.update();
-          worm.update();
+          // worm.update();
+          boar.update();
           cat.update();
           man.update();
           chest.update();
@@ -630,7 +652,8 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
           const items = {
             rock: level === 1 ? rock : undefined,
             rockThree: level === 1 ? rockThree : undefined,
-            worm: level === 1 ? worm : undefined,
+            // worm: level === 1 ? worm : undefined,
+            boar: level === 1 ? boar : undefined,
             cat: level === 1 ? cat : undefined,
             man: level === 1 ? man : undefined,
             chest: level === 1 ? chest : undefined,
@@ -712,16 +735,16 @@ export default function GameLevel1({ selectedPlayerData, level, setLevel }) {
       }
     });
 
-    const endOfGame = (gameOver) => {
-      if (gameOver) {
-        console.log("Game Over");
-        setTimeout(() => {
-          window.location.replace("/gameover");
-        }, 8000);
-        return;
-      }
-    };
-    endOfGame(gameOver);
+    // const endOfGame = (gameOver) => {
+    //   if (gameOver) {
+    //     console.log("Game Over");
+    //     setTimeout(() => {
+    //       window.location.replace("/gameover");
+    //     }, 8000);
+    //     return;
+    //   }
+    // };
+    // endOfGame(gameOver);
   }, [selectedPlayerData, level, isPaused]);
 
   const isQuestionAnswered = (question) => {

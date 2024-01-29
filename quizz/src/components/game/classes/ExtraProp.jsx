@@ -302,7 +302,7 @@ export class ChestGold extends Sprite {
       scale,
       frameRate,
       frameBuffer,
-      key: "chestgold",
+      key: "goldchest",
     });
   }
 }

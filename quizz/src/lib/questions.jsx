@@ -16,7 +16,7 @@ const questions = [
     answer: "var name = 'value';",
     hint: "The correct syntax uses a keyword followed by the name and assignment operator.",
     resultMessage: {
-      correct: "Remember this letter, it might come in handy: c",
+      correct: "",
     },
   },
   {
@@ -30,7 +30,7 @@ const questions = [
     answer: "true",
     hint: "A boolean data type represents one of two values",
     resultMessage: {
-      correct: "Remember this letter, it might come in handy: o",
+      correct: "",
     },
   },
   {
@@ -48,7 +48,7 @@ const questions = [
     answer: "function myFunction()",
     hint: "A function is defined with a keyword, followed by a name, followed by parentheses ().",
     resultMessage: {
-      correct: "Remember this letter, it might come in handy: d",
+      correct: "",
     },
   },
   {
@@ -62,7 +62,7 @@ const questions = [
     answer: "true",
     hint: "Consider how JavaScript handles type coercion with the '==' operator.",
     resultMessage: {
-      correct: "Remember this letter, it might come in handy: e",
+      correct: "",
     },
   },
   {
@@ -80,7 +80,7 @@ const questions = [
     answer: "//",
     hint: "In JavaScript, single-line comments are created using two forward slashes.",
     resultMessage: {
-      correct: "Remember this letter, it might come in handy: r",
+      correct: "",
     },
   },
   {
@@ -89,7 +89,7 @@ const questions = [
     sprite: "man",
     message: "",
     question:
-      "Hint! Show you're wise, not feeble or meek, not as dumb as the ITEM you seek",
+      "Hint Show you're wise, not feeble or meek, not as dumb as the ITEM you seek. Then, in night's embrace, it glows, then fades by day, find it and you may stay. Finally, seek a hexagon haven where buzzing dwellers sleep.",
     isAnswered: false,
     options: ["Ready"],
     answer: " ",
@@ -229,7 +229,7 @@ const questions = [
   {
     id: 14,
     type: "multiple-choice",
-    sprite: "",
+    sprite: "boar",
     question:
       "Which tool can be used for debugging JavaScript code in the browser?",
     message: "You've found a question! Answer correctly to earn a point",
