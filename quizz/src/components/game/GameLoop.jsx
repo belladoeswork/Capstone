@@ -61,7 +61,7 @@ export default function GameLevel1({
   const closeWelcome = () => {
     setShowWelcome(false);
   };
-  // added for extras?
+  // for extras?
   const bees = useRef([]);
   const extraPropTimer = useRef(0);
   const extraPropInterval = 1000;
@@ -75,26 +75,41 @@ export default function GameLevel1({
     );
   }
 
-  // added for score/level
-  const scoreRef = useRef(0); // Initialize scoreRef
-  const levelRef = useRef(0); // Initialize levelRef
+  // score/level
+  const scoreRef = useRef(0); 
+  const levelRef = useRef(0); 
 
   useEffect(() => {
-    scoreRef.current = score; // Update scoreRef when score changes
-    levelRef.current = level; // Update levelRef when level changes
+    scoreRef.current = score; 
+    levelRef.current = level;
   }, [score, level]);
 
-  // added for timer
+  // timer
   const timerRef = useRef(timeRemaining);
 
   useEffect(() => {
     timerRef.current = timeRemaining;
   }, [timeRemaining]);
 
+  // handle gaps
+  // useEffect(() => {
+  //   if (document.fullscreenElement) {
+  //     document.body.classList.add('fullscreen');
+  //   } else {
+  //     document.body.classList.remove('fullscreen');
+  //   }
+  // }, [document.fullscreenElement]);
+
+ 
+
+  // canvas
   useEffect(() => {
     const canvas = canvasRef.current;
 
     const context = canvas.getContext("2d");
+
+     // added now
+  // canvas.style.height = '100%';
 
     const currentLevelData = levelData[level];
 
@@ -127,6 +142,12 @@ export default function GameLevel1({
 
     // window.addEventListener('resize', handleResize);
 
+
+
+
+
+
+
     const originalCanvas = {
       width: canvas.width,
       height: canvas.height,
@@ -137,10 +158,39 @@ export default function GameLevel1({
       height: canvas.height / 4,
     };
 
-    const resize = (width, height) => {
+
+
+    const resize = () => {
+
+    // const resize = (width, height) => {
+
+  // Maintain the aspect ratio of the original canvas
+  // const aspectRatio = originalCanvas.width / originalCanvas.height;
+
+  // // Calculate the new height based on the width and aspect ratio
+  // const newHeight = width / aspectRatio;
+
+  // // If the new height is greater than the window height, adjust the width instead
+  // if (newHeight > height) {
+  //   width = height * aspectRatio;
+  // } else {
+  //   height = newHeight;
+  // }
+
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  const aspectRatio = originalCanvas.width / originalCanvas.height;
+  const newHeight = width / aspectRatio;
+  if (newHeight > height) {
+    width = height * aspectRatio;
+  } else {
+    height = newHeight;
+  }
+
+      //
       canvas.width = width;
       canvas.height = height;
-      context.setTransform(1, 0, 0, 1, 0, 0); // Reset the transform matrix
+      context.setTransform(1, 0, 0, 1, 0, 0); 
       context.scale(
         canvas.width / originalCanvas.width,
         canvas.height / originalCanvas.height
@@ -154,13 +204,19 @@ export default function GameLevel1({
     };
 
     // Initial resize
-    resize(window.innerWidth, window.innerHeight);
+    // resize(window.innerWidth, window.innerHeight);
 
-    const handleResize = (e) => {
-      resize(e.target.innerWidth, e.target.innerHeight);
-    };
+    // const handleResize = (e) => {
+    //   resize(e.target.innerWidth, e.target.innerHeight);
+    // };
 
-    window.addEventListener("resize", handleResize);
+    // window.addEventListener("resize", handleResize);
+
+    resize();
+    window.addEventListener('resize', resize);
+  
+
+
 
     const floorCollisions2D = [];
     for (let i = 0; i < currentLevelData.floorCollisions.length; i += 36) {
@@ -207,8 +263,6 @@ export default function GameLevel1({
       });
     });
 
-    const gravity = 0.1;
-
     const player = new Player({
       position: {
         x: 100,
@@ -234,12 +288,6 @@ export default function GameLevel1({
       Enter: {
         pressed: false,
       },
-      // f: {
-      //   pressed: false,
-      // },
-      // r: {
-      //   pressed: false,
-      // },
     };
 
     let rock;
@@ -598,6 +646,8 @@ export default function GameLevel1({
       context.fillStyle = "white";
       context.fillRect(0, 0, canvas.width, canvas.height);
 
+
+
       // added
       context.setTransform(1, 0, 0, 1, 0, 0);
 
@@ -639,7 +689,7 @@ export default function GameLevel1({
 
       spriteUpdateLoader(level);
 
-      //added for bees
+      // bees
       const deltaTime = currentTime - lastTime;
       lastTime = currentTime;
 
@@ -670,10 +720,6 @@ export default function GameLevel1({
         player.velocity.x = -2;
         player.lastDirection = "left";
         player.shouldPanCameraToTheRight({ canvas, camera });
-        // } else if (keys.Enter.pressed) {
-        //   player.switchSprite("Attack");
-        //   // player.velocity.x = 2;
-        //   player.lastDirection = "left";
       } else if (player.velocity.y === 0) {
         if (player.lastDirection === "right") player.switchSprite("Idle");
         else player.switchSprite("IdleLeft");
@@ -689,6 +735,7 @@ export default function GameLevel1({
         else player.switchSprite("FallLeft");
       }
 
+     // font for the text
       // Fullscreen functionality
       // if (keys.f.pressed) {
       //   if (!document.fullscreenElement) {
@@ -747,7 +794,7 @@ export default function GameLevel1({
       // Set the font and color for the text
       context.font = '5px "Press Start 2P"';
 
-      // Draw the score box
+      // score box
       context.strokeStyle = "#2274a5";
       context.lineWidth = 2;
       context.fillStyle = "rgba(0, 0, 0, 0.5)";
@@ -759,6 +806,8 @@ export default function GameLevel1({
         10 - camera.position.x,
         10 - camera.position.y
       );
+      
+      // level box
 
       // Draw the level box
       context.fillStyle = "rgba(0, 0, 0, 0.5)";
@@ -850,24 +899,6 @@ export default function GameLevel1({
         case "ArrowLeft":
           keys.ArrowLeft.pressed = false;
           break;
-        // case "a":
-        //   keys.a.pressed = false;
-        //   break;
-        // case "d":
-        //   keys.d.pressed = false;
-        //   break;
-        // case "f":
-        //   // keys.f.pressed = false;
-        //   if (!document.fullscreenElement) {
-        //     document.documentElement.requestFullscreen();
-        //   }
-        //   break;
-        // case "r":
-        // // keys.r.pressed = false;
-        // if (document.fullscreenElement) {
-        //   document.exitFullscreen();
-        // }
-        //   break;
       }
     });
 

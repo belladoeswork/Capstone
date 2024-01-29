@@ -2,9 +2,12 @@
 import Link from "next/link.js";
 import { useRouter } from "next/navigation.js";
 import React, { useState, useEffect, useRef } from "react";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import PlayerSelection from "@/components/PlayerSelection.jsx";
 import { IoVolumeMedium, IoVolumeMute } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
+import { MdFullscreenExit } from "react-icons/md";
 import { IoMdAlarm } from "react-icons/io";
 import TextEditor from "@/components/Notepad.jsx";
 import { CiStickyNote } from "react-icons/ci";
@@ -36,11 +39,11 @@ export default function LevelPage({ user }) {
     }
   };
 
-  const exitFullscreen = () => {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    }
-  };
+  // const exitFullscreen = () => {
+  //   if (document.fullscreenElement) {
+  //     document.exitFullscreen();
+  //   }
+  // };
 
   useEffect(() => {
     audioElement.current = new Audio("/audio/LittleR.ogg");
@@ -90,16 +93,17 @@ export default function LevelPage({ user }) {
                   />
                 </div>
               ) : (
-                <div className="volume-control">
+                  <div className="volume-control">
                   <IoVolumeMute
                     size={64}
                     color="#D29E38"
                     onClick={handleMuteToggle}
-                  />
+                    />
                 </div>
               )}
             </div>
             <div className="clockhelp">
+            
               <button className="clockoutline">
                 <IoMdAlarm className="btnIcon" />
                 <span>
@@ -107,7 +111,8 @@ export default function LevelPage({ user }) {
                   {Math.floor(timeRemaining / 60)}:
                   {(timeRemaining % 60).toString().padStart(2, "0")}
                 </span>
-              </button>
+                </button>
+                
             </div>
             <GameLevel1
               selectedPlayerData={selectedPlayerData}
@@ -134,13 +139,17 @@ export default function LevelPage({ user }) {
             >
               <CiStickyNote />
             </button>
-            <div className="textEditor-popup">{showNote && <TextEditor />}</div> */}
-            <div className="fullscreentoggle">
-              <button onClick={goFullscreen}>F</button>
-              <button onClick={exitFullscreen}>Esc</button>
+            </Tippy>
+            <div className="textEditor-popup">{showNote && <TextEditor />}</div>
+            <div className="screentoggle">
+            <Tippy placement='left' content="Fullscreen">
+              <button className="full" onClick={goFullscreen}>
+              <MdFullscreenExit />
+                </button>
+                </Tippy>
+              {/* <button className="full" onClick={exitFullscreen}>Esc</button> */}
             </div>
           </div>
-        </div>
       )}
     </div>
   );

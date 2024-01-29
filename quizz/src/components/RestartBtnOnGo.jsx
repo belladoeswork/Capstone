@@ -9,8 +9,8 @@ export default function() {
     setRestartGame(true);
   }
   return (
-    <Link onClick={handleButtonClick} href={"/level"}>
-      <button className="restartBtn">Restart Game</button>
+    <Link href={"/level"}>
+      <button onClick={handleButtonClick} className="restartBtn">Restart Game</button>
     </Link>
   );
 }

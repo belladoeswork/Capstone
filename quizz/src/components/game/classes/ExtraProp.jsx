@@ -67,7 +67,7 @@ export class Bee extends Sprite {
       context,
       imageSrc: "/assets/bee.png",
       frameRate: 4,
-      scale: 0.5,
+      scale: 0.25,
       animations: {
         Fly: {
           imageSrc: "/assets/bee.png",

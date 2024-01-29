@@ -9,7 +9,7 @@ export default async function Navbar() {
   const user = await fetchUser();
 
   return (
-    <div className="navbar-container">
+    <div className="navbar-container" id="navbar">
       {user.id && (
         <Link href={"/"}>
           <h1 className="homeHeader">

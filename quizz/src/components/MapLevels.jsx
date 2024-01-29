@@ -38,7 +38,7 @@ export default function levels() {
       <div>
         <div>
           <div className="">
-            <canvas ref={canvasRef}></canvas>
+            <canvas ref={canvasRef} className="gameCanvas"></canvas>
           </div>
         </div>
       </div>
