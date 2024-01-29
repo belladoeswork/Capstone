@@ -74,11 +74,10 @@ export default function Landing({ user }) {
                 if (!user.id) {
                   setError("You must login or register to play");
                 } else {
-                  <Link href={"/level"}></Link>;
                 }
               }}
             >
-              Play
+              <Link href={"/level"}>Play</Link>
             </button>
           </div>{" "}
           {error}
