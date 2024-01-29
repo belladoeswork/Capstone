@@ -1082,8 +1082,7 @@
   display: flex;
   position: absolute;
   right: 45px;
-  top: 300px;
-  /* gap: 8px; */
+  top: 200px;
 }
 
 .full {

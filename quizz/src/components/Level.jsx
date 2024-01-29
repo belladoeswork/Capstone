@@ -140,7 +140,7 @@ export default function LevelPage({ user }) {
               <CiStickyNote />
             </button>
             </Tippy>
-            <div className="textEditor-popup">{showNote && <TextEditor />}</div>
+            <div className="textEditor-popup">{showNote && <TextEditor />}</div> */}
             <div className="screentoggle">
             <Tippy placement='left' content="Fullscreen">
               <button className="full" onClick={goFullscreen}>
@@ -148,6 +148,7 @@ export default function LevelPage({ user }) {
                 </button>
                 </Tippy>
               {/* <button className="full" onClick={exitFullscreen}>Esc</button> */}
+            </div>
             </div>
           </div>
       )}
