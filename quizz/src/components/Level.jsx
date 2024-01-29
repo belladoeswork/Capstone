@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link.js";
+import { useRouter } from "next/navigation.js";
 import React, { useState, useEffect, useRef } from "react";
 import PlayerSelection from "@/components/PlayerSelection.jsx";
 import { IoVolumeMedium, IoVolumeMute } from "react-icons/io5";
@@ -13,10 +14,11 @@ export default function LevelPage({ user }) {
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedPlayerData, setSelectedPlayerData] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
-  const audioElement = useRef(new Audio("/audio/LittleR.ogg"));
+  const audioElement = useRef(null);
   const [timeRemaining, setTimeRemaining] = useState(10 * 60);
   const [level, setLevel] = useState(1);
   const [showNote, setShowNote] = useState(false);
+  const router = useRouter();
 
   const handlePlayerSelect = (playerData) => {
     setSelectedPlayerData(playerData);
@@ -27,6 +29,22 @@ export default function LevelPage({ user }) {
   const handleMuteToggle = () => {
     setIsMuted(!isMuted);
   };
+
+  const goFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    }
+  };
+
+  const exitFullscreen = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    audioElement.current = new Audio("/audio/LittleR.ogg");
+  }, []);
 
   useEffect(() => {
     audioElement.current.loop = true;
@@ -48,6 +66,8 @@ export default function LevelPage({ user }) {
       timer = setInterval(() => {
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
+    } else if (gameStarted && timeRemaining === 0) {
+      router.push("/gameover");
     }
 
     return () => clearInterval(timer);
@@ -55,31 +75,30 @@ export default function LevelPage({ user }) {
 
   return (
     <div className="game-container">
-      <div className="volume-control">
-        {isMuted ? (
-          <div className="volume-control">
-            <IoVolumeMedium
-              size={64}
-              color="#D29E38"
-              onClick={handleMuteToggle}
-            />
-          </div>
-        ) : (
-          <div className="volume-control">
-            <IoVolumeMute
-              size={64}
-              color="#D29E38"
-              onClick={handleMuteToggle}
-            />
-          </div>
-        )}
-      </div>
-
       {!gameStarted && <PlayerSelection onPlayerSelect={handlePlayerSelect} />}
 
       {gameStarted && selectedPlayerData && (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div>
+            <div className="volume-control">
+              {isMuted ? (
+                <div className="volume-control">
+                  <IoVolumeMedium
+                    size={64}
+                    color="#D29E38"
+                    onClick={handleMuteToggle}
+                  />
+                </div>
+              ) : (
+                <div className="volume-control">
+                  <IoVolumeMute
+                    size={64}
+                    color="#D29E38"
+                    onClick={handleMuteToggle}
+                  />
+                </div>
+              )}
+            </div>
             <div className="clockhelp">
               <button className="clockoutline">
                 <IoMdAlarm className="btnIcon" />
@@ -95,28 +114,33 @@ export default function LevelPage({ user }) {
               setLevel={setLevel}
               level={level}
               user={user}
+              timeRemaining={timeRemaining}
             />
+
+            <div className="btnhelp">
+              <Link href={"/howto"}>
+                <button className="btnhelpoutline">
+                  <IoIosHelpCircleOutline className="btnIcon" />
+                  <span>Help</span>
+                </button>
+              </Link>
+            </div>
+            <button
+              className="btnnote"
+              onClick={() => {
+                setShowNote(!showNote);
+              }}
+            >
+              <CiStickyNote />
+            </button>
+            <div className="textEditor-popup">{showNote && <TextEditor />}</div>
+            <div className="fullscreentoggle">
+              <button onClick={goFullscreen}>F</button>
+              <button onClick={exitFullscreen}>Esc</button>
+            </div>
           </div>
         </div>
       )}
-
-      <div className="btnhelp">
-        <Link href={"/howto"}>
-          <button className="btnhelpoutline">
-            <IoIosHelpCircleOutline className="btnIcon" />
-            <span>Help</span>
-          </button>
-        </Link>
-      </div>
-      <button
-        className="btnnote"
-        onClick={() => {
-          setShowNote(!showNote);
-        }}
-      >
-        <CiStickyNote />
-      </button>
-      <div className="textEditor-popup">{showNote && <TextEditor />}</div>
     </div>
   );
 }
