@@ -341,7 +341,7 @@
   font-family: "Press Start 2P";
   font-size: 12px;
   justify-content: center;
-  width: 600px;
+  width: 700px;
 }
 
 .typed {
@@ -1268,7 +1268,7 @@ body.fullscreen .footer-basic {
   opacity: 0.85;
 }
 
-.result-message {
+/* .result-message {
   font-size: 40px;
   font-weight: 400;
   color: white;
@@ -1280,6 +1280,36 @@ body.fullscreen .footer-basic {
   border-radius: 8px;
   display: inline-block;
   z-index: 6000;
+} */
+
+.result-message {
+  color: yellow;
+  position: absolute;
+  width: 100vw;
+  height: 100vw;
+  left: calc(-50vw + 50vw);
+  top: calc(-50vw + 50vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4vw;
+  font-weight: bold;
+  animation: prize 1s linear infinite;
+  text-shadow: 0.1vw 0.1vw 0.1vw #333;
+}
+
+@keyframes result-message {
+  0% {
+    transform: rotate(0) scale(1)
+  }
+
+  50% {
+    transform: rotate(0) scale(1.2)
+  }
+
+  100% {
+    transform: rotate(0) scale(1)
+  }
 }
 
 /*GAME POPUP--END*/
