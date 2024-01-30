@@ -2,9 +2,12 @@
 import Link from "next/link.js";
 import { useRouter } from "next/navigation.js";
 import React, { useState, useEffect, useRef } from "react";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 import PlayerSelection from "@/components/PlayerSelection.jsx";
 import { IoVolumeMedium, IoVolumeMute } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
+import { MdFullscreenExit } from "react-icons/md";
 import { IoMdAlarm } from "react-icons/io";
 import TextEditor from "@/components/Notepad.jsx";
 import { CiStickyNote } from "react-icons/ci";
@@ -15,9 +18,10 @@ export default function LevelPage({ user }) {
   const [selectedPlayerData, setSelectedPlayerData] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const audioElement = useRef(null);
-  const [timeRemaining, setTimeRemaining] = useState(10 * 60);
+  const [timeRemaining, setTimeRemaining] = useState(10 * 60); //change this after time testing
   const [level, setLevel] = useState(1);
-  const [showNote, setShowNote] = useState("");
+  const [showNote, setShowNote] = useState(false);
+  const [loseGame, setLoseGame] = useState(false);
   const router = useRouter();
 
   const handlePlayerSelect = (playerData) => {
@@ -36,11 +40,11 @@ export default function LevelPage({ user }) {
     }
   };
 
-  const exitFullscreen = () => {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    }
-  };
+  // const exitFullscreen = () => {
+  //   if (document.fullscreenElement) {
+  //     document.exitFullscreen();
+  //   }
+  // };
 
   useEffect(() => {
     audioElement.current = new Audio("/audio/LittleR.ogg");
@@ -67,7 +71,8 @@ export default function LevelPage({ user }) {
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
     } else if (gameStarted && timeRemaining === 0) {
-      router.push("/gameover");
+      setLoseGame(true);
+      //router.push("/gameover");
     }
 
     return () => clearInterval(timer);
@@ -116,6 +121,8 @@ export default function LevelPage({ user }) {
               user={user}
               key={level}
               timeRemaining={timeRemaining}
+              loseGame={loseGame}
+              setLoseGame={setLoseGame}
             />
 
             <div className="btnhelp">
@@ -134,12 +141,15 @@ export default function LevelPage({ user }) {
             >
               <CiStickyNote />
             </button>
-            <div className="textEditor-popup">
-              {showNote && <TextEditor user={user} />}
-            </div>
-            <div className="fullscreentoggle">
-              <button onClick={goFullscreen}>F</button>
-              <button onClick={exitFullscreen}>Esc</button>
+            </Tippy>
+            <div className="textEditor-popup">{showNote && <TextEditor />}</div> */}
+            <div className="screentoggle">
+              <Tippy placement="left" content="Fullscreen">
+                <button className="full" onClick={goFullscreen}>
+                  <MdFullscreenExit />
+                </button>
+              </Tippy>
+              {/* <button className="full" onClick={exitFullscreen}>Esc</button> */}
             </div>
           </div>
         </div>
