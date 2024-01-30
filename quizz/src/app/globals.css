@@ -9,6 +9,7 @@
 * {
   margin: 0;
   font-family: "Mina";
+
 }
 
 /*START - WELCOME/LOGIN/REGISTER*/
@@ -754,7 +755,7 @@
 } */
 
 .btnhelpoutline {
-  display: flex; 
+  display: flex;
   align-items: center;
   border-radius: 8px;
   font-size: 18px;
@@ -774,7 +775,7 @@
 
 .btnhelp span {
   display: inline-block;
-  position: relative; 
+  position: relative;
   top: 2px;
   margin-left: 10px;
 }
@@ -915,6 +916,7 @@
   right: 18px;
   top: 150px;
 }
+
 /* 
 .btnhelpoutline {
   border-radius: 10px;
@@ -1078,7 +1080,7 @@
 }
 
 .clockoutline {
-  display: flex; 
+  display: flex;
   align-items: center;
   border-radius: 10px;
   font-size: 18px;
@@ -1092,7 +1094,7 @@
 
 .clockhelp span {
   display: inline-block;
-  position: relative; 
+  position: relative;
   top: 3px;
   margin-left: 10px;
 }

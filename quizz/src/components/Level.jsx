@@ -17,7 +17,7 @@ export default function LevelPage({ user }) {
   const audioElement = useRef(null);
   const [timeRemaining, setTimeRemaining] = useState(10 * 60);
   const [level, setLevel] = useState(1);
-  const [showNote, setShowNote] = useState(false);
+  const [showNote, setShowNote] = useState("");
   const router = useRouter();
 
   const handlePlayerSelect = (playerData) => {
@@ -126,7 +126,7 @@ export default function LevelPage({ user }) {
                 </button>
               </Link>
             </div>
-            {/* <button
+            <button
               className="btnnote"
               onClick={() => {
                 setShowNote(!showNote);
@@ -134,7 +134,9 @@ export default function LevelPage({ user }) {
             >
               <CiStickyNote />
             </button>
-            <div className="textEditor-popup">{showNote && <TextEditor />}</div> */}
+            <div className="textEditor-popup">
+              {showNote && <TextEditor user={user} />}
+            </div>
             <div className="fullscreentoggle">
               <button onClick={goFullscreen}>F</button>
               <button onClick={exitFullscreen}>Esc</button>
