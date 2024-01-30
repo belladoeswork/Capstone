@@ -40,6 +40,9 @@ export default function GameLevel1({
   level,
   setLevel,
   timeRemaining,
+  loseGame,
+  setLoseGame,
+  user,
 }) {
   const canvasRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -76,11 +79,11 @@ export default function GameLevel1({
   }
 
   // score/level
-  const scoreRef = useRef(0); 
-  const levelRef = useRef(0); 
+  const scoreRef = useRef(0);
+  const levelRef = useRef(0);
 
   useEffect(() => {
-    scoreRef.current = score; 
+    scoreRef.current = score;
     levelRef.current = level;
   }, [score, level]);
 
@@ -100,16 +103,14 @@ export default function GameLevel1({
   //   }
   // }, [document.fullscreenElement]);
 
- 
-
   // canvas
   useEffect(() => {
     const canvas = canvasRef.current;
 
     const context = canvas.getContext("2d");
 
-     // added now
-  // canvas.style.height = '100%';
+    // added now
+    // canvas.style.height = '100%';
 
     const currentLevelData = levelData[level];
 
@@ -142,12 +143,6 @@ export default function GameLevel1({
 
     // window.addEventListener('resize', handleResize);
 
-
-
-
-
-
-
     const originalCanvas = {
       width: canvas.width,
       height: canvas.height,
@@ -158,39 +153,36 @@ export default function GameLevel1({
       height: canvas.height / 4,
     };
 
-
-
     const resize = () => {
+      // const resize = (width, height) => {
 
-    // const resize = (width, height) => {
+      // Maintain the aspect ratio of the original canvas
+      // const aspectRatio = originalCanvas.width / originalCanvas.height;
 
-  // Maintain the aspect ratio of the original canvas
-  // const aspectRatio = originalCanvas.width / originalCanvas.height;
+      // // Calculate the new height based on the width and aspect ratio
+      // const newHeight = width / aspectRatio;
 
-  // // Calculate the new height based on the width and aspect ratio
-  // const newHeight = width / aspectRatio;
+      // // If the new height is greater than the window height, adjust the width instead
+      // if (newHeight > height) {
+      //   width = height * aspectRatio;
+      // } else {
+      //   height = newHeight;
+      // }
 
-  // // If the new height is greater than the window height, adjust the width instead
-  // if (newHeight > height) {
-  //   width = height * aspectRatio;
-  // } else {
-  //   height = newHeight;
-  // }
-
-  let width = window.innerWidth;
-  let height = window.innerHeight;
-  const aspectRatio = originalCanvas.width / originalCanvas.height;
-  const newHeight = width / aspectRatio;
-  if (newHeight > height) {
-    width = height * aspectRatio;
-  } else {
-    height = newHeight;
-  }
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      const aspectRatio = originalCanvas.width / originalCanvas.height;
+      const newHeight = width / aspectRatio;
+      if (newHeight > height) {
+        width = height * aspectRatio;
+      } else {
+        height = newHeight;
+      }
 
       //
       canvas.width = width;
       canvas.height = height;
-      context.setTransform(1, 0, 0, 1, 0, 0); 
+      context.setTransform(1, 0, 0, 1, 0, 0);
       context.scale(
         canvas.width / originalCanvas.width,
         canvas.height / originalCanvas.height
@@ -213,10 +205,7 @@ export default function GameLevel1({
     // window.addEventListener("resize", handleResize);
 
     resize();
-    window.addEventListener('resize', resize);
-  
-
-
+    window.addEventListener("resize", resize);
 
     const floorCollisions2D = [];
     for (let i = 0; i < currentLevelData.floorCollisions.length; i += 36) {
@@ -646,8 +635,6 @@ export default function GameLevel1({
       context.fillStyle = "white";
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-
-
       // added
       context.setTransform(1, 0, 0, 1, 0, 0);
 
@@ -735,7 +722,7 @@ export default function GameLevel1({
         else player.switchSprite("FallLeft");
       }
 
-     // font for the text
+      // font for the text
       // Fullscreen functionality
       // if (keys.f.pressed) {
       //   if (!document.fullscreenElement) {
@@ -806,7 +793,7 @@ export default function GameLevel1({
         10 - camera.position.x,
         10 - camera.position.y
       );
-      
+
       // level box
 
       // Draw the level box
@@ -974,6 +961,9 @@ export default function GameLevel1({
           setScore={setScore}
           score={score}
           onAnsswerQuestion={onAnsswerQuestion}
+          loseGame={loseGame}
+          setLoseGame={setLoseGame}
+          user={user}
         />
       )}
       {/* <div

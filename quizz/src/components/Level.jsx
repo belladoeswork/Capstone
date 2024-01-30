@@ -2,8 +2,8 @@
 import Link from "next/link.js";
 import { useRouter } from "next/navigation.js";
 import React, { useState, useEffect, useRef } from "react";
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 import PlayerSelection from "@/components/PlayerSelection.jsx";
 import { IoVolumeMedium, IoVolumeMute } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
@@ -18,9 +18,10 @@ export default function LevelPage({ user }) {
   const [selectedPlayerData, setSelectedPlayerData] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const audioElement = useRef(null);
-  const [timeRemaining, setTimeRemaining] = useState(10 * 60);
+  const [timeRemaining, setTimeRemaining] = useState(10 * 60); //change this after time testing
   const [level, setLevel] = useState(1);
   const [showNote, setShowNote] = useState(false);
+  const [loseGame, setLoseGame] = useState(false);
   const router = useRouter();
 
   const handlePlayerSelect = (playerData) => {
@@ -70,7 +71,8 @@ export default function LevelPage({ user }) {
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
     } else if (gameStarted && timeRemaining === 0) {
-      router.push("/gameover");
+      setLoseGame(true);
+      //router.push("/gameover");
     }
 
     return () => clearInterval(timer);
@@ -93,17 +95,16 @@ export default function LevelPage({ user }) {
                   />
                 </div>
               ) : (
-                  <div className="volume-control">
+                <div className="volume-control">
                   <IoVolumeMute
                     size={64}
                     color="#D29E38"
                     onClick={handleMuteToggle}
-                    />
+                  />
                 </div>
               )}
             </div>
             <div className="clockhelp">
-            
               <button className="clockoutline">
                 <IoMdAlarm className="btnIcon" />
                 <span>
@@ -111,8 +112,7 @@ export default function LevelPage({ user }) {
                   {Math.floor(timeRemaining / 60)}:
                   {(timeRemaining % 60).toString().padStart(2, "0")}
                 </span>
-                </button>
-                
+              </button>
             </div>
             <GameLevel1
               selectedPlayerData={selectedPlayerData}
@@ -121,6 +121,8 @@ export default function LevelPage({ user }) {
               user={user}
               key={level}
               timeRemaining={timeRemaining}
+              loseGame={loseGame}
+              setLoseGame={setLoseGame}
             />
 
             <div className="btnhelp">
@@ -142,15 +144,15 @@ export default function LevelPage({ user }) {
             </Tippy>
             <div className="textEditor-popup">{showNote && <TextEditor />}</div> */}
             <div className="screentoggle">
-            <Tippy placement='left' content="Fullscreen">
-              <button className="full" onClick={goFullscreen}>
-              <MdFullscreenExit />
+              <Tippy placement="left" content="Fullscreen">
+                <button className="full" onClick={goFullscreen}>
+                  <MdFullscreenExit />
                 </button>
-                </Tippy>
+              </Tippy>
               {/* <button className="full" onClick={exitFullscreen}>Esc</button> */}
             </div>
-            </div>
           </div>
+        </div>
       )}
     </div>
   );
