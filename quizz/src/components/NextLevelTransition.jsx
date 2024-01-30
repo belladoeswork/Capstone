@@ -24,9 +24,8 @@ export default function NextLevelTransition() {
         src="/assets/vids/nextLevel.gif"
         alt="next level video"
         width={1050}
-        height={700}
+        height={500}
       />
-      {/* <button onClick={() => handleNextLevelButton()}>Let's Go</button> */}
     </div>
   );
 }
