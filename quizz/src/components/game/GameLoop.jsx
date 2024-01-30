@@ -34,6 +34,7 @@ import {
   Moon,
   Box,
 } from "./classes/StaticSprite.jsx";
+import Loader from "../Loader.jsx";
 
 export default function GameLevel1({
   selectedPlayerData,
@@ -56,6 +57,53 @@ export default function GameLevel1({
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showWelcome, setShowWelcome] = useState(true);
   const [score, setScore] = useState(0);
+  const [assetsLoaded, setAssetsLoaded] = useState(false);
+
+  // loading all assets
+  useEffect(() => {
+    const loadAsset = (src) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = src;
+      });
+    };
+
+    const assets = [
+      "/assets/npcs/Rocks.png",
+      "/assets/npcs/Rock3.png",
+      "/assets/npcs/Cat.png",
+      "/assets/npcs/BoarIdle.png",
+      "/assets/npcs/Worm/Idle.png",
+      "/assets/npcs/Man.png",
+      "/assets/npcs/Chest.png",
+      "/assets/npcs/GemGold.png",
+      "/assets/huntress/Idle.png",
+      "/assets/huntress/Run.png",
+      "/assets/huntress/Jump.png",
+      "/assets/huntress/Fall.png",
+      "/assets/huntress/FallLeft.png",
+      "/assets/huntress/RunLeft.png",
+      "/assets/huntress/IdleLeft.png",
+      "/assets/huntress/JumpLeft.png",
+      "/assets/huntress/AttackLeft.png",
+      "/assets/huntress/AttackRight.png",
+      "/assets/huntress/Death.png",
+      "/assets/bee.png",
+      "/assets/map1.png",
+      "/assets/map2.png",
+      "/assets/map3.png",
+
+      "/assets/npcs/BoarIdle.png",
+      "/assets/npcs/GemGreen.png",
+      "/assets/npcs/Worm/Idle.png",
+    ];
+
+    Promise.all(assets.map(loadAsset)).then(() => {
+      setAssetsLoaded(true);
+    });
+  }, []);
 
   useEffect(() => {
     localStorage.removeItem("correctAnswerIds");
@@ -630,8 +678,17 @@ export default function GameLevel1({
 
     let lastTime = 0;
 
+    const renderLoadingScreen = () => {
+      context.fillStyle = "black";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = "white";
+      context.fillText("Loading...", canvas.width / 2, canvas.height / 2);
+    };
+
     const animate = (currentTime) => {
-      if (!isPaused) {
+      // if (!isPaused) {
+      if (!assetsLoaded) {
+        renderLoadingScreen();
         window.requestAnimationFrame(animate);
       }
       context.fillStyle = "white";

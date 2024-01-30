@@ -24,11 +24,49 @@ export default function LevelPage({ user }) {
   const [loseGame, setLoseGame] = useState(false);
   const [winGame, setWinGame] = useState(false);
   const router = useRouter();
+  const [assetsLoaded, setAssetsLoaded] = useState(false);
 
   const handlePlayerSelect = (playerData) => {
     setSelectedPlayerData(playerData);
     setGameStarted(true);
     audioElement.current.play();
+
+
+    Promise.all([
+      loadAsset('asset1.png'),
+      loadAsset('asset2.png'),
+      loadAsset("/assets/npcs/Rocks.png"),
+      loadAsset("/assets/npcs/Rock3.png"),
+      loadAsset("/assets/npcs/Cat.png"),
+      loadAsset("/assets/npcs/BoarIdle.png"),
+      loadAsset("/assets/npcs/Worm/Idle.png"),
+      loadAsset("/assets/npcs/Man.png"),
+      loadAsset("/assets/npcs/Chest.png"),
+      loadAsset("/assets/npcs/GemGold.png"),
+      loadAsset("/assets/huntress/Idle.png"),
+      loadAsset("/assets/huntress/Run.png"),
+      loadAsset("/assets/huntress/Jump.png"),
+      loadAsset("/assets/huntress/Fall.png"),
+      loadAsset("/assets/huntress/FallLeft.png"),
+      loadAsset("/assets/huntress/RunLeft.png"),
+      loadAsset("/assets/huntress/IdleLeft.png"),
+      loadAsset("/assets/huntress/JumpLeft.png"),
+      loadAsset("/assets/huntress/AttackLeft.png"),
+      loadAsset("/assets/huntress/AttackRight.png"),
+      loadAsset("/assets/huntress/Death.png"),
+      loadAsset("/assets/bee.png"),
+      loadAsset("/assets/map1.png"),
+      loadAsset("/assets/map2.png"),
+      loadAsset("/assets/map3.png"),
+
+      loadAsset("/assets/npcs/BoarIdle.png"),
+      loadAsset("/assets/npcs/GemGreen.png"),
+      loadAsset("/assets/npcs/Worm/Idle.png")
+      // ... more assets
+    ]).then(() => {
+      // All assets have loaded, start the game
+      setGameStarted(true);
+    });
   };
 
   const handleMuteToggle = () => {
@@ -80,6 +118,7 @@ export default function LevelPage({ user }) {
   }, [gameStarted, timeRemaining]);
 
   return (
+    
     <div className="game-container">
       {!gameStarted && <PlayerSelection onPlayerSelect={handlePlayerSelect} />}
 
@@ -115,6 +154,8 @@ export default function LevelPage({ user }) {
                 </span>
               </button>
             </div>
+            {!gameStarted ? <Loader /> : (
+  selectedPlayerData && (
             <GameLevel1
               selectedPlayerData={selectedPlayerData}
               setLevel={setLevel}
@@ -126,7 +167,8 @@ export default function LevelPage({ user }) {
               setLoseGame={setLoseGame}
               winGame={winGame}
               setWinGame={setWinGame}
-            />
+            /> )
+            
 
             <div className="btnhelp">
               <Link href={"/howto"}>
