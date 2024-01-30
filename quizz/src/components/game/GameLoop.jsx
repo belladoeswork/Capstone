@@ -938,8 +938,6 @@ export default function GameLevel1({
               , as the seeker you were. <br />
               Find and answer the questions to prove your worth, <br />
               Show your wisdom, affirm your birth. <br />
-              For if you succeed in this cerebral sob, <br /> A grand reward
-              awaits: you're ready for a job!
             </p>
           </div>
         </div>

@@ -133,7 +133,7 @@ export default function LevelPage({ user }) {
                 </button>
               </Link>
             </div>
-            <button
+            {/* <button
               className="btnnote"
               onClick={() => {
                 setShowNote(!showNote);

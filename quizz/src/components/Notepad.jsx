@@ -37,7 +37,6 @@ export default function TextEditor({ user }) {
 
   return (
     <div className="text-editor">
-      {text}
       <form onSubmit={handleSave}>
         <textarea
           id="text-editor-textarea"
