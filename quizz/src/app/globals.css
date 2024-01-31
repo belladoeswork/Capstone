@@ -1283,7 +1283,7 @@ body.fullscreen .footer-basic {
 } */
 
 .result-message {
-  color: yellow;
+  color: lightgreen;
   position: absolute;
   width: 100vw;
   height: 100vw;
@@ -1294,7 +1294,7 @@ body.fullscreen .footer-basic {
   align-items: center;
   font-size: 4vw;
   font-weight: bold;
-  animation: prize 1s linear infinite;
+  animation: result-message 1s linear infinite;
   text-shadow: 0.1vw 0.1vw 0.1vw #333;
 }
 
@@ -1319,22 +1319,22 @@ body.fullscreen .footer-basic {
 .text-editor {
   background-color: #ffeb3b;
   max-width: 300px;
+  height: 200px;
   padding: 20px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   margin: 20px;
 }
 
-#text-editor-textarea {
-  width: 100%;
-  height: 150px;
+.text-editor-textarea {
+  width: 200px;
   border: none;
+  border-bottom: 1px solid #2274a5;
   background: transparent;
-  resize: vertical;
   margin-bottom: 10px;
 }
 
-#text-editor-button {
+.text-editor-button {
   background-color: #2274a5;
   color: white;
   border: none;
@@ -1343,8 +1343,13 @@ body.fullscreen .footer-basic {
   cursor: pointer;
 }
 
-#text-editor-button :hover {
-  background-color: #2274a5;
+.text-editor-button:hover {
+  background-color: #623b5a;
+}
+
+.text-editor-button-container {
+  display: flex;
+  gap: 5px;
 }
 
 .btnnote {

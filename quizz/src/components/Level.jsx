@@ -13,12 +13,12 @@ import TextEditor from "@/components/Notepad.jsx";
 import { CiStickyNote } from "react-icons/ci";
 import GameLevel1 from "./game/GameLoop.jsx";
 
-export default function LevelPage({ user }) {
+export default function LevelPage({ user, note }) {
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedPlayerData, setSelectedPlayerData] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const audioElement = useRef(null);
-  const [timeRemaining, setTimeRemaining] = useState(10 * 60); //change this after time testing
+  const [timeRemaining, setTimeRemaining] = useState(10 * 60);
   const [level, setLevel] = useState(1);
   const [showNote, setShowNote] = useState(false);
   const [loseGame, setLoseGame] = useState(false);
@@ -133,7 +133,7 @@ export default function LevelPage({ user }) {
                 </button>
               </Link>
             </div>
-            {/* <button
+            <button
               className="btnnote"
               onClick={() => {
                 setShowNote(!showNote);
@@ -141,8 +141,10 @@ export default function LevelPage({ user }) {
             >
               <CiStickyNote />
             </button>
-            </Tippy>
-            <div className="textEditor-popup">{showNote && <TextEditor />}</div> */}
+            {/* </Tippy> */}
+            <div className="textEditor-popup">
+              {showNote && <TextEditor user={user} note={note} />}
+            </div>
             <div className="screentoggle">
               <Tippy placement="left" content="Fullscreen">
                 <button className="full" onClick={goFullscreen}>

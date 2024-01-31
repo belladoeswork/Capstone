@@ -72,7 +72,6 @@ export default function Landing({ user }) {
               onClick={() => {
                 if (!user.id) {
                   setError("You must login or register to play");
-                } else {
                 }
               }}
             >

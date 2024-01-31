@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import { floorCollisions, platformCollisions } from "../data/Collisions.js";
 import { Sprite } from "./classes/Sprite.jsx";
 import { Player } from "./classes/Player.jsx";
@@ -25,7 +31,7 @@ import { useRouter } from "next/navigation.js";
 import { levelData } from "../MapLevels.jsx";
 import Quiz from "@/components/Quiz.jsx";
 import { MdClose } from "react-icons/md";
-import questions from "@/lib/questions.jsx";
+import { questions, sprites } from "@/lib/questions.jsx";
 import {
   Rock,
   HiveOne,
@@ -54,6 +60,18 @@ export default function GameLevel1({
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showWelcome, setShowWelcome] = useState(true);
   const [score, setScore] = useState(0);
+
+  // const randomizedQuestions = useMemo(() => {
+  //   return questions.map((question) => {
+  //     if (question.type === "message") return question;
+  //     const randomIndex = Math.floor(Math.random() * sprites.length);
+  //     const randomSprite = sprites[randomIndex];
+
+  //     return { ...question, sprite: randomSprite || question.sprite };
+  //   });
+  // }, []);
+
+  // console.log("randomizedQuestions", randomizedQuestions);
 
   useEffect(() => {
     localStorage.removeItem("correctAnswerIds");
@@ -953,7 +971,6 @@ export default function GameLevel1({
           currentQuestion={currentQuestion}
           setCurrentQuestion={setCurrentQuestion}
           currentQuestionIndex={currentQuestionIndex}
-          questions={questions}
           setLevel={setLevel}
           level={level}
           setScore={setScore}

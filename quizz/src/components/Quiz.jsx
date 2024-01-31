@@ -10,7 +10,6 @@ import GameOver from "./GameOver.jsx";
 
 export default function Quiz({
   question,
-  questions,
   currentItem,
   showPopup,
   interactedItems,
@@ -52,12 +51,20 @@ export default function Quiz({
       setSecretWord(question?.resultMessage.correct);
       setScore(score + 1);
       setShowHint(false);
-      if ((score + 1) % 2 === 0) {
-        //change back to 5 after testing
-        // if (score + 1 < questions.length) {
+      if ((score + 1) % 5 === 0) {
         if (level + 1 < 4) {
           setTransition(true);
           setResultMessage("");
+          const response = await fetch(`/api/users/${user.id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: user.id,
+              level,
+            }),
+          });
           setTimeout(() => {
             setLevel(level + 1);
             setTransition(false);

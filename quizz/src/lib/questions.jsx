@@ -1,4 +1,4 @@
-const questions = [
+export const questions = [
   {
     id: 1,
     sprite: "goldchest",
@@ -390,5 +390,27 @@ const questions = [
       correct: "",
     },
   },
+];
+
+export const sprites = [
+  "rock",
+  "rockThree",
+  // "worm",
+  "boar",
+  "cat",
+  "man",
+  "chest",
+  "gemgold",
+  "frogblue",
+  "hiveOne",
+  "catstretching",
+  // "man2",
+  "gemgreen",
+  "box",
+  "moon",
+  "snail",
+  "goldchest",
+  "froggreen",
+  "gemblue",
 ];
 export default questions;
