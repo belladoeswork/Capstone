@@ -391,4 +391,27 @@ const questions = [
     },
   },
 ];
+
 export default questions;
+
+// export const sprites = [
+//   "rock",
+//   "rockThree",
+//   // "worm",
+//   "boar",
+//   "cat",
+//   "man",
+//   "chest",
+//   "gemgold",
+//   "frogblue",
+//   "hiveOne",
+//   "catstretching",
+//   // "man2",
+//   "gemgreen",
+//   "box",
+//   "moon",
+//   "snail",
+//   "goldchest",
+//   "froggreen",
+//   "gemblue",
+// ];

@@ -11,13 +11,12 @@ import Confetti from "@/components/ConfettiPage.jsx";
 
 export default function Quiz({
   question,
-  questions,
-  currentItem,
   showPopup,
+  currentItem,
   interactedItems,
   gameOver,
   currentQuestion,
-  currentQuestionInde,
+  currentQuestionIndex,
   setCurrentQuestion,
   setShowPopup,
   setGameOver,
@@ -38,7 +37,7 @@ export default function Quiz({
   const [inputAnswer, setInputAnswer] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [transition, setTransition] = useState(false);
-  //const [winGame, setWinGame] = useState(false);
+  const [winGame, setWinGame] = useState(false);
 
   async function handleAnswer(isCorrect) {
     setResultMessage("");
@@ -57,6 +56,17 @@ export default function Quiz({
         if (level + 1 < 4) {
           setTransition(true);
           setResultMessage("");
+
+          // const response = await fetch(`/api/users/${user.id}`, {
+          //   method: "PUT",
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //   },
+          //   body: JSON.stringify({
+          //     userId: user.id,
+          //     level,
+          //   }),
+          // });
           setTimeout(() => {
             setLevel(level + 1);
             setTransition(false);

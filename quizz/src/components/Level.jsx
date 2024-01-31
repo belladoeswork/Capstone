@@ -13,15 +13,17 @@ import { MdFullscreenExit } from "react-icons/md";
 import { IoMdAlarm } from "react-icons/io";
 import TextEditor from "@/components/Notepad.jsx";
 import { CiStickyNote } from "react-icons/ci";
+
 import GameLevel1 from "./game/GameLoop.jsx";
 import Loader from "./game/Loader.jsx";
 import HowToScreen from "@/app/(pages)/howto/page.jsx";
 
-export default function LevelPage({ user }) {
+export default function LevelPage({ user, note }) {
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedPlayerData, setSelectedPlayerData] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const audioElement = useRef(null);
+  const [timeRemaining, setTimeRemaining] = useState(10 * 60);
   const [timeRemaining, setTimeRemaining] = useState(10 * 60);
   const [level, setLevel] = useState(1);
   const [loseGame, setLoseGame] = useState(false);
@@ -71,7 +73,6 @@ export default function LevelPage({ user }) {
       }, 1000);
     } else if (gameStarted && timeRemaining === 0) {
       setLoseGame(true);
-      //router.push("/gameover");
     }
 
     return () => clearInterval(timer);
@@ -141,6 +142,28 @@ export default function LevelPage({ user }) {
               )}
             </Tippy>
           </span>
+            </div>
+            <button
+              className="btnnote"
+              onClick={() => {
+                setShowNote(!showNote);
+              }}
+            >
+              <CiStickyNote />
+            </button>
+            {/* </Tippy> */}
+            <div className="textEditor-popup">
+              {showNote && <TextEditor user={user} note={note} />}
+            </div>
+            <div className="screentoggle">
+              <Tippy placement="left" content="Fullscreen">
+                <button className="full" onClick={goFullscreen}>
+                  <MdFullscreenExit />
+                </button>
+              </Tippy>
+              {/* <button className="full" onClick={exitFullscreen}>Esc</button> */}
+            </div>
+          </div>
         </div>
       )}
     </div>

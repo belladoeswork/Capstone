@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import { floorCollisions, platformCollisions } from "../data/Collisions.js";
 import { Sprite } from "./classes/Sprite.jsx";
 import { Player } from "./classes/Player.jsx";
@@ -111,6 +117,18 @@ export default function GameLevel1({
       setAssetsLoaded(true);
     });
   }, []);
+
+  // const randomizedQuestions = useMemo(() => {
+  //   return questions.map((question) => {
+  //     if (question.type === "message") return question;
+  //     const randomIndex = Math.floor(Math.random() * sprites.length);
+  //     const randomSprite = sprites[randomIndex];
+
+  //     return { ...question, sprite: randomSprite || question.sprite };
+  //   });
+  // }, []);
+
+  // console.log("randomizedQuestions", randomizedQuestions);
 
   useEffect(() => {
     localStorage.removeItem("correctAnswerIds");
@@ -865,6 +883,7 @@ export default function GameLevel1({
             // man2: level === 2 ? man2 : undefined,
             gemgreen: level === 2 ? gemgreen : undefined,
             box: level === 2 ? box : undefined,
+            // man3: level === 3 ? man3 : undefined,
             moon: level === 3 ? moon : undefined,
             snail: level === 3 ? snail : undefined,
             goldchest: level === 3 ? goldchest : undefined,
@@ -962,11 +981,7 @@ export default function GameLevel1({
               <span style={{ color: "#2274a5", fontWeight: "bolder" }}>
                 Press Enter
               </span>
-              , as the seeker you were. <br />
-              Find and answer the questions to prove your worth, <br />
-              Show your wisdom, affirm your birth. <br />
-              For if you succeed in this cerebral sob, <br /> A grand reward
-              awaits: you're ready for a job!
+              , as the seeker you were. <br /> <br />
             </p>
           </div>
         </div>
@@ -982,7 +997,6 @@ export default function GameLevel1({
           currentQuestion={currentQuestion}
           setCurrentQuestion={setCurrentQuestion}
           currentQuestionIndex={currentQuestionIndex}
-          questions={questions}
           setLevel={setLevel}
           level={level}
           setScore={setScore}
