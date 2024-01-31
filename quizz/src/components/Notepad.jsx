@@ -79,7 +79,7 @@ export default function TextEditor({ user, note }) {
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
-            height: "100px",
+            height: "auto",
           }}
         >
           {note?.text}
