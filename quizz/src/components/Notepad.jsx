@@ -68,8 +68,9 @@ export default function TextEditor({ user, note }) {
   return (
     <div className="text-editor">
       <form onSubmit={handleSave}>
-        <input
+        <textarea
           className="text-editor-textarea"
+          maxLength={100}
           value={text}
           onChange={handleChange}
           placeholder="jot a note here..."
@@ -79,7 +80,7 @@ export default function TextEditor({ user, note }) {
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
-            height: "auto",
+            height: "125px",
           }}
         >
           {note?.text}
