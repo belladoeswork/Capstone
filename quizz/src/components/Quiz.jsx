@@ -10,12 +10,12 @@ import GameOver from "./GameOver.jsx";
 
 export default function Quiz({
   question,
-  currentItem,
   showPopup,
+  currentItem,
   interactedItems,
   gameOver,
   currentQuestion,
-  currentQuestionInde,
+  currentQuestionIndex,
   setCurrentQuestion,
   setShowPopup,
   setGameOver,
@@ -28,16 +28,12 @@ export default function Quiz({
   setLoseGame,
   user,
 }) {
-  // const [level, setLevel] = useState(0);
-  // const [score, setScore] = useState(0);
-  const [showOptions, setShowOptions] = useState(true);
   const [resultMessage, setResultMessage] = useState("");
   const [secretWord, setSecretWord] = useState("");
   const [inputAnswer, setInputAnswer] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [transition, setTransition] = useState(false);
   const [winGame, setWinGame] = useState(false);
-  //const [loseGame, setLoseGame] = useState(false);
 
   async function handleAnswer(isCorrect) {
     setResultMessage("");
@@ -55,16 +51,17 @@ export default function Quiz({
         if (level + 1 < 4) {
           setTransition(true);
           setResultMessage("");
-          const response = await fetch(`/api/users/${user.id}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              userId: user.id,
-              level,
-            }),
-          });
+
+          // const response = await fetch(`/api/users/${user.id}`, {
+          //   method: "PUT",
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //   },
+          //   body: JSON.stringify({
+          //     userId: user.id,
+          //     level,
+          //   }),
+          // });
           setTimeout(() => {
             setLevel(level + 1);
             setTransition(false);

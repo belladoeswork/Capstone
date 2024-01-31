@@ -31,7 +31,7 @@ import { useRouter } from "next/navigation.js";
 import { levelData } from "../MapLevels.jsx";
 import Quiz from "@/components/Quiz.jsx";
 import { MdClose } from "react-icons/md";
-import { questions, sprites } from "@/lib/questions.jsx";
+import questions from "@/lib/questions.jsx";
 import {
   Rock,
   HiveOne,
@@ -865,6 +865,7 @@ export default function GameLevel1({
             // man2: level === 2 ? man2 : undefined,
             gemgreen: level === 2 ? gemgreen : undefined,
             box: level === 2 ? box : undefined,
+            // man3: level === 3 ? man3 : undefined,
             moon: level === 3 ? moon : undefined,
             snail: level === 3 ? snail : undefined,
             goldchest: level === 3 ? goldchest : undefined,
@@ -979,24 +980,6 @@ export default function GameLevel1({
           user={user}
         />
       )}
-      {/* <div
-        style={{
-          display: "flex",
-          alignItems: "end",
-          justifyContent: "center",
-          backgroundColor: "#F2F5FF",
-          flexDirection: "row",
-          gap: "100px",
-          fontSize: "30px",
-        }}
-      >
-        <h2>
-          Score: <span style={{ color: "#2274a5" }}>{score}</span>
-        </h2>
-        <h2>
-          Level: <span style={{ color: "#2274a5" }}>{level}</span>
-        </h2>
-      </div> */}
     </div>
   );
 }
