@@ -89,12 +89,15 @@ body {
   align-items: center;
   margin: auto;
   padding: 20px;
+  height: 700px;
+  padding-top: 90px;
+  /* padding-bottom: 50px; */
   background-color: #2274a5;
 }
 
 .welcome-logo {
   width: 30%;
-  height: 30%;
+  height: 40%;
   border-radius: 50%;
 }
 
@@ -126,8 +129,8 @@ body {
   font-family: "Press Start 2P";
   color: white;
   font-size: 20px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 150px;
+  margin-bottom: 50px;
 }
 
 .login-register-container {
