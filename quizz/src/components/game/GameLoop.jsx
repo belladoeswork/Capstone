@@ -41,9 +41,6 @@ import {
   Box,
 } from "./classes/StaticSprite.jsx";
 import { IoMdAlarm } from "react-icons/io";
-import { useNavigate, useLocation } from "react-router-dom";
-
-import ReactDOMServer from "react-dom/server";
 
 import Loader from "./Loader.jsx";
 
@@ -945,6 +942,7 @@ export default function GameLevel1({
       }
     };
     endOfGame(gameOver);
+
   }, [selectedPlayerData, level, isPaused]);
 
   const isQuestionAnswered = (question) => {
