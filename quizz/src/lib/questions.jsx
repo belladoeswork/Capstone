@@ -9,7 +9,7 @@ const questions = [
       "What is the correct syntax for declaring a variable in JavaScript?",
     isAnswered: false,
     options: [
-      "var name = 'value';",
+      "const name = 'value';",
       "variable name = 'value';",
       "var: name = 'value';",
     ],

@@ -24,7 +24,10 @@ export default function NextLevelTransition() {
         src="/assets/vids/nextLevel.gif"
         alt="next level video"
         width={1050}
-        height={500}
+        // height={500}
+        height={600}
+
+
       />
     </div>
   );

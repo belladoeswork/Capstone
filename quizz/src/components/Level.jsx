@@ -24,9 +24,9 @@ export default function LevelPage({ user, note }) {
   const [isMuted, setIsMuted] = useState(false);
   const audioElement = useRef(null);
   const [timeRemaining, setTimeRemaining] = useState(10 * 60);
-  const [timeRemaining, setTimeRemaining] = useState(10 * 60);
   const [level, setLevel] = useState(1);
   const [loseGame, setLoseGame] = useState(false);
+  const [showNote, setShowNote] = useState(false);
   const [winGame, setWinGame] = useState(false);
   const router = useRouter();
   const [assetsLoaded, setAssetsLoaded] = useState(false);
@@ -72,9 +72,10 @@ export default function LevelPage({ user, note }) {
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
     } else if (gameStarted && timeRemaining === 0) {
+      console.log("Time is zero!");
+
       setLoseGame(true);
     }
-
     return () => clearInterval(timer);
   }, [gameStarted, timeRemaining]);
 
@@ -130,6 +131,19 @@ export default function LevelPage({ user, note }) {
             </Tippy>
           </span>
           <span>
+            <Tippy placement="top" content="Jot things down">
+              <span
+                className="screentoggle"
+                onClick={() => {
+                  setShowNote(!showNote);
+                }}
+              >
+                {" "}
+                &#x1F5D2; Notepad
+              </span>
+            </Tippy>
+          </span>
+          <span>
             <Tippy placement="top" content="Sound on/off">
               {isMuted ? (
                 <span className="volume-control" onClick={handleMuteToggle}>
@@ -142,27 +156,8 @@ export default function LevelPage({ user, note }) {
               )}
             </Tippy>
           </span>
-            </div>
-            <button
-              className="btnnote"
-              onClick={() => {
-                setShowNote(!showNote);
-              }}
-            >
-              <CiStickyNote />
-            </button>
-            {/* </Tippy> */}
-            <div className="textEditor-popup">
-              {showNote && <TextEditor user={user} note={note} />}
-            </div>
-            <div className="screentoggle">
-              <Tippy placement="left" content="Fullscreen">
-                <button className="full" onClick={goFullscreen}>
-                  <MdFullscreenExit />
-                </button>
-              </Tippy>
-              {/* <button className="full" onClick={exitFullscreen}>Esc</button> */}
-            </div>
+          <div className="textEditor-popup">
+            {showNote && <TextEditor user={user} note={note} />}
           </div>
         </div>
       )}

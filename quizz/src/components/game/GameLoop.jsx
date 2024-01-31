@@ -152,7 +152,7 @@ export default function GameLevel1({
   const closeWelcome = () => {
     setShowWelcome(false);
   };
-  // for extras?
+  // bees
   const bees = useRef([]);
   const extraPropTimer = useRef(0);
   const extraPropInterval = 1000;
@@ -927,13 +927,13 @@ export default function GameLevel1({
       }
     });
 
-    canvas.addEventListener("click", (event) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+    // canvas.addEventListener("click", (event) => {
+    //   const rect = canvas.getBoundingClientRect();
+    //   const x = event.clientX - rect.left;
+    //   const y = event.clientY - rect.top;
 
     
-    });
+    // });
 
     const endOfGame = (gameOver) => {
       if (gameOver) {

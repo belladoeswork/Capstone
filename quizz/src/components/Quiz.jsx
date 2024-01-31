@@ -28,8 +28,8 @@ export default function Quiz({
   loseGame,
   setLoseGame,
   user,
-  winGame,
-  setWinGame,
+  // winGame,
+  // setWinGame,
 }) {
   const [showOptions, setShowOptions] = useState(true);
   const [resultMessage, setResultMessage] = useState("");
