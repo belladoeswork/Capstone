@@ -11,6 +11,7 @@ import { MdFullscreenExit } from "react-icons/md";
 import { IoMdAlarm } from "react-icons/io";
 import TextEditor from "@/components/Notepad.jsx";
 import { CiStickyNote } from "react-icons/ci";
+
 import GameLevel1 from "./game/GameLoop.jsx";
 
 export default function LevelPage({ user, note }) {
@@ -72,7 +73,6 @@ export default function LevelPage({ user, note }) {
       }, 1000);
     } else if (gameStarted && timeRemaining === 0) {
       setLoseGame(true);
-      //router.push("/gameover");
     }
 
     return () => clearInterval(timer);

@@ -1356,12 +1356,13 @@ body.fullscreen .footer-basic {
   z-index: 3;
   display: inline-block;
   position: absolute;
-  right: 30px;
-  top: 200px;
-  background-color: white;
+  right: 35px;
+  top: 240px;
+  background-color: none;
   color: #623b5a;
-  font-size: 50px;
-  border: none;
+  font-size: 40px;
+  border: 2px solid #623b5a;
+  border-radius: 10px;
 }
 
 .textEditor-popup {
