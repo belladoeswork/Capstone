@@ -72,9 +72,18 @@ export default function TextEditor({ user, note }) {
           className="text-editor-textarea"
           value={text}
           onChange={handleChange}
-          placeholder="Start typing..."
+          placeholder="jot a note here..."
         />
-
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            height: "100px",
+          }}
+        >
+          {note?.text}
+        </div>
         <div className="text-editor-button-container">
           {hideSave && (
             <button type="submit" className="text-editor-button">
@@ -82,25 +91,17 @@ export default function TextEditor({ user, note }) {
             </button>
           )}
           {!hideSave && (
-            <button className="text-editor-button" onClick={handleEditSubmit}>
-              Edit
-            </button>
+            <>
+              <button className="text-editor-button" onClick={handleEditSubmit}>
+                Edit
+              </button>
+              <button className="text-editor-button" onClick={handleDelete}>
+                Delete
+              </button>
+            </>
           )}
-          <button className="text-editor-button" onClick={handleDelete}>
-            Delete
-          </button>
         </div>
       </form>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}
-      >
-        {note?.text}
-      </div>
     </div>
   );
 }
