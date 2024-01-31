@@ -25,39 +25,43 @@ export default function ProfilePage({ user }) {
   const router = useRouter();
   //console.log(user.avatar);
   return (
-    <div className="profile-container">
-      <div>
-        <Image
-          src={`/${user.avatar}.jpg` || "/assets/avatar/avatar6.jpg"}
-          alt={"avatar"}
-          className="profile-image"
-          width={100}
-          height={100}
-        />
-      </div>
-      {user.id && (
+    <div className="profilePage-container">
+      <div className="profile-container">
         <div>
-          <div style={{ display: isModalOpen ? "flex" : "none" }}>
-            <AvatarOption setSelectedAvatar={setSelectedAvatar} user={user} />
-          </div>
-          <h1 className="user-name">{user.username}</h1>
-          <div className="level-indicator">
-            <FaTrophy />
-            <p>Last Level: {user.level}</p>
-          </div>
-          <div className="profileButton-div">
-            <button
-              onClick={handleEditProfileClick}
-              className="editProfile-button"
-            >
-              Choose an Avatar
-            </button>
-            <Link href={"/"}>
-              <button className="editProfile-button">Play</button>
-            </Link>
-          </div>
+          <Image
+            src={`/${user.avatar}.jpg` || "/assets/avatar/avatar6.jpg"}
+            alt={"avatar"}
+            className="profile-image"
+            width={100}
+            height={100}
+          />
         </div>
-      )}
+        {user.id && (
+          <div>
+            <div style={{ display: isModalOpen ? "flex" : "none" }}>
+              <AvatarOption setSelectedAvatar={setSelectedAvatar} user={user} />
+            </div>
+            <h1 className="user-name">{user.username}</h1>
+
+            <div className="profileButton-div">
+              <button
+                onClick={handleEditProfileClick}
+                className="editProfile-button"
+              >
+                Choose an Avatar
+              </button>
+              <Link href={"/"}>
+                <button className="editProfile-button">Play</button>
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+
+/* <div className="level-indicator">
+            <FaTrophy />
+            <p>Last Level: {user.level}</p>
+          </div>*/

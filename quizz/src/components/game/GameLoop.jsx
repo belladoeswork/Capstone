@@ -43,6 +43,8 @@ export default function GameLevel1({
   loseGame,
   setLoseGame,
   user,
+  winGame,
+  setWinGame,
 }) {
   const canvasRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -964,26 +966,10 @@ export default function GameLevel1({
           loseGame={loseGame}
           setLoseGame={setLoseGame}
           user={user}
+          winGame={winGame}
+          setWinGame={setWinGame}
         />
       )}
-      {/* <div
-        style={{
-          display: "flex",
-          alignItems: "end",
-          justifyContent: "center",
-          backgroundColor: "#F2F5FF",
-          flexDirection: "row",
-          gap: "100px",
-          fontSize: "30px",
-        }}
-      >
-        <h2>
-          Score: <span style={{ color: "#2274a5" }}>{score}</span>
-        </h2>
-        <h2>
-          Level: <span style={{ color: "#2274a5" }}>{level}</span>
-        </h2>
-      </div> */}
     </div>
   );
 }

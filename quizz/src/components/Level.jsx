@@ -22,6 +22,7 @@ export default function LevelPage({ user }) {
   const [level, setLevel] = useState(1);
   const [showNote, setShowNote] = useState(false);
   const [loseGame, setLoseGame] = useState(false);
+  const [winGame, setWinGame] = useState(false);
   const router = useRouter();
 
   const handlePlayerSelect = (playerData) => {
@@ -66,7 +67,7 @@ export default function LevelPage({ user }) {
 
   useEffect(() => {
     let timer;
-    if (gameStarted && timeRemaining > 0) {
+    if (gameStarted && timeRemaining > 0 && !winGame) {
       timer = setInterval(() => {
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
@@ -123,6 +124,8 @@ export default function LevelPage({ user }) {
               timeRemaining={timeRemaining}
               loseGame={loseGame}
               setLoseGame={setLoseGame}
+              winGame={winGame}
+              setWinGame={setWinGame}
             />
 
             <div className="btnhelp">
