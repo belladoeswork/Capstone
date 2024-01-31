@@ -492,7 +492,7 @@ main {
 
 }*/
 
-/*.profile-avatar-container {
+.profile-avatar-container {
   display: flex;
   height: 300px;
   width: 500px;
@@ -500,40 +500,33 @@ main {
   justify-content: center;
   align-items: center;
   padding-bottom: 100px;
-}*/
+}
 
-/*.profile-avatar {
+.profile-avatar {
   display: flex;
   height: 100px;
   width: 100px;
   border: 1px solid #623b5a;
   border-radius: 0%;
-}*/
+}
+
+/* END - PROFILE */
 
 /*Profile Page*/
-
-.profilePage-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 50px;
-}
 
 .profile-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /*margin-top: 80px;
-  margin-bottom: 0;
-  margin-left: 300px;*/
+  margin: 20px;
+  margin-left: 300px;
   padding: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   /* width: 600px; */
-  max-width: 40%;
+  max-width: 30%;
   background-color: rgba(98, 59, 90, 1);
-  max-height: 40%;
 }
 
 .profile-image {
@@ -563,7 +556,7 @@ main {
   color: white;
 }
 
-/*.level-indicator {
+.level-indicator {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -574,11 +567,10 @@ main {
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-}*/
+}
 
 .profileButton-div {
   display: flex;
-  justify-content: center;
   gap: 10px;
 }
 
@@ -612,18 +604,19 @@ main {
 /*AVATAR PAGE START*/
 .profile-modal {
   display: flex;
-  /* position: relative; */
-  width: 100%;
+  position: fixed;
+  width: 70%;
+  max-width: 500px;
   gap: 20px;
   top: 0;
   right: 0px;
-  /* z-index: auto; */
+  height: 91.5%;
   left: -50%;
   background-color: white;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: right 0.3s ease-in-out;
-  overflow-y: auto;
+  /* transition: right 0.3s ease-in-out;
+  overflow-y: auto; */
   border-radius: 5px;
 }
 

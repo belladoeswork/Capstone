@@ -16,7 +16,7 @@ export default function Logout() {
   }
 
   return (
-    <Link onClick={handleLogout} href={"/welcome"} className="logoutButton">
+    <Link onClick={handleLogout} href={"/goodbye"} className="logoutButton">
       Logout
     </Link>
   );

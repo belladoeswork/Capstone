@@ -2,9 +2,10 @@
 import Navbar from "@/components/Navbar.jsx";
 import PlayerSelection from "@/components/PlayerSelection.jsx";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, } from "react";
+import { useRouter } from "next/navigation.js";
 import Image from "next/image.js";
-import CodeHero from "/public/assets/Level1.png";
+// import CodeHero from "/public/assets/Level1.png";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { IoIosArrowDropup } from "react-icons/io";
 import GameLevel1 from "./game/GameLoop.jsx";
@@ -13,6 +14,7 @@ import Footer from "./Footer.jsx";
 export default function Landing({ user }) {
   const [hideHowToButton, setHideHowToButton] = useState(true);
   const [error, setError] = useState("");
+  const router = useRouter();
 
   function handleHowtoClick() {
     setHideHowToButton(!hideHowToButton);
@@ -73,17 +75,18 @@ export default function Landing({ user }) {
               onClick={() => {
                 if (!user.id) {
                   setError("You must login or register to play");
-                } else {
+                } else {router.push("/level");
                 }
               }}
             >
-              <Link href={"/level"}>Play</Link>
+              Play
+              {/* <Link href={"/level"} style={{ textDecoration: "none" }}>Play</Link> */}
             </button>
           </div>{" "}
           {error}
         </div>
         <div id="homepage-right-container">
-          <Image src={CodeHero} alt="Level One Map" className="homepage-img" />
+          <Image src={"/assets/Level1.png"} alt="Level One Map" className="homepage-img" height={310} width={400}/>
         </div>{" "}
       </div>
       <Footer />

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Loader() {
   return (
     <div className="container">
@@ -15,7 +13,7 @@ export default function Loader() {
         <div id="warning">
           <p>
             <div className="exclamation">!</div>
-            &nbsp CAUTION, Do not turn off.
+            &nbsp Do not refresh the page.
           </p>
           <div id="line-cascates"></div>
         </div>

@@ -1,3 +1,4 @@
+
 import Link from "next/link.js";
 import { MdExitToApp } from "react-icons/md";
 import { IoMdAlarm } from "react-icons/io";
@@ -9,13 +10,16 @@ import {
 import Image from "next/image.js";
 
 export default function HowToScreen() {
+
   return (
     <div className="main-container">
       <div className="cont-title">How to Play</div>
 
+      <span className="line">&#9888; This will restart the game! </span>
+
       <div className="section">
         <div className="explainer-clock">
-          This is an escape room. There are 05 hidden coding questions at each
+          This is an escape jungle. There are 05 hidden coding questions at each
           level. Your goal is to find and answer the questions correctly to
           progress. A single incorrect answer, and you'll have to start your
           journey afresh.
@@ -58,14 +62,15 @@ export default function HowToScreen() {
           <IoMdAlarm className="clock-anim" />
         </div>
       </div>
-      <div className="backbtn">
-        <Link href={"/level"}>
+
+        <div className="backbtn">
+          <Link href={"/level"}>
           <button className="bckhelpoutline">
             <MdExitToApp className="btnIcon" />
             <span>Back</span>
           </button>
         </Link>
-      </div>
+        </div>
     </div>
   );
 }
