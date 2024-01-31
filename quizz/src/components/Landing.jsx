@@ -32,8 +32,8 @@ export default function Landing({ user }) {
           <div className="home-description">
             <p>Welcome to CodeHero!</p>
             <p>
-              A game where you test your journey to becoming a Javascript master
-              coder.
+              A game where you test your knowledge on your journey to becoming a
+              Javascript master coder.
             </p>
             <p>Ready to start your odyssey?</p>
             <p>
@@ -74,7 +74,9 @@ export default function Landing({ user }) {
               {!user.id ? (
                 <Link href={"/login"}>{error}</Link>
               ) : (
-                <Link id="play-now-btn">Play</Link>
+                <Link href={"/level"} id="play-now-btn">
+                  Play
+                </Link>
               )}
             </div>
           </div>

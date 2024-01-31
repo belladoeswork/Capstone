@@ -953,9 +953,7 @@ export default function GameLevel1({
               <span style={{ color: "#2274a5", fontWeight: "bolder" }}>
                 Press Enter
               </span>
-              , as the seeker you were. <br />
-              Find and answer the questions to prove your worth, <br />
-              Show your wisdom, affirm your birth. <br />
+              , as the seeker you were. <br /> <br />
             </p>
           </div>
         </div>
