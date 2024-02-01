@@ -1,8 +1,16 @@
 import Link from "next/link.js";
 
 import Confetti from "@/components/ConfettiPage.jsx";
+import { useState } from "react";
 
 export default function WinGameDisplay() {
+  const [restartGame, setRestartGame] = useState(false);
+
+  function handleButtonClick() {
+    setRestartGame(true); 
+    window.location.reload(true);
+  }
+
   return (
     <div className="congrats-container">
       <h1 className="congrats-header">Congratulation!!</h1>
@@ -13,9 +21,9 @@ export default function WinGameDisplay() {
         "Opportunities don't happen. You create them." - Chris Grosser
       </p>
 
-      <Link href={"/"}>
-        <button className="congratsBtn">Home</button>
-      </Link>
+      {/* <Link href={"/"}> */}
+        <button className="congratsBtn" onClick={handleButtonClick} >Replay</button>
+      {/* </Link> */}
     </div>
   );
 }

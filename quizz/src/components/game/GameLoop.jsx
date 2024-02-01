@@ -42,7 +42,7 @@ import {
 } from "./classes/StaticSprite.jsx";
 import { IoMdAlarm } from "react-icons/io";
 
-import Loader from "./Loading.jsx";
+import Loading from "@/components/Loading.jsx";
 
 export default function GameLevel1({
   winGame,
@@ -57,11 +57,8 @@ export default function GameLevel1({
 }) {
   const canvasRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
-  // const location = useLocation();
-
   const [showPopup, setShowPopup] = useState(false);
   const [currentItem, setCurrentItem] = useState(null);
-  // const [interactedItems, setInteractedItems] = useState({});
   const [gameOver, setGameOver] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -69,36 +66,11 @@ export default function GameLevel1({
   const [score, setScore] = useState(0);
   const [assetsLoaded, setAssetsLoaded] = useState(false);
 
-  // const randomizedQuestions = useMemo(() => {
-  //   return questions.map((question) => {
-  //     if (question.type === "message") return question;
-  //     const randomIndex = Math.floor(Math.random() * sprites.length);
-  //     const randomSprite = sprites[randomIndex];
-
-  //     return { ...question, sprite: randomSprite || question.sprite };
-  //   });
-  // }, []);
-
-  // console.log("randomizedQuestions", randomizedQuestions);
 
   useEffect(() => {
     localStorage.removeItem("correctAnswerIds");
   }, [level]);
 
-  // const router = useRouter();
-
-  // const navigate = useNavigate();
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   if (location.pathname === '/howto') {
-  //     // Pause your game here
-  //     setIsPaused(true);
-  //   } else {
-  //     // Resume your game here
-  //     setIsPaused(false);
-  //   }
-  // }, [location]);
 
   const closeWelcome = () => {
     setShowWelcome(false);
@@ -151,63 +123,6 @@ export default function GameLevel1({
       width: canvas.width / 4,
       height: canvas.height / 4,
     };
-
-    // canvas.width = window.innerWidth;
-    // canvas.height = window.innerHeight;
-    // const originalCanvas = { width: canvas.width, height: canvas.height };
-    // const scaledCanvas = { width: canvas.width / 4, height: canvas.height / 4 };
-    // context.scale(canvas.width / originalCanvas.width, canvas.height / originalCanvas.height);
-    // const handleResize = () => {
-    //   canvas.width = window.innerWidth;
-    //   canvas.height = window.innerHeight;
-    //   scaledCanvas.width = canvas.width / 4;
-    //   scaledCanvas.height = canvas.height / 4;
-    //   context.setTransform(1, 0, 0, 1, 0, 0); // Reset the transform matrix
-    //   context.scale(canvas.width / originalCanvas.width, canvas.height / originalCanvas.height);
-    // };
-
-    // window.addEventListener('resize', handleResize);
-
-    // const originalCanvas = {
-    //   width: canvas.width,
-    //   height: canvas.height,
-    // };
-
-    // let scaledCanvas = {
-    //   width: canvas.width / 4,
-    //   height: canvas.height / 4,
-    // };
-
-    // const resize = () => {
-
-    //   let width = window.innerWidth;
-    //   let height = window.innerHeight;
-    //   const aspectRatio = originalCanvas.width / originalCanvas.height;
-    //   const newHeight = width / aspectRatio;
-    //   if (newHeight > height) {
-    //     width = height * aspectRatio;
-    //   } else {
-    //     height = newHeight;
-    //   }
-
-    //   //
-    //   canvas.width = width;
-    //   canvas.height = height;
-    //   context.setTransform(1, 0, 0, 1, 0, 0);
-    //   context.scale(
-    //     canvas.width / originalCanvas.width,
-    //     canvas.height / originalCanvas.height
-    //   );
-
-    //   // Update scaledCanvas
-    //   scaledCanvas = {
-    //     width: canvas.width / 4,
-    //     height: canvas.height / 4,
-    //   };
-    // };
-
-    // resize();
-    // window.addEventListener("resize", resize);
 
     const floorCollisions2D = [];
     for (let i = 0; i < currentLevelData.floorCollisions.length; i += 36) {
@@ -633,14 +548,6 @@ export default function GameLevel1({
 
     let lastTime = 0;
 
-    ///remove
-    const renderLoadingScreen = () => {
-      context.fillStyle = "black";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-      context.fillStyle = "white";
-      context.fillText("Loading...", canvas.width / 2, canvas.height / 2);
-    };
-    ////
 
     const animate = (currentTime) => {
       if (!isPaused) {
@@ -648,9 +555,6 @@ export default function GameLevel1({
       }
       context.fillStyle = "white";
       context.fillRect(0, 0, canvas.width, canvas.height);
-
-      // added
-      // context.setTransform(1, 0, 0, 1, 0, 0);
 
       context.save();
       context.scale(4, 4);
@@ -668,9 +572,7 @@ export default function GameLevel1({
 
       const spriteUpdateLoader = (level) => {
         if (level === 1) {
-          // rock.update();
           rockThree.update();
-          // worm.update();
           boar.update();
           cat.update();
           man.update();
@@ -680,7 +582,6 @@ export default function GameLevel1({
         if (level === 2) {
           catstretching.update();
           frogblue.update();
-          // man2.update();
           gemgreen.update();
           box.update();
           hiveOne.update();
@@ -818,7 +719,6 @@ export default function GameLevel1({
           const items = {
             rock: level === 1 ? rock : undefined,
             rockThree: level === 1 ? rockThree : undefined,
-            // worm: level === 1 ? worm : undefined,
             boar: level === 1 ? boar : undefined,
             cat: level === 1 ? cat : undefined,
             man: level === 1 ? man : undefined,
@@ -827,10 +727,8 @@ export default function GameLevel1({
             frogblue: level === 2 ? frogblue : undefined,
             hiveOne: level === 2 ? hiveOne : undefined,
             catstretching: level === 2 ? catstretching : undefined,
-            // man2: level === 2 ? man2 : undefined,
             gemgreen: level === 2 ? gemgreen : undefined,
             box: level === 2 ? box : undefined,
-            // man3: level === 3 ? man3 : undefined,
             moon: level === 3 ? moon : undefined,
             snail: level === 3 ? snail : undefined,
             goldchest: level === 3 ? goldchest : undefined,
@@ -874,23 +772,6 @@ export default function GameLevel1({
       }
     });
 
-    // canvas.addEventListener("click", (event) => {
-    //   const rect = canvas.getBoundingClientRect();
-    //   const x = event.clientX - rect.left;
-    //   const y = event.clientY - rect.top;
-
-    // });
-
-    // const endOfGame = (gameOver) => {
-    //   if (gameOver) {
-    //     console.log("Game Over");
-    //     setTimeout(() => {
-    //       window.location.replace("/gameover");
-    //     }, 8000);
-    //     return;
-    //   }
-    // };
-    // endOfGame(gameOver);
   }, [selectedPlayerData, level, isPaused]);
 
   const isQuestionAnswered = (question) => {

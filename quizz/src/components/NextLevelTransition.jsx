@@ -5,10 +5,6 @@ import { useState } from "react";
 export default function NextLevelTransition() {
   const [nextLevel, setLevelSet] = useState(false);
 
-  // const handleNextLevelButton = () => {
-  //   setLevelSet(true);
-  // };
-
   return (
     <div
       className="gif-nextLevel"

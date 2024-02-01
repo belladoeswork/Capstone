@@ -11,7 +11,6 @@ export default function Logout() {
       method: "POST",
     });
     const info = await response.json();
-    //router.push("/api/users/login");
     router.refresh();
   }
 

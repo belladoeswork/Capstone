@@ -50,32 +50,3 @@ export default async function Navbar() {
   );
 }
 
-/*<div className="navbar-container">
-      <Link href={"/"}>
-        <h1 className="homeHeader">
-          CodeHero
-          
-          </h1>
-          </Link>
-    
-          <div className="navbarRight">
-            <>
-              <Link href={"/login"} className="navTab">
-                Login
-              </Link>
-              <Link href={"/register"} className="navTab">
-                Register
-              </Link>
-            </>
-    
-            <Link href={"/welcome"} className="navTab">
-              Logout
-            </Link>
-            {user.id && (
-              <span>
-                <Link href={"/profile"}>Welcome {user.username} </Link>
-              </span>
-            )}
-          </div>
-        </div>
-      );*/
