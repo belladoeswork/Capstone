@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Sprite } from "./game/classes/Sprite.jsx";
+import Loading from "@/components/Loading.jsx";
+
 
 const playerData = {
   huntress: {
@@ -135,12 +137,16 @@ export default function playerSelection({ onPlayerSelect }) {
   // const [interactedItems, setInteractedItems] = useState({});
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedPlayerData, setSelectedPlayerData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const canvasRef1 = useRef(null);
   const spriteRef1 = useRef(null);
   const canvasRef2 = useRef(null);
   const spriteRef2 = useRef(null);
 
   useEffect(() => {
+    setIsLoading(true);
+
     const canvas1 = canvasRef1.current;
     const context1 = canvas1.getContext("2d");
 
@@ -157,6 +163,7 @@ export default function playerSelection({ onPlayerSelect }) {
       position: { x: 0, y: 0 },
       ...playerData.warrior.animations.Idle,
       context: context2,
+      
     });
 
     const animate = () => {
@@ -168,6 +175,8 @@ export default function playerSelection({ onPlayerSelect }) {
     };
 
     animate();
+    setIsLoading(false);
+
   }, []);
 
   const handlePlayerSelect = (player) => {
@@ -183,6 +192,9 @@ export default function playerSelection({ onPlayerSelect }) {
   }, [selectedPlayerData]);
 
   return (
+    isLoading ? (
+      <Loading />
+    ) : (
     <div className="container-box">
       <div className="player-selection">
         <h1 className="title"> Select a Player</h1>
@@ -201,6 +213,7 @@ export default function playerSelection({ onPlayerSelect }) {
           </div>
         </div>
       </div>
-    </div>
+        </div>
+    )
   );
 }

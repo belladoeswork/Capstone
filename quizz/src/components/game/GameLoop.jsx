@@ -42,9 +42,11 @@ import {
 } from "./classes/StaticSprite.jsx";
 import { IoMdAlarm } from "react-icons/io";
 
-import Loader from "./Loader.jsx";
+import Loader from "./Loading.jsx";
 
 export default function GameLevel1({
+  winGame,
+  setWinGame,
   selectedPlayerData,
   level,
   setLevel,
@@ -52,8 +54,6 @@ export default function GameLevel1({
   loseGame,
   setLoseGame,
   user,
-  winGame,
-  setWinGame,
 }) {
   const canvasRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -68,52 +68,6 @@ export default function GameLevel1({
   const [showWelcome, setShowWelcome] = useState(true);
   const [score, setScore] = useState(0);
   const [assetsLoaded, setAssetsLoaded] = useState(false);
-
-  // loading all assets
-  useEffect(() => {
-    const loadAsset = (src) => {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = resolve;
-        img.onerror = reject;
-        img.src = src;
-      });
-    };
-
-    const assets = [
-      "/assets/npcs/Rocks.png",
-      "/assets/npcs/Rock3.png",
-      "/assets/npcs/Cat.png",
-      "/assets/npcs/BoarIdle.png",
-      "/assets/npcs/Worm/Idle.png",
-      "/assets/npcs/Man.png",
-      "/assets/npcs/Chest.png",
-      "/assets/npcs/GemGold.png",
-      "/assets/huntress/Idle.png",
-      "/assets/huntress/Run.png",
-      "/assets/huntress/Jump.png",
-      "/assets/huntress/Fall.png",
-      "/assets/huntress/FallLeft.png",
-      "/assets/huntress/RunLeft.png",
-      "/assets/huntress/IdleLeft.png",
-      "/assets/huntress/JumpLeft.png",
-      "/assets/huntress/AttackLeft.png",
-      "/assets/huntress/AttackRight.png",
-      "/assets/huntress/Death.png",
-      "/assets/bee.png",
-      "/assets/map1.png",
-      "/assets/map2.png",
-      "/assets/map3.png",
-
-      "/assets/npcs/BoarIdle.png",
-      "/assets/npcs/GemGreen.png",
-      "/assets/npcs/Worm/Idle.png",
-    ];
-
-    Promise.all(assets.map(loadAsset)).then(() => {
-      setAssetsLoaded(true);
-    });
-  }, []);
 
   // const randomizedQuestions = useMemo(() => {
   //   return questions.map((question) => {
@@ -254,8 +208,6 @@ export default function GameLevel1({
 
     // resize();
     // window.addEventListener("resize", resize);
-
-
 
     const floorCollisions2D = [];
     for (let i = 0; i < currentLevelData.floorCollisions.length; i += 36) {
@@ -790,7 +742,6 @@ export default function GameLevel1({
         else player.switchSprite("FallLeft");
       }
 
-
       //  score and level
       context.font = '5px "Press Start 2P"';
 
@@ -841,7 +792,6 @@ export default function GameLevel1({
         206 - camera.position.x,
         11 - camera.position.y
       );
-
 
       context.restore();
     };
@@ -929,20 +879,18 @@ export default function GameLevel1({
     //   const x = event.clientX - rect.left;
     //   const y = event.clientY - rect.top;
 
-    
     // });
 
-    const endOfGame = (gameOver) => {
-      if (gameOver) {
-        console.log("Game Over");
-        setTimeout(() => {
-          window.location.replace("/gameover");
-        }, 8000);
-        return;
-      }
-    };
-    endOfGame(gameOver);
-
+    // const endOfGame = (gameOver) => {
+    //   if (gameOver) {
+    //     console.log("Game Over");
+    //     setTimeout(() => {
+    //       window.location.replace("/gameover");
+    //     }, 8000);
+    //     return;
+    //   }
+    // };
+    // endOfGame(gameOver);
   }, [selectedPlayerData, level, isPaused]);
 
   const isQuestionAnswered = (question) => {
@@ -959,8 +907,15 @@ export default function GameLevel1({
           ? `${correctAnswerIds},${currentQuestion.id}`
           : currentQuestion.id
       );
+      const allQuestionsAnswered = questions.every((question) =>
+        correctAnswerIds.split(",").includes(question.id)
+      );
+
+      if (allQuestionsAnswered) {
+        setWinGame(true);
+      }
     }
-  }, [currentQuestion]);
+  }, [currentQuestion, questions, setWinGame]);
 
   return (
     <div id="game">
@@ -986,6 +941,8 @@ export default function GameLevel1({
       )}
       {currentQuestion && (
         <Quiz
+          winGame={winGame}
+          setWinGame={setWinGame}
           question={currentQuestion}
           handleAnswer={(isCorrect) => handleAnswer(isCorrect, currentItem)}
           showPopup={showPopup}
@@ -1003,8 +960,6 @@ export default function GameLevel1({
           loseGame={loseGame}
           setLoseGame={setLoseGame}
           user={user}
-          winGame={winGame}
-          setWinGame={setWinGame}
         />
       )}
     </div>

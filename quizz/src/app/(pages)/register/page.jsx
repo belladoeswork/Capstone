@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation.js";
+import Loading from "@/components/Loading.jsx";
 
 import Image from "next/image.js";
-import Logo from "../../../assets/codeHero/codeHeroLogo.png";
+// import Logo from "/assets/codeHero/codeHeroLogo.png";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -13,6 +14,8 @@ export default function Register() {
   async function handleRegister(e) {
     e.preventDefault();
     console.log(username, password);
+    setIsLoading(true);
+
     //send a rewuest to the server
     //api/users/register
     const response = await fetch("/api/users/register", {
@@ -31,8 +34,11 @@ export default function Register() {
   const router = useRouter();
 
   return (
+    isLoading ? (
+      <Loading />
+    ) : (
     <div className="login-register-container">
-      <Image className="login-register-logo" src={Logo} alt="CodeHero Logo" />
+      <Image className="login-register-logo" src={"/assets/codeHero/codeHeroLogo.png"} alt="CodeHero Logo" width={150} height={150} />
       <h1 className="typed-login">Welcome to CodeHero</h1>
 
       <form onSubmit={handleRegister}>
@@ -58,7 +64,8 @@ export default function Register() {
           <span className="pTag-auth">Login</span>
         </a>
       </p>
-    </div>
+        </div>
+    )
   );
 }
 

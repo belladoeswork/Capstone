@@ -1499,7 +1499,7 @@ body.fullscreen .footer-basic {
   font-family: "Press Start 2P";
   justify-content: center;
   align-items: center;
-  font-size: 4vw;
+  font-size: 2vw;
   font-weight: bold;
   animation: result-message 1s linear infinite;
   text-shadow: 0.1vw 0.1vw 0.1vw #333;
@@ -1773,7 +1773,9 @@ body.fullscreen .footer-basic {
 .loading {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .spinner {

@@ -13,9 +13,10 @@ import { MdFullscreenExit } from "react-icons/md";
 import { IoMdAlarm } from "react-icons/io";
 import TextEditor from "@/components/Notepad.jsx";
 import { CiStickyNote } from "react-icons/ci";
-
+import GameOver from "@/components/GameOver.jsx";
+import WinGameDisplay from "./WinGameDisplay.jsx";
 import GameLevel1 from "./game/GameLoop.jsx";
-import Loader from "./game/Loader.jsx";
+import Loading from "./game/loading.jsx";
 import HowToScreen from "@/app/(pages)/howto/page.jsx";
 
 export default function LevelPage({ user, note }) {
@@ -23,13 +24,72 @@ export default function LevelPage({ user, note }) {
   const [selectedPlayerData, setSelectedPlayerData] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const audioElement = useRef(null);
-  const [timeRemaining, setTimeRemaining] = useState(10 * 60);
+  const [timeRemaining, setTimeRemaining] = useState(4 * 60);
   const [level, setLevel] = useState(1);
   const [loseGame, setLoseGame] = useState(false);
   const [showNote, setShowNote] = useState(false);
   const [winGame, setWinGame] = useState(false);
   const router = useRouter();
   const [assetsLoaded, setAssetsLoaded] = useState(false);
+
+
+
+
+
+
+  // loading all assets
+  useEffect(() => {
+    const loadAsset = (src) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = src;
+      });
+    };
+
+    const assets = [
+      "/assets/npcs/Rocks.png",
+      "/assets/npcs/Rock3.png",
+      "/assets/npcs/Cat.png",
+      "/assets/npcs/BoarIdle.png",
+      "/assets/npcs/Worm/Idle.png",
+      "/assets/npcs/Man.png",
+      "/assets/npcs/Chest.png",
+      "/assets/npcs/GemGold.png",
+      "/assets/huntress/Idle.png",
+      "/assets/huntress/Run.png",
+      "/assets/huntress/Jump.png",
+      "/assets/huntress/Fall.png",
+      "/assets/huntress/FallLeft.png",
+      "/assets/huntress/RunLeft.png",
+      "/assets/huntress/IdleLeft.png",
+      "/assets/huntress/JumpLeft.png",
+      "/assets/huntress/AttackLeft.png",
+      "/assets/huntress/AttackRight.png",
+      "/assets/huntress/Death.png",
+      "/assets/bee.png",
+      "/assets/map1.png",
+      "/assets/map2.png",
+      "/assets/map3.png",
+
+      "/assets/npcs/BoarIdle.png",
+      "/assets/npcs/GemGreen.png",
+      "/assets/npcs/Worm/Idle.png",
+    ];
+
+    Promise.all(assets.map(loadAsset)).then(() => {
+      setAssetsLoaded(true);
+    });
+  }, []);
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAssetsLoaded(true);
+    }, 2000); 
+  }, []);
+
 
   const handlePlayerSelect = (playerData) => {
     setSelectedPlayerData(playerData);
@@ -65,101 +125,148 @@ export default function LevelPage({ user, note }) {
     };
   }, [gameStarted, isMuted]);
 
+  const handleWinGame = () => {
+    setWinGame(true);
+  };
+
   useEffect(() => {
     let timer;
     if (gameStarted && timeRemaining > 0 && !winGame) {
       timer = setInterval(() => {
-        setTimeRemaining((prevTime) => prevTime - 1);
+        setTimeRemaining((prevTime) => {
+          if (prevTime - 1 === 0) {
+            setLoseGame(true);
+          }
+          return prevTime - 1;
+        });
       }, 1000);
-    } else if (gameStarted && timeRemaining === 0) {
-      console.log("Time is zero!");
-
-      setLoseGame(true);
     }
+
     return () => clearInterval(timer);
-  }, [gameStarted, timeRemaining]);
+  }, [gameStarted, timeRemaining, winGame]);
 
   return (
     <div className="game-container">
-      {!gameStarted && <PlayerSelection onPlayerSelect={handlePlayerSelect} />}
-      {gameStarted && selectedPlayerData && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <GameLevel1
-            selectedPlayerData={selectedPlayerData}
-            setLevel={setLevel}
-            level={level}
-            user={user}
-            key={level}
-            timeRemaining={timeRemaining}
-            loseGame={loseGame}
-            setLoseGame={setLoseGame}
-          />
-        </div>
-      )}
-      {gameStarted && selectedPlayerData && (
-        <div id="controls">
-          <span className="btnhelp">
-            <Tippy placement="top" content="Oh nooooo... See ya later fren">
-              <Link href={"/"}>
-                <span className="btnhelp">&#9166; Exit</span>
-              </Link>
-            </Tippy>
-          </span>
-          <span>
-            <span>Enter</span>Open question
-          </span>
-          <span>
-            <span>&lt;</span>
-            <span>&gt;</span>Move
-          </span>
-          <span>
-            <span class="rotate">&lt;</span>Jump
-          </span>
-          <span className="btnhelp">
-            <Tippy placement="top" content="Help">
-              <Link href={"/howto"}>
-                <span className="btnhelp">&#9432; Help</span>
-              </Link>
-            </Tippy>
-          </span>
-          <span>
-            <Tippy placement="top" content="Fullscreen">
-              <span className="screentoggle" onClick={goFullscreen}>
-                {" "}
-                &#x26F6; Expand
-              </span>
-            </Tippy>
-          </span>
-          <span>
-            <Tippy placement="top" content="Jot things down">
-              <span
-                className="screentoggle"
-                onClick={() => {
-                  setShowNote(!showNote);
-                }}
-              >
-                {" "}
-                &#x1F5D2; Notepad
-              </span>
-            </Tippy>
-          </span>
-          <span>
-            <Tippy placement="top" content="Sound on/off">
-              {isMuted ? (
-                <span className="volume-control" onClick={handleMuteToggle}>
-                  &#x1F50A;
-                </span>
+      {!assetsLoaded ? (
+      <Loading />
+    ) :
+        // {
+          loseGame?(
+        <GameOver />
+      ) : winGame ? (
+        <WinGameDisplay />
+      ) : (
+        <>
+          {!gameStarted && (
+            <PlayerSelection onPlayerSelect={handlePlayerSelect} />
+          )}
+          {gameStarted && selectedPlayerData && (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              {loseGame ? (
+                <GameOver />
+              ) : winGame ? (
+                <WinGameDisplay />
               ) : (
-                <span className="volume-control" onClick={handleMuteToggle}>
-                  &#x1F507;
-                </span>
+                <>
+                  <GameLevel1
+                    winGame={winGame}
+                    setWinGame={setWinGame}
+                    selectedPlayerData={selectedPlayerData}
+                    setLevel={setLevel}
+                    level={level}
+                    user={user}
+                    key={level}
+                    timeRemaining={timeRemaining}
+                    loseGame={loseGame}
+                    setLoseGame={setLoseGame}
+                  />
+                </>
               )}
-            </Tippy>
-          </span>
-          <div className="textEditor-popup">
-            {showNote && <TextEditor user={user} note={note} />}
-          </div>
-        </div>
+            </div>
+          )}
+          {gameStarted && selectedPlayerData && (
+            <div id="controls">
+              {loseGame ? (
+                <GameOver />
+              ) : winGame ? (
+                <WinGameDisplay />
+              ) : (
+                <>
+                  <span className="btnhelp">
+                    <Tippy
+                      placement="top"
+                      content="Oh nooooo... See ya later fren"
+                    >
+                      <Link href={"/"}>
+                        <span className="btnhelp">&#9166; Exit</span>
+                      </Link>
+                    </Tippy>
+                  </span>
+                  <span>
+                    <span>Enter</span>Open question
+                  </span>
+                  <span>
+                    <span>&lt;</span>
+                    <span>&gt;</span>Move
+                  </span>
+                  <span>
+                    <span class="rotate">&lt;</span>Jump
+                  </span>
+                  <span className="btnhelp">
+                    <Tippy placement="top" content="Help">
+                      <Link href={"/howto"}>
+                        <span className="btnhelp">&#9432; Help</span>
+                      </Link>
+                    </Tippy>
+                  </span>
+                  <span>
+                    <Tippy placement="top" content="Fullscreen">
+                      <span className="screentoggle" onClick={goFullscreen}>
+                        {" "}
+                        &#x26F6; Expand
+                      </span>
+                    </Tippy>
+                  </span>
+                  <span>
+                    <Tippy placement="top" content="Jot things down">
+                      <span
+                        className="screentoggle"
+                        onClick={() => {
+                          setShowNote(!showNote);
+                        }}
+                      >
+                        {" "}
+                        &#x1F5D2; Notepad
+                      </span>
+                    </Tippy>
+                  </span>
+                  <span>
+                    <Tippy placement="top" content="Sound on/off">
+                      {isMuted ? (
+                        <span
+                          className="volume-control"
+                          onClick={handleMuteToggle}
+                        >
+                          &#x1F50A;
+                        </span>
+                      ) : (
+                        <span
+                          className="volume-control"
+                          onClick={handleMuteToggle}
+                        >
+                          &#x1F507;
+                        </span>
+                      )}
+                    </Tippy>
+                  </span>
+                  <div className="textEditor-popup">
+                    {showNote && <TextEditor user={user} note={note} />}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+        </>
       )}
     </div>
   );

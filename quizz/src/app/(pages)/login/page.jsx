@@ -4,21 +4,27 @@ import Image from "next/image.js";
 import Logo from "../../../assets/codeHero/codeHeroLogo.png";
 import { useState } from "react";
 import { useRouter } from "next/navigation.js";
+import Loading from "@/components/Loading.jsx";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleLogin(e) {
     e.preventDefault();
-    //console.log(username, password);
+  
+    setIsLoading(true);
+
+
     const res = await fetch("/api/users/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
     });
     const info = await res.json();
     if (info.error) {
+      setIsLoading(false);
       return setError(info.error);
     }
     //console.log(info);
@@ -28,6 +34,10 @@ export default function Login() {
   const router = useRouter();
 
   return (
+    isLoading ? (
+      <Loading />
+    ) : (
+        
     <div className="login-register-container">
       <Image className="login-register-logo" src={Logo} alt="CodeHero Logo" />
       <h1 className="typed-login">Welcome to CodeHero</h1>
@@ -55,7 +65,8 @@ export default function Login() {
           {" "}
           <span className="pTag-auth">Register</span>
         </a>
-      </p>
-    </div>
+          </p>
+        </div>
+    )
   );
 }

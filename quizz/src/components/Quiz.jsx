@@ -10,6 +10,8 @@ import GameOver from "./GameOver.jsx";
 import Confetti from "@/components/ConfettiPage.jsx";
 
 export default function Quiz({
+  winGame,
+  setWinGame,
   question,
   showPopup,
   currentItem,
@@ -37,7 +39,7 @@ export default function Quiz({
   const [inputAnswer, setInputAnswer] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [transition, setTransition] = useState(false);
-  const [winGame, setWinGame] = useState(false);
+  // const [winGame, setWinGame] = useState(false);
 
   async function handleAnswer(isCorrect) {
     setResultMessage("");

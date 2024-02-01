@@ -23,7 +23,7 @@ export default function GameOver() {
           <RestartBtnOnGo />
         </div>
       ) : (
-        <p class="gameOver-text">"Game Over"</p>
+        <p className="gameOver-text">"Game Over"</p>
       )}
     </div>
   );

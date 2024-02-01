@@ -13,7 +13,7 @@ const questions = [
       "variable name = 'value';",
       "var: name = 'value';",
     ],
-    answer: "var name = 'value';",
+    answer: "const name = 'value';",
     hint: "The correct syntax uses a keyword followed by the name and assignment operator.",
     resultMessage: {
       correct: "",
